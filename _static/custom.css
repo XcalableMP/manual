@@ -1,0 +1,159 @@
+/*  border-left: 6px solid #3498db;*/
+
+h2 {
+    position: relative;
+    margin: 36px 0 16px 0;
+    padding: 0.4em 0 0.4em 1.5em;
+    border: 2px solid #0066FF;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+h2:before{
+    content: "";
+    position: absolute;
+    background: #0066FF;
+    top: 50%;
+    left: 0.5em;
+    margin-top :-14px;
+    height: 28px;
+    width: 8px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+}
+
+h3 {
+  position: relative;
+  padding: .2em 0 .25em .5em;
+  margin-top: 20px;
+  border-left: 6px solid #444;
+  border-bottom: 1px solid #444;
+  font-size: 100%;
+}
+
+h4 {
+  position: relative;
+  padding: .1em 0 .15em .5em;
+  border-left: 6px solid #444;
+  font-size: 90%;
+}
+
+.wy-side-nav-search{
+    background-color: #0066CC;
+}
+
+div[class^="highlight"] pre {
+  padding:0.6em;
+  font-size: 14px;
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  color :#000;
+  white-space: pre-wrap;
+} 
+
+.rst-content .highlight > pre {
+  line-height: 1.5;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.wy-nav-content{
+  max-width: 100%;
+  min-width: 400px;
+}
+
+table{
+  font-size:100%;
+  border-collapse:collapse;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  border:1px solid navy;
+}
+
+table th{
+  padding:6px;
+  text-align:left;
+  vertical-align:middle;
+  color: white;
+  background-color: navy;;
+  border:1px solid navy;
+  text-align: center;
+}
+
+tr.row-odd{
+    border:1px solid navy;
+}
+
+.wy-table thead th, .rst-content table.docutils thead th, .rst-content table.field-list thead th {
+    border:1px solid navy;
+}
+
+.wy-table-odd td, .wy-table-striped tr:nth-child(2n-1) td, .rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+  background-color: white;
+  border:1px solid navy;
+  white-space: inherit;
+  line-height: 1.5;
+}
+
+.wy-table-even td, .wy-table-striped tr:nth-child(2n) td, .rst-content table.docutils:not(.field-list) tr:nth-child(2n) td {
+ background-color: #D9E5FF;
+ border:1px solid navy;
+ white-space: inherit;
+ line-height: 1.5;
+}
+
+td{
+    border:1px solid navy;
+}
+
+.rst-content table.docutils.footnote{
+    color: black;
+}
+
+.rst-content table.docutils:not(.field-list).footnote tr:nth-child(2n-1) td{
+    border: none;
+}
+
+a {
+    color: #0066FF;
+}
+
+div.note {
+    color: black;
+}
+
+.rst-content .section ul{
+  margin-bottom: 10px;
+}
+
+.cp {
+   color: #dd7374;
+   font-style: italic;
+}
+
+.c {
+   color: #dd7374;
+   font-weight: bold;
+}
+
+p {
+  margin-bottom: 14px;
+  margin-top   : 14px;
+}
+
+.rst-content .section > img, .rst-content .section > a > img {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.wy-nav-content {
+  background: white;
+}
+
+div.hint {
+  color: black;
+}
