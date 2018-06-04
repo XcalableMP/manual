@@ -1,2 +1,3 @@
 _build/
 local-build/
+.DS_Store
