@@ -14,8 +14,11 @@ html-ja:
 html-en:
 	$(SPHINXBUILD) -a -b html -d _build/doctrees ./en /home/xmp/public_html/manual
 
-local:
-	sphinx-build -a -b html -d _build/doctrees ./ja ./local-build
+local: local-ja local-en
+local-ja:
+	sphinx-build -a -b html -d _build/doctrees ./ja ./local-build/ja
+local-en:
+	sphinx-build -a -b html -d _build/doctrees ./en ./local-build/en
 
 # Put it first so that "make" without argument is like "make help".
 help:
