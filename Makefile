@@ -4,15 +4,15 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = manual
+SPHINXPROJ    = handbook
 SOURCEDIR     = .
 BUILDDIR      = _build
 
 all: html-ja html-en
 html-ja:
-	$(SPHINXBUILD) -a -b html -d _build/doctrees ./ja /home/xmp/public_html/ja/manual
+	$(SPHINXBUILD) -a -b html -d _build/doctrees ./ja /home/xmp/public_html/ja/handbook
 html-en:
-	$(SPHINXBUILD) -a -b html -d _build/doctrees ./en /home/xmp/public_html/manual
+	$(SPHINXBUILD) -a -b html -d _build/doctrees ./en /home/xmp/public_html/handbook
 
 local: local-ja local-en
 local-ja:
