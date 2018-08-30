@@ -1,103 +1,133 @@
 =========================
-はじめに
+Introduction
 =========================
 
 .. contents::
    :local:
    :depth: 2
 
-XMP誕生の背景
+Background
 ----------------
-大規模シミュレーションなどを行うには，分散メモリシステムの利用が一般的です．
-そのプログラミングにはMessage Passing Interface（MPI）が広く用いられていますが，MPIは実行フローをユーザが意識した上で，プロセス間の通信を記述する必要があります．
-そのため，些細なプログラムのミスによるデットロックや結果不正になる危険が常にあり，そのプログラミングは容易ではありません．
+Distributed-memory systems are generally used for large-scale simulations.
+To program such systems, Message Passing Interface (MPI) is widely
+adopted. However, the programming with MPI is difficult because
+programmers must describe inter-process communications with
+consideration of the execution flow of the programs, which might cause
+deadlocks or wrong results.
 
-そこで，Fortranに最小限の指示文を挿入するだけで，
-逐次プログラムを並列プログラムとして実行できる並列言語High Performance Fortran（HPF）が1991年に提案されました．
-ユーザはHPFが提供する指示文を使って，データが各プロセスにどのように分散されているかを指示するのみで，それ以外の並列化の作業（通信や処理の分割など）はすべてコンパイラが行ってくれます．
-しかし，HPFはコンパイラが多くの作業を自動で行う仕様であるため，ユーザによる性能チューニングが難しく，
-またコンパイラのバージョンやハードウェアが変わると性能も大きく変わる可能性があるため，結果として普及しませんでした．
+To address this issue, a parallel language named High Performance
+Fortran (HPF) was proposed in 1991. With HPF, users can execute their
+serial programs in parallel by inserting minimal directives into
+them. If users specify data distribution with HPF directives, compilers do
+all other tasks for parallelization (e.g. communication generation and
+work distribution).
+However, HPF was not widely accepted eventually because the
+compiler's automatic processing prevents users from performance tuning 
+and the performance depends heavily on the environment (e.g. compiler
+version and hardware)
 
 .. note:: 
-   より詳しいことは，次の文献が詳しいです．
+   For more detail, please refer:
    Ken Kennedy, Charles Koelbel and Hans Zima: The Rise and Fall of High Performance Fortran: An Historical Object Lesson, Proc. 3rd ACM SIGPLAN History of Programming Languages Conf. (HOPL-III), pp. 7-1-7-22 (2007).
 
-このような背景から，逐次プログラムからの簡易な並列化を支援する並列実行モデルの確立と，それに基づく新たなプログラミング言語の設計を行うため，2008年に「次世代並列プログラミング言語検討委員会」が設立されました．
-この委員会において，HPFの経験から得た教訓を元に設計された並列言語XcalableMP（XMP）が誕生しました．
-次世代並列プログラミング言語検討委員会は，2011年から `PCクラスタコンソーシアム <https://www.pccluster.org/ja>`_ の「並列プログラミング言語XMP規格部会」として活動しています．
+In such circumstance, to development a mew parallel programming model
+that enables easy parallelization of existing serial programs and design
+a new language based on it, "the XMP Specification Working Group" was
+established in 2008.
+This group utilized the lessons from the experience of HPF to define a
+parallel language XcalableMP (XMP). The group was reorganized to
+one of the working groups of `PC Cluster Consortium
+<https://www.pccluster.org/ja>`_ in 2011.
 
-XMPの特徴
+Features
 -------------
-HPFの経験から，コンパイラの自動化の適用範囲が広がるほどプログラムと実際の動作の乖離が大きくなり，逆にユーザは利用しづらくなることがわかりました．
+It is learned from the lessons of HPF that more automatic processing
+of compilers increases the gap between a program and its execution,
+and, as a result, decreases the usability of the language.
 
-そこで，XMPではプログラムからその動作が容易に想像できるレベルまでユーザが記述するスタイルをとっています．
-具体的には，通信・同期・データ分割・処理分割などをユーザが明示的に記述することで，性能チューニングを簡易に行えるようにしています．
-また，HPFにはなかった，個別のプロセスを意識したプログラミングを行える片側通信記法を追加しています．
-この記法を用いることで，並列アルゴリズムを簡易に実装できます．
+In XMP, users specify the details of parallel programs to make their
+execution easy-to-understand. In particular, users can specify
+explicitly communication, synchronization, data distribution, and work
+distribution to facilitate performance tuning. In addition, XMP
+supports features for one-sided communication on each process, which
+was not available in HPF. This feature might enable users to implement
+parallel algorithms easily.
 
-C言語とFortranの拡張
+Extension for C and Fortran
 ^^^^^^^^^^^^^^^^^^^^^^
-HPFはFortranのみの拡張ですが，XMPではC言語とFortranの両方を拡張しています．
-XMPは既存の言語をベースとしているので，並列プログラムへの移行が容易であり，さらに学習コストも小さい，といった特徴があります．
+XMP supports C and Fortran as base languages while HPF is an extension
+of Fortran. It is advantages of XMP that it is easy to migrate with
+low cost of learning because it is based on existing languages.
 
-本サイトでは，XMP版のC言語を「XMP/C」，XMP版のFortranを「XMP/Fortran」と呼びます．
-なお，C++言語についても対応を検討中です．
+In this site, XMP for C and XMP for Fortran are referred as XMP/C and
+XMP/Fortran, respectively. XMP for C++ is also under development.
 
-メモリモデル
+Memory model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-XMPは分散メモリシステムを対象とする並列プログラミング言語です．
-分散メモリシステムとは，下図のように，分散されたメモリとCPUがネットワークで接続されたシステムのことです．
-ただし，実際のハードウェアは共有メモリでも構いません．
-その場合は，チップ内の各コアを図中のCPUと考えることができます．
+XMP is a parallel programming language for distributed-memory systems.
+A distributed-memory system is a system where distributed memory and
+CPUs are connected with each other via network, as shown in the figure
+below. However, actual hardware can be equipped with shared memory. In
+such a case, each core on a chip can be regarded as a CPU in the
+figure.
 
 .. image:: ../img/overview/architecture.png
 
-XMPでは，メモリとCPUの組を「ノード」と呼び，ノードを実行単位とします．
-XMPはデータを各ノードに分散させ，そのデータに対応する計算を並列に実行します．
-ノード内におけるメモリアクセスは通常のプログラミングと同じである一方，
-ノード間におけるメモリアクセスは通信を行う構文（指示文や片側通信記法）で行います．
+In XMP, A combination of memory and a CPU is referred as a *node*,
+which is an execution unit of XMP programs.
+Accesses to remote data residing on another node is specified with
+special constructs such as dedicated directives and *coarrays* while
+accesses to local data residing within the node is specified in the
+same way as in normal languages.
 
-実行モデル
+Execution model
 ^^^^^^^^^^^^^
-XMPの実行モデルはMPIと同じSPMD（Single Program, Multiple Data streams）です．
-各ノードが独立に重複して実行が開始します．
-そして，指示文の箇所では，各ノードが協調して動作します．
+The execution model of XMP follows the Single Program Multiple Data
+(SPMD) model, like MPI.
+According to this model, each node executes the same code
+independently. When a node encounters a XMP construct, it cooperate
+with each other to execute the construct.
 
 .. image:: ../img/overview/execution.png
 
-プログラミングモデル
+Programming model
 ^^^^^^^^^^^^^^^^^^^^^^^^
-XMPは，下記の2通りのプログラミングモデルをサポートしています．
+XMP supports the following two programming models.
 
-* Global-view（グローバルビュー）
-* Local-view（ローカルビュー）
+* Global-view
+* Local-view
 
-グローバルビューでは，データや計算をグローバルなイメージで記述することで，
-逐次プログラムのように並列プログラムを作成することができます．
-各ノードに対するデータや計算の実際の割り当ては，ユーザが挿入する指示文を元にコンパイラが行います．
-グローバルビューは領域分割問題のような全ノードが同じ動作をするアプリケーションの作成に向いています．
+In the global-view model, users specify the collective behavior of nodes
+in the target program to parallelize it.
+As users specify with the directives how data and computation are
+distributed on nodes, compilers are responsible for doing it.
+This model is suitable for regular applications, such as
+domain-decomposition problems, where every node works in a similar way.
 
-ローカルビューでは，MPIと同様にデータや計算をノード毎に記述します．
-すなわち，各ノードに対するデータや計算の割り当てはユーザが手動で行う必要があります．
-ローカルビューにおける通信は，Coarray Fortran（CAF）をベースにした片側通信記法で行います．
-ローカルビューは各ノードの振る舞いが異なるアプリケーションの作成に向いています．
+In the local-view modes, users specify the behavior of each node, just
+like MPI. Therefore, users are responsible for distributing data and
+computation onto nodes. Communications in this model can be specified
+in a one-sided manner based on coarrays. This model is suitable for
+applications where each node performs a different task.
 
-XMPでは，グローバルビューとローカルビューは共存できるように設計されているので，
-1つのアプリケーション内でグローバルビューとローカルビューの両方を使うことも可能です．
+Users can use both of the two models in an XMP application.
 
-他言語との連携
+Interoperability
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-現在の並列アプリケーションの多くはMPIが用いられています．
-1つの並列アプリケーションであっても数百万行に及ぶものも存在するため，
-そのコードのすべてをXMPで書き換えることは非現実的です．
+Most of existing parallel applications are written with MPI. It is not
+realistic to port them over to XMP because each of them could consist
+of millions of lines.
 
-そこで，XMPはMPIと共存できるような仕様になっています．
-この仕様により，アプリケーション全体をXMPで書き直す必要はなく，部分的な変更のみを既存のアプリケーションに対して行うだけで，XMPアプリケーションを作成できます．
-また，例えば最初から並列アプリケーションを作成する場合であっても，煩雑な領域分割の箇所はXMPでシンプルに記述し，
-特に細かな性能チューニングが必要な箇所だけ高速なMPIライブラリを用いる，ということが可能です．
-同様に，OpenMPやPythonとの連携も可能です．
+Because XMP is interoperable with MPI, users can develop an XMP
+application by modifying a part of an existing one instead of rewriting
+it totally. When developing a parallel application from scratch, it is
+possible to use XMP to write a complicated part of, for example,
+domain decomposition while they use MPI, which could be faster than XMP,
+to write a hot-spot part that need to be tuned carefully. In addition,
+XMP is interoperable with OpenMP and Python.
 
-一般に，1つのプログラミング言語には得意・不得意なことがあるため，
-1つの汎用的なプログラミング言語やフレームワークで並列アプリケーションを作成することは困難なことがあります．
-そこで，XMPでは，それぞれの言語が得意とする機能を適材適所に使い分けることにより，高生産性と高性能の両立を目指しています．
-
+It might be difficult to develop a parallel application with
+just one programming language or framework since it generally has its
+own strong and weak points. Thus, an XMP program is interoperable with
+those in other languages to provide both high productivity and
+performance.

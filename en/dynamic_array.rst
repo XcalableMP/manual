@@ -1,17 +1,18 @@
 =================================
-分散配列の動的生成
+Dynamic allocation of distributed arrays
 =================================
 
-分散配列を動的に生成する方法について説明します．
-基本的な手順はXMP/CとXMP/Fortranで同じですが，各ベース言語に沿った方法を採用しています．
+This section explains how distributed arrays are allocated at
+runtime. The basic procedure is common in XMP/C and XMP/Fortran with a
+few specific difference.
 
 .. contents::
    :local:
    :depth: 2
 
-1次元配列の場合
+One-dimensional arrays
 -------------------
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -23,12 +24,13 @@
      :
    a = xmp_malloc(xmp_desc_of(a), N);
 
-まず，分散配列で用いる型のポインタを宣言します．
-次に，そのポインタを配列と仮定して，align指示文を使って整列させます．
-最後に，xmp_malloc()を用いて，分散配列のメモリ空間を確保します．
-xmp_desc_of()は引数に指定されたXMPオブジェクトのディスクリプタを返す関数です．
+First, declare a pointer of the type of the target distributed array.
+Second, align it as if it were an array.
+Finally, allocate memory for it with the xmp_malloc() function.
+xmp_desc_of() is a intrinsic/builtin function that returns the
+descriptor of the XMP object specified by the argument.
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -40,16 +42,16 @@ xmp_desc_of()は引数に指定されたXMPオブジェクトのディスクリ�
 
    allocate(a(N))
 
-まず，分散配列で用いる型のallocatable配列を宣言します．
-次に，align指示文を使ってそのallocatable配列を整列させます．
-最後に，allocate文を用いて，分散配列のメモリ空間を確保します．
+First, declare an allocatable array of the type of the target
+distributed array.
+Second, align it. Finally, allocate memory for it with the allocate
+statement.
 
-多次元配列の場合
+Multi-dimensional arrays
 -----------------
-1次元配列と同様の手順で多次元配列も動的に生成することができます．
+The procedure is the same as that for one-dimensional array.
 
-
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -61,7 +63,7 @@ xmp_desc_of()は引数に指定されたXMPオブジェクトのディスクリ�
      :
    a = (float (*)[N2])xmp_malloc(xmp_desc_of(a), N1, N2);
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -74,4 +76,4 @@ xmp_desc_of()は引数に指定されたXMPオブジェクトのディスクリ�
    allocate(a(N2,N1))
 
 .. note::
-  テンプレートのサイズも動的に決定したい場合は，:doc:`template_fix` を併用します．
+  If the size of template is not fixed until runtime, use :doc:`template_fix`.

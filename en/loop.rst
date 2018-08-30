@@ -1,27 +1,31 @@
 =================================
-loop指示文
+loop Construct
 =================================
 
-loop指示文は対象のループを並列化する指示文です．
-そのループ中に現れる分散配列は，下記の条件を満たす必要があります．
+The loop directive is used to parallelize a loop. Distributed arrays
+in such a loop must fulfill the following two conditions:
 
-1. 繰り返しを跨ぐデータ依存や制御依存がないこと．
-つまり，ループの繰り返しは，どのような順番で実行しても同じ結果となるようなループであること
+1. There is no data/control dependence among the iterations.
+   In other words, the iterations of the loop can be executed in any
+   order to produce the same result.
 
-2. 分散配列の要素を持っているノードが，その要素をアクセスすること
+2. An element of a distributed array is accessed only by the node that
+   owns the element.
 
 .. contents::
    :local:
    :depth: 2
 
-分散配列へのアクセス
+Accessing Distributed Arrays
 -------------------------------------
-下記のプログラムは，正しいloop指示文とループ文の例です．
-ループ内でアクセスされる分散配列aのインデックスはiだけなので，条件1をクリアします．
-また，loop指示文のon節で指定されたテンプレートが持つ各ノードのインデックス情報はループ内の分散配列と同じなので，
-条件2もクリアします．
+The programs below are examples of a right loop directive and a loop statement.
+The condition 1. is satisfied because i is the only one index of the
+distributed array a that is accessed within the loop, and the
+condition 2 is also satisfied because the indices of the template in
+the on clause of the loop directive is identical to that of the
+distributed array.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -40,7 +44,7 @@ loop指示文は対象のループを並列化する指示文です．
       return 0;
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -60,9 +64,9 @@ loop指示文は対象のループを並列化する指示文です．
 
 .. image:: ../img/loop/loop1.png
 
-同じプログラムでループの範囲が下記のように小さくなっていたら，並列化できるでしょうか？
+Is it possible to parallelize the below loops whose bounds are shrunk?
 
-* XMP/Cプログラム（一部分）
+* XMP/C program (excerpt)
 
 .. code-block:: C
 
@@ -70,7 +74,7 @@ loop指示文は対象のループを並列化する指示文です．
       for(int i=1;i<9;i++)
         a[i] = i;
 
-* XMP/Fortranプログラム（一部分）
+* XMP/Fortran program (excerpt)
 
 .. code-block:: Fortran
 
@@ -79,15 +83,19 @@ loop指示文は対象のループを並列化する指示文です．
         a(i) = i
       enddo
 
-この場合も，条件1と2をともに満たすため，並列化可能です．
-XMP/Cでは， p[0]はインデックス1から4を処理し，p[1]は5から8を処理します．
-同様に，XMP/Fortranでは，p(1)はインデックス2から5を処理し，p(2)は6から9を処理します．
+In this case, the conditions 1 and 2 are satisfied and therefore it is
+possible to parallelize them.
+In XMP/C, p[0] processes the indices from one to four and p[1] from
+five to eight.
+In XMP/Fortran, p(1) processes the indices from two to five and p(2) from
+six to nine.
 
 .. image:: ../img/loop/loop2.png
+	   
+Next, is it possible to parallelize the below loops in which the index
+of the distributed array is different?.
 
-次に，同じプログラムで分散配列のインデックスがずれていたら，並列化できるでしょうか？
-
-* XMP/Cプログラム（一部分）
+* XMP/C program (excerpt)
 
 .. code-block:: C
 
@@ -95,7 +103,7 @@ XMP/Cでは， p[0]はインデックス1から4を処理し，p[1]は5から8�
       for(int i=1;i<9;i++)
         a[i+1] = i;
 
-* XMP/Fortranプログラム（一部分）
+* XMP/Fortran program (excerpt)
 
 .. code-block:: Fortran
 
@@ -104,18 +112,19 @@ XMP/Cでは， p[0]はインデックス1から4を処理し，p[1]は5から8�
         a(i+1) = i
       enddo
 
-この場合は，条件1は満たしますが，条件2は満たさないため，並列化を行うことができません．
-XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]を持っていないためです．
-同様に，XMP/Fortranでは，p(1)はa(6)をアクセスしようとしますが，p(1)はa(6)を持っていません．
+In this case, the condition 1 is satisfied but 2 is not, and therefore
+it is not possible to parallelize them.
+In XMP/C, p[0] tries to access a[5] but does not own it.
+In XMP/Fortran, p(1) tries to access a(6) but does not own it.
 
 .. image:: ../img/loop/loop3.png
 
-集約計算
+Reduction Computations
 ---------
 
-次の逐次プログラムを使って集約計算について説明します．
+The serial programs below are examples of the reduction computation.
 
-* Cプログラム
+* C program
 
 .. code-block:: C
 
@@ -134,7 +143,7 @@ XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]�
       return 0;
     }
 
-* Fortranプログラム
+* Fortran program
 
 .. code-block:: Fortran
 
@@ -150,11 +159,11 @@ XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]�
 
     end program main
 
-上のループをloop指示文だけを使って並列化しようとした場合，
-ノード毎に変数sumの値が計算されるため，
-変数sumの値はノード毎に異なる結果になります．
+If the above loops are parallelized only with the loop directive, the
+value of the variable sum varies from node to node because it is
+calculated on each node.
 
-* XMP/Cプログラム（未完成．一部）
+* XMP/C program (excerpt)
 
 .. code-block:: C
 
@@ -164,7 +173,7 @@ XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]�
         sum += a[i];
       }
 
-* XMP/Fortranプログラム（未完成．一部）
+* XMP/Fortran program (excerpt)
 
 .. code-block:: Fortran
 
@@ -176,9 +185,9 @@ XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]�
 
 .. image:: ../img/loop/reduction1.png
 
-そこで，loop指示文にreduction節を加えます．
+Then, add the reduction clause to the loop directive.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -202,7 +211,7 @@ XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]�
       return 0;
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -223,15 +232,16 @@ XMP/Cでは，p[0]はa[5]をアクセスしようとしますが，p[0]はa[5]�
 
     end program main
 
-reduction節には集約のための演算子と集約変数を指定します．
-上例では加算の演算子を指定しており，
-この集約計算がノードを跨ぐ総和を求めていることを表現しています．
+A operator and target variables for reduction are specified in a
+reduction clause. In the above examples, a + operator is specified for
+the reduction computation to produce a total sum among nodes.
 
 .. image:: ../img/loop/reduction2.png
 
-集約計算に対する演算は，下記の結合則が成り立つ演算に限られます．
+Operations that can be used in a reduction computation are limited to
+the following associative ones.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: bash
 
@@ -250,7 +260,7 @@ reduction節には集約のための演算子と集約変数を指定します�
     lastmax
     lastmin
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: bash
 
@@ -272,13 +282,16 @@ reduction節には集約のための演算子と集約変数を指定します�
     lastmin
 
 .. note::
-   集約変数が浮動小数点型の場合は，計算順序の違いにより，逐次実行と並列実行で結果がわずかに異なる場合があります．
+   If the reduction variable is type of floating point, 
+   the difference of the order of the executions can make a little bit
+   difference between serial and parallel executions
 
-ネストされたループの並列実行
+Parallelizing nested loops
 ------------------------------
-ネストされたループに対するワークマッピングも，1次元配列と同じように行うことができます．
+Parallelization of nested loops can be specified in a similar manner
+for a single loop.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -298,7 +311,7 @@ reduction節には集約のための演算子と集約変数を指定します�
       return 0;
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 

@@ -1,10 +1,10 @@
-XcalableMPハンドブック
+XcalableMP Handbook
 ==================================
 
-本サイトでは，並列言語XcalableMP（XMP）について紹介します．
+This cite introduces a parallel language XcalableMP.
 
-基本的に，最新版の仕様書の内容を紹介していますが，
-次期以降の仕様書に掲載予定の内容についても言及しています．
+The explanation is based on the latest specification but some
+features from the upcoming one are also include.
 
 .. toctree::
    :maxdepth: 2

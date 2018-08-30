@@ -1,11 +1,10 @@
 =================================
-array指示文
+array construct
 =================================
 
-array指示文は，配列代入文を並列実行するために用います．
+The array construct is for work mapping of array assignment statements.
 
-
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -14,7 +13,7 @@ array指示文は，配列代入文を並列実行するために用います．
    #pragma xmp array on t[0:N]
    a[0:N] = 1.0;
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -23,9 +22,9 @@ array指示文は，配列代入文を並列実行するために用います．
    !$xmp array on t(1:N)
    a(1:N) = 1.0
 
-上の例は，下記と同じ意味です．
+The above is equivalent to the below.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -35,7 +34,7 @@ array指示文は，配列代入文を並列実行するために用います．
    for(int i=0;i<N;i++)
      a[i] = 1.0;
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -46,9 +45,11 @@ array指示文は，配列代入文を並列実行するために用います．
      a(i) = 1.0
    enddo
 
-また，多次元配列も表現可能です．さらに，tripletを使うと，全要素に対する処理が簡単に表現できます．
+This construct can also be applied to multi-dimensional arrays.
+The triplet notation enables specifying operations for all elements of
+the array.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -57,7 +58,7 @@ array指示文は，配列代入文を並列実行するために用います．
    #pragma xmp array on t[:][:]
    a[:][:] = 1.0;
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -67,7 +68,6 @@ array指示文は，配列代入文を並列実行するために用います．
    a(:,:) = 1.0
 
 .. note::
-   on節で指定するテンプレートは，代入文中の分散配列と同じ形状である必要があります．
-   また，右辺の値は全ノードで同じである必要があります．
-   さらに，array指示文は全ノードが実行する必要があります．
-
+   The template appearing in the on clause must have the same shape of
+   arrays in the following statement. The rhs value must be identical
+   among all nodes. The array construct is collective.

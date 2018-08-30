@@ -1,11 +1,12 @@
 =================================
-template_fix指示文
+template_fix construct
 =================================
 
-template_fix指示文は，サイズ未定義のテンプレートに対してそのサイズと分散の形状を定義します．
-分散配列のサイズも動的に決定する場合に用います．
+The template_fix construct defines the size and distribution of an
+unfixed template. It is also used when a distributed array is
+allocated at runtime.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -19,7 +20,7 @@ template_fix指示文は，サイズ未定義のテンプレートに対して�
    #pragma xmp template_fix t[n]
    a = xmp_malloc(xmp_desc_of(a), n);
    
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
    
@@ -34,17 +35,20 @@ template_fix指示文は，サイズ未定義のテンプレートに対して�
    !$xmp template_fix t(n)
    allocate(a(n))
 
-まず，template指示文は，サイズが未定義のテンプレートをコロンを用いて宣言します．
-次に，align指示文は，XMP/Cの場合はポインタを配列と仮定して整列し，XMP/Fortranの場合はallocatable配列を整列します．
-template_fix指示文は，テンプレートのサイズを定義します．
-最後に，XMP/Cの場合はxmp_malloc()，XMP/Fortranの場合はallocate文を使って，分散配列のサイズを決定します．
+First, declare a template the size of which is undefined using the ":" notation.
+Second, align a pointer in XMP/C and an allocatable array in
+XMP/Fortran with the template.
+Third, fix the size of the template with a template_fix construct.
+Finally, allocate the array with the xmp_malloc() builtin function in
+XMP/C and the allocate statement in XMP/Fortran.
 
 .. note::
-   template_fix指示文によるサイズ未定義のテンプレートに対する定義は1回だけ行うことができます．
+   template_fix constructs can be applied to a template only once.
 
-distribute指示文において「gblock(*)」を指定した場合は，template_fix指示文において，下記のようにgblockにおける分散の形状も決定することができます．
+The template_fix construct can also be used to define a mapping array of a
+template that is distributed in "gblock(*)" at declaration.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -60,7 +64,7 @@ distribute指示文において「gblock(*)」を指定した場合は，templat
    #pragma xmp template_fix[gblock(m)] t[n]
    a = xmp_malloc(xmp_desc_of(a), n);
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
