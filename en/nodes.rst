@@ -23,7 +23,7 @@ The nodes construct declares the name of a node group and its shape．A node gro
 
     !$xmp nodes p(4)
 
-The nodes construct declares a 1-dimensional node group p which has 4 nodes. 
+The nodes construct declares 1-dimensional node group p which has 4 nodes. 
 In XMP/C, the node group consists of p[0]，p[1]，p[2]，and p[3]．
 In XMP/Fortran, the node group consists of p(1)，p(2)，p(3)，and p(4)．
 
@@ -42,7 +42,7 @@ Multi-dimensional Node Group
 
     !$xmp nodes p(3,2)
 
-The nodes construct declares a 2-dimensional node group p which has 6 nodes.
+The nodes construct declares 2-dimensional node group p which has 6 nodes.
 In XMP/C, the node group consists of p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，and p[1][2]．
 In XMP/Fortran, the node group consists of p(1,1)，p(2,1)，p(3,1)，p(1,2)，p(2,2)，and p(3,2)．
 
@@ -64,7 +64,7 @@ Dynamic Node Group
     !$xmp nodes p(*)
 
 An asterisk symbol can be used in the nodes construct to declare a dynamic node group.
-The program declares a 1-dimensional dynamic node group p by using an asterisk symbol.
+The program declares 1-dimensional dynamic node group p by using an asterisk symbol.
 The size of a dynamic node group is determined at runtime (at the beginning of the execution).
 For example, when the user runs the sample program with 3 XMP processes, the node group p will have 3 nodes.
 
@@ -111,11 +111,11 @@ Partial node groups can be used to optimize inter-node communication by reducing
    !$xmp nodes q(8)=p(1:8)
    !$xmp nodes r(2,4)=p(9:16)
 
-Line 1 declares a node group p which has 16 nodes.
-Line 2 declares a partial node group q from the first half of p ([0:8]).
-Line 3 declares a 2-dimensional partial node group r from the latter half of p ([8:8]).
+Line 1 declares node group p which has 16 nodes.
+Line 2 declares partial node group q from the first half of p ([0:8]).
+Line 3 declares 2-dimensional partial node group r from the latter half of p ([8:8]).
 
-The user can declare 1-dimensional node group from a multi-dimensional node group.
+The user can declare an 1-dimensional node group from a multi-dimensional node group.
 
 * XMP/C program
 
@@ -133,9 +133,9 @@ The user can declare 1-dimensional node group from a multi-dimensional node grou
    !$xmp nodes row(4)=p(*,:)
    !$xmp nodes col(2)=p(:,*)
 
-Line 1 declares a 2-dimensional node group p which has 4x2 nodes.
-Line 2 declares a partial node group row from a single row elements of p.
-Line 3 declares a partial node group col from a single column elements of p.
+Line 1 declares 2-dimensional node group p which has 4x2 nodes.
+Line 2 declares partial node group row from a single row elements of p.
+Line 3 declares partial node group col from a single column elements of p.
 
 The colon symbols used in the sample program are triplets which indicate that all elements in the dimension are used to declare the target partial node group.
 The asterisk symbols indicate that the current executing node will be used to declare the target partial node group.
