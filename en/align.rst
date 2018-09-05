@@ -1,18 +1,18 @@
 =================================
-align指示文
+align Construct
 =================================
 
-align指示文は，分散されたテンプレートにしたがい，配列を各ノードに分散させることにより分散配列を作成します．
-align指示文は，配列の宣言の後に挿入します．
+The align construct performs data mapping and distributes data among nodes by using a distributed template.
+The align construct should be given after the target array definition.
 
 .. contents::
    :local:
    :depth: 2
 
-通常の整列
+Normal Alignment
 --------------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -22,7 +22,7 @@ align指示文は，配列の宣言の後に挿入します．
     int a[8];
     #pragma xmp align a[i] with t[i]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -32,13 +32,14 @@ align指示文は，配列の宣言の後に挿入します．
     integer :: a(8)
     !$xmp align a(i) with t(i)
 
-align指示文は，配列aの要素iをテンプレートtの要素iに整列させます．
+The align construct aligns the owner node of a[i] with t(i), a distributed template.
+As a result, array a is distributed among the node group p.
 
 .. image:: ../img/align/1dim.png
 
-同様に，多次元配列も整列できます．
+The align construct also can be used for multi-dimensional arrays.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -48,7 +49,7 @@ align指示文は，配列aの要素iをテンプレートtの要素iに整列�
     int a[8][8];
     #pragma xmp align a[i][j] with t[i][j]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -60,13 +61,13 @@ align指示文は，配列aの要素iをテンプレートtの要素iに整列�
 
 .. image:: ../img/align/multi-dim.png
 
-特殊な整列
+Special Alignment
 -------------
-縮退
+Collapse
 ^^^^^^
-2次元配列を1次元テンプレートに整列させる場合は，下記のように記述します．
+The user can align a 2-dimensional array with a 1-dimensional template.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -76,7 +77,7 @@ align指示文は，配列aの要素iをテンプレートtの要素iに整列�
     int a[8][8];
     #pragma xmp align a[i][*] with t[i]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -86,19 +87,21 @@ align指示文は，配列aの要素iをテンプレートtの要素iに整列�
     integer :: a(8,8)
     !$xmp align a(*,i) with t(i)
 
-align指示文の配列の要素にアスタリスクを用いると，その次元は整列しないことを意味します．
-下記の例では，2次元配列の1次元目だけをブロック分散させています．
+When an asterisk symbol is given in the array reference in the align construct,
+the specified dimension is not distributed among the node group.
+In the sample program, the first dimension of the array a is distribute among node group p
+while the second dimension is duplicated.
 
 .. image:: ../img/align/collapse.png
 
-XMP/Cでは，a[0:2][:]の実体はp[0]に存在します．
-同様に，XMP/Fortranでは，a(:,1:2)の実体はp(1)に存在します．
+In XMP/C, a[0:2][:] will be allocated on p[0]．
+Likewise, a(:,1:2) will be allocated on p(1) in XMP/Fortran.
 
-複製
+Replicate
 ^^^^^^
-前節とは逆に，1次元配列を2次元テンプレートに整列させる場合は，下記のように記述します．
+The use also can align an 1-dimensional array with a multi-dimensional template.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -108,7 +111,7 @@ XMP/Cでは，a[0:2][:]の実体はp[0]に存在します．
     int a[8];
     #pragma xmp align a[i] with t[i][*]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -118,9 +121,10 @@ XMP/Cでは，a[0:2][:]の実体はp[0]に存在します．
     integer :: a(8)
     !$xmp align a(i) with t(*,i)
 
-align指示文のテンプレートの要素にアスタリスクを用いると，その次元と対応しているすべてのノードが配列の複製を持つという意味になります．
+When an asterisk symbol is given in the template reference in the align construct,
+the owner nodes of the specified dimension will have duplicated images of the target array.
 
 .. image:: ../img/align/replicate.png
 
-XMP/Cでは，a[0:4]の実体はp[0][0]とp[0][1]の2ノードが持ちます．
-同様に，XMP/Fortranでは，a(1:4)の実体はp(1,1)とp(2,1)の2ノードが持ちます．
+In XMP/C, a[0:4] will be duplicated and allocated on p[0][0] and p[0][1]．
+Likewise, a(1:4) will be allocated on p(1,1) and p(2,1) in XMP/Fortran．

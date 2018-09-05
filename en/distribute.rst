@@ -1,24 +1,24 @@
 =================================
-distribute指示文
+distribute Construct
 =================================
 
-distribute指示文はテンプレートの分散の形状を決定します．
-テンプレートの分散の形状には，block，cyclic，block-cyclic，gblock（不均等分割）があり， アプリケーションの性質によって使い分けます．
+The distribute construct specifies a distribution of the target template.
+The user can specify block, cyclic, block-cyclic, gblock (irregular data distribution) distribution, which can be chosen by the target application.
 
 .. contents::
    :local:
    :depth: 2
 
-block分散
+block Distribution
 ----------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp distribute t[block] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
