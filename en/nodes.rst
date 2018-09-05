@@ -1,100 +1,101 @@
 =================================
-nodes指示文
+nodes Construct
 =================================
 
-nodes指示文はノードの名前と形状を宣言します．形状は多次元が可能です．
+The nodes construct declares the name of a node group and its shape．A node group can have a multi-dimensional shape.
 
 .. contents::
    :local:
    :depth: 2
 
-1次元ノード集合
+1-dimensional Node Group
 -----------------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
    
    #pragma xmp nodes p[4]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
     !$xmp nodes p(4)
 
-4ノードからなる1次元ノード集合pを宣言しています，
-XMP/Cでは，p[0]，p[1]，p[2]，p[3]が宣言されます．
-同様に，XMP/Fortranでは，p(1)，p(2)，p(3)，p(4)が宣言されます．
+The nodes construct declares a 1-dimensional node group p which has 4 nodes. 
+In XMP/C, the node group consists of p[0]，p[1]，p[2]，and p[3]．
+In XMP/Fortran, the node group consists of p(1)，p(2)，p(3)，and p(4)．
 
-多次元ノード集合
+Multi-dimensional Node Group
 -----------------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp nodes p[2][3]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
     !$xmp nodes p(3,2)
 
-6ノードからなる2次元ノード集合pを宣言しています．
-XMP/Cでは，p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，p[1][2]が宣言されます．
-同様に，XMP/Fortranでは，p(1,1)，p(2,1)，p(3,1)，p(1,2)，p(2,2)，p(3,2)が宣言されます．
+The nodes construct declares a 2-dimensional node group p which has 6 nodes.
+In XMP/C, the node group consists of p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，and p[1][2]．
+In XMP/Fortran, the node group consists of p(1,1)，p(2,1)，p(3,1)，p(1,2)，p(2,2)，and p(3,2)．
 
 .. note::
-   C言語とFotranでは，配列の次元の順が逆になります．
+   The ordering of the elements in a node group depends on the base language, C and Fortran.
 
-動的ノード集合
+Dynamic Node Group
 ------------------
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp nodes p[*]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
     !$xmp nodes p(*)
 
-数字の代わりにアスタリスクを指定した1次元ノード集合pを宣言しています．
-アスタリスクを用いると，ノード数はプログラムの実行開始時に決まります．
-具体的には，上の例において3ノードで実行した場合は，アスタリスクに「3」を指定した場合と同じ意味になります．
+An asterisk symbol can be used in the nodes construct to declare a dynamic node group.
+The program declares a 1-dimensional dynamic node group p by using an asterisk symbol.
+The size of a dynamic node group is determined at runtime (at the beginning of the execution).
+For example, when the user runs the sample program with 3 XMP processes, the node group p will have 3 nodes.
 
-もちろん，アスタリスクを用いた多次元ノード集合の宣言も可能です．
+The user also declare multi-dimensional dynamic nodes with an asterisk symbol．
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp nodes p[*][3]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
     !$xmp nodes p(3,*)
 
-上の例において12ノードで実行した場合は，アスタリスクに「4」を指定した場合と同じ意味になります．
+When the user runs the sample program with 12 XMP processes, the node group p will have a shape of [4][3] in C, and (3, 4) in Fortran.
 
 .. note::
-   多次元ノード集合では，アスタリスクは最後の次元にしか利用できません．
+   The user can use only one asterisk symbol in the last dimension of the node group.
 
 .. hint::
-   アスタリスクよりも数字を用いた方が，コンパイラの最適化が効く場合があります．
+   The dynamic node group may interfere with compiler optimizations and reduce the execution time. Static node groups achieves better performance in general.
 
-部分ノード集合
+Partial Node Group
 ------------------
-宣言済みのノード集合から部分ノード集合を作成することができます．
-部分ノード集合を作成することで，通信の範囲などを狭めることができ，高速なアプリケーションの作成が行えます．
+The user can declare a partial node group from the existing node group.
+Partial node groups can be used to optimize inter-node communication by reducing the number of nodes participating in the communication.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -102,7 +103,7 @@ XMP/Cでは，p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，p[1][2]が宣言
    #pragma xmp nodes q[8]=p[0:8]
    #pragma xmp nodes r[4][2]=p[8:8]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -110,13 +111,13 @@ XMP/Cでは，p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，p[1][2]が宣言
    !$xmp nodes q(8)=p(1:8)
    !$xmp nodes r(2,4)=p(9:16)
 
-1行目で16ノードのノード集合pを宣言しています．
-2行目でノード集合pの前半の8ノードを使って，部分ノード集合qを作成しています．
-3行目でノード集合pの後半の8ノードを使って，2次元部分ノード集合rを作成しています．
+Line 1 declares a node group p which has 16 nodes.
+Line 2 declares a partial node group q from the first half of p ([0:8]).
+Line 3 declares a 2-dimensional partial node group r from the latter half of p ([8:8]).
 
-2次元ノード集合から1次元ノード集合も作成できます．
+The user can declare 1-dimensional node group from a multi-dimensional node group.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -124,7 +125,7 @@ XMP/Cでは，p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，p[1][2]が宣言
    #pragma xmp nodes row[4]=p[:][*]
    #pragma xmp nodes col[2]=p[*][:]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -132,23 +133,21 @@ XMP/Cでは，p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，p[1][2]が宣言
    !$xmp nodes row(4)=p(*,:)
    !$xmp nodes col(2)=p(:,*)
 
-1行目で4x2の2次元ノード集合pを宣言しています．
-2行目でノード集合pから行方向を抜き出したノード集合rowを生成しています．
-同様に，3行目でノード集合pから列方向を抜き出したノード集合colを生成しています．
+Line 1 declares a 2-dimensional node group p which has 4x2 nodes.
+Line 2 declares a partial node group row from a single row elements of p.
+Line 3 declares a partial node group col from a single column elements of p.
 
-上の例で利用されているコロンはtripletであり，その次元のすべての要素という意味です．
-アスタリスクは，その指示文を実行しているノードそのものという意味です．
-例えば，XMP/Cの場合，p[0][0]とp[0][1]で実行される3行目はcol[2]=p[0][0:2]という意味なのに対し，p[1][0]とp[1][1]ではcol[2]=p[1][0:2]という意味です．
-同様に，XMP/Fortranの場合，p(1,1)とp(2,1)で実行される3行目はcol(2)=p(1:2,1)という意味なのに対し，p(1,2)とp(2,2)ではcol(2)=p(1:2,2)という意味です．
+The colon symbols used in the sample program are triplets which indicate that all elements in the dimension are used to declare the target partial node group.
+The asterisk symbols indicate that the current executing node will be used to declare the target partial node group.
+For example, col[2] is p[0][0:2] on node p[0][0]/p[0][1] and is p[1][0:2] on node p[1][0]/p[1][1] in XMP/C.
+Likewise, col(2) is p(1:2,1) on node p(1,1)/p(2,1) and p(1:2,2) on node p(1,2)/p(2,2) in XMP/Fortran.
 
 .. image:: ../img/nodes/row_col.png
 
-XMP/Cにおいて，row[0]という名前を持っているノードは，p[0][0]とp[0][1]です．
-また，col[0]という名前を持っているノードは，p[0][0]・p[1][0]・p[2][0]・p[3][0]です．
-同様に，XMP/Fortranにおいて，row(1)という名前を持っているノードは，p(1,1)とp(2,1)です．
-また，col(1)という名前を持っているノードは，p(1,1)・p(1,2)・p(1,3)・p(1,4)です．
+In XMP/C, both p[0][0] and p[0][1] will be row[0].
+Likewise, p[0][0], p[1][0], p[2][0] and p[3][0] will be col[0] in each execution context.
+In XMP/Fortran, both p(1,1) and p(2,1) will be row(1).
+Likewise, p(1,1), p(1,2), p(1,3) and p(1,4) will be col(1) in each context.
 
 .. note::
-   ノード集合を参照するとき（部分ノード集合を作成するときやon節で現れるとき）のアスタリスクの意味は，
-   ノード集合を宣言するときや正規表現のアスタリスクの意味と異なります．
-
+   The syntactic meaning of asterisk symbols in the node group references are different when declaring a node group  and regular expressions in on claueses.
