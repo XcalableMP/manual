@@ -24,16 +24,15 @@ block Distribution
 
    !$xmp distribute t(block) onto p
 
-各ノードにブロック状に要素が割り当てられます．
-テンプレートのサイズをN，ノード数をKとした場合，
-ブロック幅はceil(N/K)で計算されます．
-差分法の計算など，近傍の要素の参照が多い場合に適します．
+Target data is divided into contiguous blocks and distributed among nodes.
+When the size of the template is N and the number of nodes is K, the chunk size of each block will be ceil(N/K).
+For example, block distribution is useful for stencil computation which refers to boundary elements of distributed chunks.
 
 .. note:: 
 
-   関数ceil(x)は，x以上の最小の整数を返します．
+   Function ceil(x) returns the minimum integer value which is greater than x.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -41,7 +40,7 @@ block Distribution
    #pragma xmp template t[22]
    #pragma xmp distribute t[block] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -51,12 +50,13 @@ block Distribution
 
 .. image:: ../img/distribute/block.png
 
-ceil(22/3)=8なので，最初の2ノードは8要素が割り当てられ，最後のノードは余りの6要素が割り当てられます．
+Since ceil(22/3) is 8, 8 elements will be allocated on p[0] and p[1].
+And then, 6 elements will be allocated on p[2].
 
-また，下記のように，ブロック幅を指定することができます．
-この場合も，最後のノードは余りの要素が割り当てられます．
+The user can specify the size of the block chunk explicitly.
+In that case, the remaining elements will be allocated on the last node.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -64,7 +64,7 @@ ceil(22/3)=8なので，最初の2ノードは8要素が割り当てられ，最
    #pragma xmp template t[22]
    #pragma xmp distribute t[block(7)] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -74,27 +74,28 @@ ceil(22/3)=8なので，最初の2ノードは8要素が割り当てられ，最
 
 .. image:: ../img/distribute/block2.png
 
-最初の2ノードは指定した7要素が割り当てられ，最後のノードは余りの8要素が割り当てられます．
+7 elements will be allocated on the p[0] and p[1], as specified in the directive.
+And then remaining 8 elements will be allocated on the last node p[2].
 
-cyclic分散
+cyclic Distribution
 ----------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp distribute t[cyclic] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
    !$xmp distribute t(cyclic) onto p
 
-各ノードに1要素ずつ割り当てられます．
-計算負荷に偏りや不規則なばらつきがある場合に適します．
+Target data is divided into a chunk of a single element and distributed among nodes in a round-robin manner.
+Cyclic distribution is suitable for computation with irregular load balance of data and computation.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -102,7 +103,7 @@ cyclic分散
    #pragma xmp template t[22]
    #pragma xmp distribute t[cyclic] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -112,26 +113,26 @@ cyclic分散
 
 .. image:: ../img/distribute/cyclic.png
 
-block-cyclic分散
+block-cyclic Distribution
 -------------------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp distribute t[cyclic(w)] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
    !$xmp distribute t(cyclic(w)) onto p
 
-各ノードにw要素ずつ割り当てられます．
-block分散では負荷が不均等になるが，
-近傍要素の参照があるためcyclicでは性能が悪くなるような場合に適します．
+Target data is divided into a contiguous block of size w and distributed among nodes in a round-robin manner.
+Block-cyclic distribution is suitable for computation which has irregular load balance
+and references to boundary elements of distributed chunks.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -139,7 +140,7 @@ block分散では負荷が不均等になるが，
    #pragma xmp template t[22]
    #pragma xmp distribute t[cyclic(3)] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -149,25 +150,26 @@ block分散では負荷が不均等になるが，
 
 .. image:: ../img/distribute/block-cyclic.png
 
-gblock分散
+gblock Distribution
 -----------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp distribute t[gblock(W)] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
    !$xmp distribute t(gblock(W)) onto p
 
-Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数になります．
-三角行列など，負荷の偏りがわかっている場合に適します．
+Array W is a mapping array which is used for irregular data distribution. 
+W[k]/W(k) elements will be allocated on node p(k)．
+The user can specify special type of data distribution explicitly by using mapping arrays (e.g. distribution of triangular matrix).
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -176,7 +178,7 @@ Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数
    int W[3] = {6, 11, 5};
    #pragma xmp distribute t[gblock(W)] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program.
 
 .. code-block:: Fortran
 
@@ -187,14 +189,14 @@ Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数
 
 .. image:: ../img/distribute/gblock.png
 
-「gblock(*)」のように，マッピング配列の代わりにアスタリスクを用いることもできます．
-この場合の分散の形状は :doc:`template_fix` を用いて，動的に決定できます．
+The user can specify an asterisk symbol instead of a mapping array in gblock.
+In that case, data distribution will be determined at runtime by using :doc:`template_fix`.
 
-多次元テンプレートの分散
+Distribution of Multi-dimensional templates
 --------------------------
-ここからは，多次元のノード集合とテンプレートを用いた分散について説明します．
+The user can distribute multi-dimensional templates with a (single/multi-dimensional) node group.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -202,7 +204,7 @@ Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数
    #pragma xmp template t[10][10]
    #pragma xmp distribute t[block][block] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -210,14 +212,14 @@ Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数
    !$xmp template t(10,10)
    !$xmp distribute t(block,block) onto p
 
-2次元ノード集合を2次元テンプレートに分散させています．
-ノード集合の各次元は，共にテンプレートにblock分散させています．
+The distribute construct declares data distribution of a 2-dimensional template by using a 2-dimensional node group.
+Each dimension of the template is divided by block distribution on node group p.
 
 .. image:: ../img/distribute/multi.png
 
-下記のように，次元毎に異なる分散を行うこともできます．
+The user can specify different distribution pattern to each dimension.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -225,7 +227,7 @@ Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数
    #pragma xmp template t[10][10]
    #pragma xmp distribute t[block][cyclic] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -235,11 +237,11 @@ Wはマッピング配列であり，W[k]/W(k)はp(k)に割り当てる要素数
 
 .. image:: ../img/distribute/multi2.png
 
+When an asterisk symbol is given in the distribute construct instead of distribution type,
+the target dimension will remain undistributed.
+In the following example, the first dimension will be distributed (block distribution) and the second dimension will remain undistributed.
 
-distribute指示文の分散の形状の箇所にアスタリスクを用いると「非分散」という意味になります．
-下記の例では，テンプレートの1次元目だけをブロック分散しています．
-
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -247,7 +249,7 @@ distribute指示文の分散の形状の箇所にアスタリスクを用いる�
    #pragma xmp template t[10][10]
    #pragma xmp distribute t[block][*] onto p
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
