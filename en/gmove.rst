@@ -1,26 +1,26 @@
 =================================
-gmove指示文
+gmove directive
 =================================
 
-gmove指示文を用いると，分散配列に対する通信を代入文の形式で記述できます．
+You can describe a communication for distributed arrays in the form of assignment statements by using gmove directive.
 
-gmoveには集合モード，inモード，outモードの3つのモードがあります．
-集合モードは実行しているノード内で（両側）通信を行いますが，
-inモードとoutモードでは，task指示文と併用してタスク間で片側通信を行います．
-inモードはGet通信であり，outモードはPut通信です．
+There are three modes in gmove; collective mode, in mode and out mode.
+Collective mode communicates (two-sided) within the node which is executing.
+On the other hand, in mode and out mode execute one-sided communication among tasks together with a task directive.
+In mode is Get communication, out mode is Put communication.
 
 .. contents::
    :local:
    :depth: 2
 
-集合モード
+Collective mode
 ------------------
 
-分散配列間の通信
+Communications among distributed arrays
 ^^^^^^^^^^^^^^^^^^^
-配列aの一部を配列bにコピーします．gmove内の配列代入文では，tripletを用います．
+Copying a part of array "a" to array "b". For array assignment statements in a gmove, use triplet.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -34,7 +34,7 @@ inモードはGet通信であり，outモードはPut通信です．
     #pragma xmp gmove
       a[9:5] = b[0:5];
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -50,12 +50,12 @@ inモードはGet通信であり，outモードはPut通信です．
 
 .. image:: ../img/gmove/gmove.png
 
-gmove指示文は，XMP/Cでは，p[0]はb[0]からb[3]をp[2]とp[3]に送信し，p[1]はb[4]をp[3]に送信します．
-同様に，XMP/Fortranでは，p(1)はb(1)からb(4)をp(3)とp(4)に送信し，p(2)はb(5)をp(4)に送信します．
+In XMP/C, p[0] sends between b[0] and b[3] to p[2] and [3], and p[1] sends b[4] to p[3].
+Similarly, in XMP/Fortran, p(1) sends between b(1) and b(4) to p(3) and p(4), and p(2) sends b(5) to p(4).
 
-上の例では，同じ形状で分散した配列同士の代入文でしたが，もちろん異なる形状で分散した配列同士についても代入を行うことができます．
+In the previous example, it is assignment statements between distributed arrays with the same shape, but of couree it can be assign with the different shape.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -71,7 +71,7 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]からb[3]をp[2]とp[3]に送信�
     #pragma xmp gmove
       a[9:5] = b[0:5];
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -89,16 +89,16 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]からb[3]をp[2]とp[3]に送信�
 
 .. image:: ../img/gmove/gmove_cyclic.png
 
-配列aはcyclic分散，配列bはblock分散されています．
+Array "a" is distributed according to cyclic, array "b" is distributed according to block.
 
-gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信します．p[1]はb[1]をp[2]に送信します．p[2]とp[3]の各要素についてはローカルコピーが行われます．
-同様に，XMP/Fortranでは，p(1)はb(1)とb(5)をp(3)とp(4)に送信します．p(2)はb(2)をp(3)に送信します．p(3)とp(4)の各要素についてはローカルコピーが行われます．
+In XMP/C, p[0] sends b[0] and b[4] to p[2] and p[3]. p[1] sends b[1] to p[2]. Each element of p[2] and p[3] will be local copied.
+Similarly, in XMP/Fortran, p(1) sends b(1) and b(5) to p(3) and p(4). p(2) sends b(2) to p(3). Each element of p(3) and p(4) will be local copied.
 
 .. note::
    
-   右辺で指定された要素数が1以外の場合で，右辺と左辺とで要素数が異なると正常に動作しません．
+   If the number of elements specified on the right side is other than 1, it will not work properly if the number of elements differs between the right side and the left side.
 
-この方法を用いると，計算途中で分散配列の形状を変えることができます．
+By using this method, the shape of distributed array can be changed during calculation.
 
 .. code-block:: C
 
@@ -115,7 +115,7 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
     #pragma xmp gmove
       a[:] = b[:];
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -134,14 +134,14 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
 
 .. image:: ../img/gmove/gmove_change.png
 
-上の例では，block分散されている配列bの全要素を，gblock分散されている配列aにコピーしています．
-配列aと配列bにおいて，担当ノードが一致していない要素についてのみ通信が発生します（図中の矢印はノード間通信を意味します）．
+In the previous example, copying all elements of array b which is block distributed to array a which is gblock distributed.
+In array a and b, communication occurs only for elements whose responsible nodes do not match (the arrow means communication between nodes in figures).
 
-スカラーの通信
+Communication of scalar
 ^^^^^^^^^^^^^^^
-代入文において，右辺に1要素，左辺に複数要素が指定された場合，放送通信の動作になります．
+In an assignment statement, if one element is specified on the right side and plural elements are specified on the left side, the operation will be broadcast communication.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -155,7 +155,7 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
     #pragma xmp gmove
       a[9:5] = b[0];
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -171,14 +171,14 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
 
 .. image:: ../img/gmove/gmove_one_element.png
 
-上の例では，XMP/Cでは，ノードp[0]が持つ要素b[0]が，ノードp[2]とp[3]の指定された位置に放送されます．
-同様に，XMP/Fortranでは，ノードp(1)が持つ要素b(1)が，ノードp(3)とp(4)の指定された位置に放送されます．
+In the previous example, in XMP/C, an element array b[0] of node p[0] will be broadcasted to specified index of node p[2] and p[3].
+Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcasted to specified index of node p(3) and p(4).
 
-重複配列やスカラ変数の通信
+Communication of duplicated array and scalar values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-右辺は分散配列のみでなく，重複配列や普通のスカラ変数でも可能です．
+Not only the distributed array but also the duplicate array and ordinary scalar variable can be described on the right side.
 
-* XMP/Cプログラム（一部）
+* XMP/C program (a port of it)
 
 .. code-block:: C
 
@@ -194,7 +194,7 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
    #pragma xmp gmove
       a[9:5] = c;
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -210,13 +210,13 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
    !$xmp gmove
       a(10:14) = c
 
-上の例では，重複配列とスカラ変数が分散配列にローカルコピーされます．
-そのため，通信は発生しません．
+In the previous example, duplicated array and scalar variable are local copied to distributed array.
+For this reason, communication does not occur.
 
-分割次元の異なる分散配列間の通信
+Communication between distributed arrays with different division dimensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -232,7 +232,7 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
     #pragma xmp gmove
       a[0][:] = b[0][:];
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -250,15 +250,15 @@ gmove指示文は，XMP/Cでは，p[0]はb[0]とb[4]をp[2]とp[3]に送信し�
 
 .. image:: ../img/gmove/gmove_different.png
 
-上の例では，XMP/Cでは，p[0]が持っているb[0][0:2]，p[1]が持っているb[0][2:2]，p[2]が持っているb[0][4:2]，p[3]が持っているb[0][6:2]が，p[0]のa[0][:]にコピーされます．
-同様に，XMP/Fortranでは，p(1)が持っているb(1:2,1)，p(2)が持っているb(3:4,1)，p(3)が持っているb(5:6,1)，p(4)が持っているb(7:8,1)が，p(1)のa(:,1)にコピーされます．
+In the previous example, in XMP/C, b[0][0:2] of p[0], b[0][2:2] of p[1], b[0][4:2] of p[2] and b[0][6:2] of p[3] are copied to a[0][:] of p[0].
+Similarly, in XMP/Fortran, b(1:2,1) of p(1), b(3:4,1) of p(2), b(5:6,1) of p(3) and b(7:8,1) of p(4) are copied to a(:,1) of p(1).
 
 
-inモード
+in mode
 ---------
-gmove指示文にin節をつけることで，inモードとして動作します．
+It operates as in mode by setting in clause to gmove directive
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -274,7 +274,7 @@ gmove指示文にin節をつけることで，inモードとして動作しま�
      a[0:2] = b[2:2]
    #pragma xmp end task
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -290,16 +290,16 @@ gmove指示文にin節をつけることで，inモードとして動作しま�
      a(1:2) = b(3:4)
    !$xmp end task
 
-上の例では，まずtask指示文は，4ノードのノード集合を前半と後半の2ノードずつに分けています．
-inモードのgmove指示文では，後半のノードが持っている配列を，前半のノードが持っている配列に対するGet通信を実行しています．
+In previous example, the task directive divides the node set of 4 nodes into two nodes, the first half and the second half.
+In gmove directive which is in mode, it executes Get communication from array of second half node to array of first half node.
 
 .. image:: ../img/gmove/gmove_in.png
 
-outモード
+out mode
 -----------
-gmove指示文にin節をつけることで，outモードとして動作します．
+It operates as out mode by setting out clause to gmove directive
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -315,7 +315,7 @@ gmove指示文にin節をつけることで，outモードとして動作しま�
      b[2:2] = a[0:2]
    #pragma xmp end task
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -331,7 +331,7 @@ gmove指示文にin節をつけることで，outモードとして動作しま�
      b(3:4) = a(1:2)
    !$xmp end task
 
-上の例は，inモードの代入文を逆にしただけです．
-outモードのgmove指示文では，前半のノードが持っている配列を後半のノードが持っている配列に対するPut通信を実行しています．
+In the previous example, it just reversed the assignment statement of the in mode.
+In gmove directive which is out mode, it executes Put communication from array of first half node to array of second half node.
 
 .. image:: ../img/gmove/gmove_out.png

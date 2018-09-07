@@ -1,13 +1,13 @@
 =================================
-プロシージャ・インタフェース
+Procedure interface
 =================================
 
-XMPにおけるプロシージャの呼び出しはプロシージャの呼び出しは，基本的にはベース言語と同じです．
-異なる言語間のプロシージャや外部ライブラリの呼び出しも，ベース言語が対応していれば可能です．
+Procedure calls in XMP are basically the same as the base language.
+Procedures call between different languages and external library are also possible if the base language supports them.
 
-下の例では，sub1()は分散配列を引数にしてsub2()を呼び出しています．
+In the below example, sub1() calls sub2() with a distributed array as an argument.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -29,7 +29,7 @@ XMPにおけるプロシージャの呼び出しはプロシージャの呼び�
       :
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -51,13 +51,13 @@ XMPにおけるプロシージャの呼び出しはプロシージャの呼び�
       :
     end	subroutine
 
-呼び出されるプロシージャ内で，引数にある分散配列を分散配列として用いたい場合は，その分散配列の形状をプロシージャ内で再定義する必要があります．
+If you want to use distributed arrays in arguments as distributed arrays in the called procedure, you need to redefine the shape of the distributed array in the procedure.
 
 .. image:: ../img/procedure/destributed_array.png
 
-ただし，呼び出されるプロシージャ内で，引数にある分散配列を重複配列として用いたい場合は，再定義を行う必要はありません．
+But, if you want to use the distributed array in the argument as a duplicate array in the called procedure, you do not need to redefine them.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -74,7 +74,7 @@ XMPにおけるプロシージャの呼び出しはプロシージャの呼び�
       :
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 

@@ -1,14 +1,14 @@
 =================================
-bacst指示文
+bacst directive
 =================================
 
-from節で指定されたノードが持つ変数を，on節で指定されたノード集合に対して放送通信を行います．
-from節を省略した場合は，対象ノード集合の最初のノードが起点となります．
-on節を省略した場合は，現在実行しているノード集合が対象となります．
+This directive broadcasts variables which are held by the node, specified in the from clause, to the node set specified in the on clause.
+If there is no from clause, the first node of the target node set is the starting point.
+If there is no on clause, the current set of nodes will be covered.
 
-下記の例では，ノード集合pの最初のノードが起点となります．
+In the below example, the first node of the node set p is the starting point.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -17,7 +17,7 @@ on節を省略した場合は，現在実行しているノード集合が対象
    num = xmpc_node_num() + 1;
    #pragma xmp bcast (num)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -28,9 +28,9 @@ on節を省略した場合は，現在実行しているノード集合が対象
 
 .. image:: ../img/bcast/bcast.png
 
-下記の例では，from節によってノード集合pの最後のノードを起点としています．
+In the below example, starting from the last node of node set p by the from clause.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -39,7 +39,7 @@ on節を省略した場合は，現在実行しているノード集合が対象
    num = xmpc_node_num() + 1;
    #pragma xmp bcast (num) from p[3]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -50,9 +50,9 @@ on節を省略した場合は，現在実行しているノード集合が対象
 
 .. image:: ../img/bcast/bcast_from.png
 
-下記の例では，on節によって4ノード中の後半の3ノードの値のみを通信の対象としています．	
+In the below example, only the values of the last three nodes in 4 nodes are target for communication by the on clause.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -61,7 +61,7 @@ on節を省略した場合は，現在実行しているノード集合が対象
    sum = xmpc_node_num() + 1;
    #pragma xmp bcast (num) from p[3] on p[1:3]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 

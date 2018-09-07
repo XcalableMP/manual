@@ -1,9 +1,4 @@
 =================================
-lock/unlock指示文
+lock/unlock directive
 =================================
-工事中．
-
-
-
-
-
+Work in progress.

@@ -1,16 +1,16 @@
 =================================
-MPIとの連携
+Cooperation with MPI
 =================================
 
 .. contents::
    :local:
    :depth: 2
 
-MPIプログラムの呼び出し
+Calling MPI program
 --------------------------
-下記の関数を用いることで，XMPプログラムからMPIプログラムを呼び出せます．
+You can call the MPI program from the XMP program by using following functions.
 
-* MPI環境の初期化
+* Initialization of MPI environment
 
 +-------------+--------------+-----------------------------+
 | Language    | Retrun Value | Function                    |
@@ -20,7 +20,7 @@ MPIプログラムの呼び出し
 | XMP/Fortran | (None)       | xmp_init_mpi()              |
 +-------------+--------------+-----------------------------+
 
-* ノード集合に対するMPIコミュニケータの取得
+* Acquisition of MPI Communicator for node set
 
 +-------------+--------------+-----------------------------+
 | Language    |	Retrun Value | Function                    |
@@ -30,7 +30,7 @@ MPIプログラムの呼び出し
 | XMP/Fortran | integer      | xmp_get_mpi_comm()          |
 +-------------+--------------+-----------------------------+
 
-* MPI環境の完了処理
+* Finalization process of MPI environment
 
 +-------------+--------------+-----------------------------+
 | Language    | Retrun Value | Function                    |
@@ -40,7 +40,7 @@ MPIプログラムの呼び出し
 | XMP/Fortran | (None)       | xmp_finalize_mpi()          |
 +-------------+--------------+-----------------------------+
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -64,7 +64,7 @@ MPIプログラムの呼び出し
      return 0;
    }
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -85,17 +85,15 @@ MPIプログラムの呼び出し
      call xmp_finalize_mpi()
    end program
 
-xmp_init_mpi()はMPI環境の初期化をXMPプログラムで行い，
-xmp_finalize_mpi()はMPI環境の完了処理をXMPプログラムで行います．
-その2つの関数の間で，任意のMPI関数とxmp_get_mpi_comm()を呼び出すことができます．
-xmp_get_mpi_comm()は，現在実行されているノード集合（上のXMP/Cではp[1:2]，XMP/Fortranではp(2:3)で構成される2ノード）のMPIコミュニケータを取得できます．
+xmp_init_mpi() initializes the MPI environment with the XMP program, and xmp_finalize_mpi() performs the completion processing of the MPI environment with the XMP program.
+You can call any MPI functions and xmp_get_mpi_comm() between the above two functions.
+xmp_get_mpi_comm() can acquire the MPI communicator of the node set (p[1: 2] in the above XMP/C and p(2: 3) in the XMP/Fortran) currently being executed.
 
-
-MPIプログラムからの呼び出し
+Calling from MPI program
 ----------------------------
-下記の関数を用いることで，MPIプログラムからXMPプログラムを呼び出せます．
+By using following functions, you can call XMP program from MPI program.
 
-* XMP環境の初期化
+* Initialization of XMP environment
 
 +-------------+--------------+--------------------+
 | Language    | Retrun Value | Function           |
@@ -105,7 +103,7 @@ MPIプログラムからの呼び出し
 | XMP/Fortran | (None)       | xmp_init(Integer)  |
 +-------------+--------------+--------------------+
 
-* XMP環境の完了処理
+* Finalization process of XMP environment
 
 +-------------+--------------+-------------------------+
 | Language    | Retrun Value | Function                |
@@ -115,7 +113,7 @@ MPIプログラムからの呼び出し
 | XMP/Fortran | (None)       | xmp_finalize()          |
 +-------------+--------------+-------------------------+
 
-* MPI/Cプログラム
+* MPI/C program
 
 .. code-block:: C
 
@@ -136,7 +134,7 @@ MPIプログラムからの呼び出し
      return 0;
    }
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -145,7 +143,7 @@ MPIプログラムからの呼び出し
       :
    }
 
-* MPI/Fortranプログラム
+* MPI/Fortran program
 
 .. code-block:: Fortran
 
@@ -161,7 +159,7 @@ MPIプログラムからの呼び出し
    
    end program test
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -171,7 +169,6 @@ MPIプログラムからの呼び出し
    end subroutine hoge
 
 
-xmp_init()はXMP環境の初期化をMPIプログラムで行い，
-xmp_finalize()はXMP環境の完了処理をMPIプログラムで行います．
-2つの関数の間で，任意のXMP関数を呼び出すことができます．
-なお，xmp_init()はMPI_Init()の後，xmp_finalize()はMPI_Finalize()の前に実行する必要があります．
+xmp_init() initializes the XMP environment with the MPI program, and xmp_finalize() completes the XMP environment with the MPI program.
+You can call any XMP functions can be called between the above two functions.
+Note that, xmp_init() must be executed after MPI_Init() and xmp_finalize() must be executed before MPI_Finalize().

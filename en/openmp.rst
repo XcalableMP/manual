@@ -1,15 +1,14 @@
 =================================
-OpenMPとの連携
+Cooperation with OpenMP
 =================================
 
-XMPプログラム中にOpenMP指示文を書くことが可能です．
-すなわち，XMPプログラムは分散メモリシステム上の並列化を行い，OpenMP指示文は共有メモリシステム上の並列化を行う，
-いわゆるハイブリッド並列をプログラミングできます．
+You can write OpenMP directives in XMP programs.
+In other words, you can do the hybrid programming with the XMP parallelized on the distributed memory system, and the OpenMP parallelized on the shared memory system.
 
-ただし，制約条件として「loop指示文を除くXMP指示文・Coarray記法・XMPが提供する関数などは，シングルスレッドが呼び出さないといけない」があります．
-XMPのloop指示文は，OpenMP/Cのparallel for指示文もしくはOpenMP/Fortranのparallel do指示文の直前か直後であれば記述できます．
+However, there is a precondition that "a single thread must invoke XMP directive, Coarray notation excluding loop directive, function provided by XMP, etc."
+You can write the XMP loop directive as long as it is immediately before or after OpenMP/C parallel for directive or OpenMP/Fortran parallel do directive.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -25,7 +24,7 @@ XMPのloop指示文は，OpenMP/Cのparallel for指示文もしくはOpenMP/Fort
    for(int i=0;i<N;i++)
       a[i] = i;
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -43,5 +42,6 @@ XMPのloop指示文は，OpenMP/Cのparallel for指示文もしくはOpenMP/Fort
      a(i) = i
    enddo
 
-XMP指示文とOpenMP指示文の順序はどちらが先でも構いません．
-上の例では，まずXMP指示文がループ文を各ノードに分割し，その後にOpenMP指示文が各ノードが持つ（複数の）CPUコアにループ文を分割します．
+Either the XMP directive or the OpenMP directive can be in order.
+In the above example, the XMP directive first divides the loop statement into each node, and then the OpenMP directive divides the loop statement into the (multiple) CPU core in each node.
+

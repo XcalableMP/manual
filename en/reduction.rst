@@ -1,11 +1,11 @@
 =================================
-reduction指示文
+reduction directive
 =================================
 
-集約演算を行います．
-:doc:`loop` のreduction節と意味は同じですが，reduction指示文は任意の箇所に記述することができます．
+Execute aggregate operation.
+It has the same meaning as the reduction clause of :doc: 'loop', but the reduction directive can be described anywhere.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -14,7 +14,7 @@ reduction指示文
    sum = xmpc_node_num() + 1;
    #pragma xmp reduction (+:sum)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -25,10 +25,10 @@ reduction指示文
 
 .. image:: ../img/reduction/reduction.png
 
-on節を伴ってノード集合の範囲を指定することもできます．
-下記の例では，4ノード中の後半の2ノードの値のみが集約演算の対象となります．
+You can set the range by using the on clause.
+In the below example, only the values of the last two nodes in four nodes are target to aggregation operation.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -37,7 +37,7 @@ on節を伴ってノード集合の範囲を指定することもできます．
    sum = xmpc_node_num() + 1;
    #pragma xmp reduction (+:sum) on p[2:2]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -48,9 +48,9 @@ on節を伴ってノード集合の範囲を指定することもできます．
 
 .. image:: ../img/reduction/reduction_on.png
 
-指定できる演算子は下記の通りです．
+The specifiable operators are as follows.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: bash
 
@@ -65,7 +65,7 @@ on節を伴ってノード集合の範囲を指定することもできます．
     max
     min
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: bash
 
@@ -83,10 +83,10 @@ on節を伴ってノード集合の範囲を指定することもできます．
     ieor
 
 .. note::
-   reduction節はループ文を伴うため，firstmax・firstmin・lastmax・lastminの演算子が必要ですが，
-   reduction指示文はループ文を伴わないため，それらの演算子はありません．
+   Since the reduction clause needs a loop statement, operators of firstmax, firstmin, lastmax, and lastmin are required.
+   But, since the reduction directive does not need a loop statement, there are no such operators.
 
 .. note::
-   reduction指示文はreduction節と同様に，集約変数が浮動小数点型の場合は，計算順序の違いにより，逐次実行と並列実行で結果がわずかに異なる場合があります．
+   Similar to the reduction clause, the reduction directive may have slightly different results from sequential execution and parallel execution, because of depending on the calculation order when the aggregate variable is a floating-point type.
 
 

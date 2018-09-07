@@ -1,28 +1,27 @@
 =================================
-Pythonとの連携
+Cooperation with Python
 =================================
 
-PythonプログラムからXMPプログラムを呼び出す方法について紹介します．
-現時点では，XMP/Cのみの対応です．
+We will show you how to call XMP program from Python program.
+Currently, it supports only XMP/C.
 
 .. note::
-   逆のパターンであるXMPプログラムからPythonプログラムを呼び出す方法については，
-   各ベース言語からPythonプログラムを呼び出す手順と同じです．
+   The method of calling a Python program from the XMP program is the same as calling a Python program from each base language.
 
-下記の2通りのXMPプログラムの呼び出し方を提供しています．
+We provide two ways to call XMP program as follows.
 
 .. contents::
    :local:
    :depth: 2
 
-並列Pythonプログラムからの呼び出し
+Calling from parallel Python program
 ------------------------------------
-mpi4pyパッケージによって並列に動作しているPythonプログラムからXMPプログラムを呼び出します．
-XMPプログラムの並列数は，起点のPythonプログラムの並列数と同じになります．
+Calling the XMP program from a Python program which is running in parallel by the mpi4py package.
+The number of parallel in the XMP program is the same as the number of parallel in the origin Python program.
 
 .. image:: ../img/python/parallel.png
 
-* Pythonプログラム
+* Python program
 
 .. code-block:: python
 
@@ -33,7 +32,7 @@ XMPプログラムの並列数は，起点のPythonプログラムの並列数�
    args = ([1,2,3], [4,5,6])
    job = lib.call(MPI.COMM_WORLD, "call_xmp", args)
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block::	C
    
@@ -42,21 +41,21 @@ XMPプログラムの並列数は，起点のPythonプログラムの並列数�
       :
    }
 
-Pythonプログラムの1行目で，PythonパッケージのXMPをインポートします．
-4行目で，呼び出したい関数のあるXMPプログラムで作られた共有ライブラリを指定します．
-6行目で，その共有ライブラリ内にあるXMPプログラムを呼び出します．
-xmp.call()の第1引数はMPIコミュニケータであり，XMPプログラムのノード集合の生成に用いられます．
-第2引数はXMPプログラムの関数名です．
-第3引数はXMPプログラムの関数に渡す引数です．
-XMPプログラムの関数に引数が不要な場合，xmp.call()の第3引数は省略できます．
+In the first line of the Python program, import XMP of Python package.
+On line 4, specify the shared library created by the XMP program with the function you want to call.
+In line 6, call the XMP program in that shared library.
+The first argument of xmp.call() is the MPI communicator, which is used to generate the node set in the XMP program.
+The second argument is the function name of the XMP program.
+The third argument is an argument to be passed to the function of the XMP program.
+If the argument of the XMP program function is unnecessary, the third argument of xmp.call() can be omitted.
 
-逐次Pythonプログラムからの呼び出し
+Calling from the sequential Python program
 ------------------------------------
-逐次のPythonプログラムから並列XMPプログラムを呼び出します．
+Call the parallel XMP program from the sequential Python program.
 
 .. image:: ../img/python/serial.png
 
-* Pythonプログラム
+* Python program
 
 .. code-block:: python
 
@@ -67,7 +66,7 @@ XMPプログラムの関数に引数が不要な場合，xmp.call()の第3引数
    job = lib.spawn(3, "call_xmp", args)
 
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -76,12 +75,11 @@ XMPプログラムの関数に引数が不要な場合，xmp.call()の第3引数
       :
    }
 
-xmp.spawn()の第1引数はXMPプログラムの並列数であり，第2引数は関数名です．
-第3引数はXMPプログラムの関数に渡す引数です．
-XMPプログラムの関数に引数が不要な場合，xmp.spawn()の第3引数は省略できます．
+The first argument of xmp.spawn() is the number of parallel of the XMP program and the second argument is the function name.
+The third argument is an argument to be passed to the function of the XMP program.
+If the argument of the XMP program function is unnecessary, the third argument of xmp.spawn() can be omitted.
 
-xmp.spawn()は指定したXMPプログラムの完了まで待機しますが，
-XMPの完了を待たない場合は，下記のようにasyncの指定を行います．
+xmp.spawn() waits until the specified XMP program is completed, but if you do not want to wait for completion of XMP, specify async as shown below.
 
 .. code-block:: python
 
@@ -89,5 +87,5 @@ XMPの完了を待たない場合は，下記のようにasyncの指定を行い
    // other work
    job.wait()
 
-xmp.wait()で，XMPプログラムの完了を保証します．
+xmp.wait() guarantees completion of XMP program.
 

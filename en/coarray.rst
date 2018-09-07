@@ -1,57 +1,57 @@
 =================================
-coarray記法
+coarray notation
 =================================
 
-Coarrayの概要は :doc:`tutorial-local` で説明しました．
-本ページでは，まだ説明していなった同期文の詳細について説明します．
+An overview of Coarray has described in :doc:`tutorial-local`.
+This page explains details of the synchronization statement that has not been explained yet.
 
 .. contents::
    :local:
    :depth: 2
 
-同期文の種類
+Kind of synchronization statements
 -------------
 sync all
 ^^^^^^^^^^^^^^^^^^
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
     void xmp_sync_all(int *status)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
    sync all
 
-これまでに発行したすべての片側通信の完了後に全イメージでバリア同期を行います．
-詳細は :doc:`tutorial-local` を参照してください．
+Barrier synchronization is performed among all images after completing all one side communications.
+For details, see: doc: `tutorial-local`.
 
 sync images
 ^^^^^^^^^^^^^^^^^^
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
     void xmp_sync_images(int num, int *image-set, int *status)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
    sync images (image-set)
 
-これまでに発行したすべての片側通信の完了後に指定したイメージ間でバリア同期を行います．
+Barrier synchronization is performed among the specified images after completing all one side communications.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    int image_set[3] = {0,1,2};
    xmp_sync_images(3, image_set, NULL);
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -65,19 +65,19 @@ sync memory
 
     void xmp_sync_memory(int *status)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
    sync memory
 
-これまでに発行したすべての片側通信の完了を待ちます．
-この文は，sync allやsync imagesと異なりバリア同期を含まないため，ローカルのみで実行されます．
+Wait for completion of all one side communications.
+This function does not include barrier synchronization unlike sync all and sync images, so it is executed only locally.
 
-引数について
+About arguments
 --------------
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -85,7 +85,7 @@ sync memory
     void xmp_sync_images(int *status)
     void xmp_sync_memory(int *status)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -93,17 +93,19 @@ sync memory
    sync images (image-set) [stat=..] [errmsg=..]
    sync memory [stat=..] [errmsg=..]
 
-XMP/Cにおいて，同期が成功した場合は，statusにはxmp.hで定義された定数である「XMP_STAT_SUCCESS」が代入されます．
-いずれかのイメージがすでに終了していた場合は，「XMP_STAT_STOPPED_IMAGE」が代入されます．
-それ以外のエラーの場合は，上記2つ以外の値が代入されます．
+In XMP/C, if synchronization is successful, "XMP_STAT_SUCCESS" which is the constant defined in xmp.h is assigned to status.
+If any of the images have already ended, "XMP_STAT_STOPPED_IMAGE" is substituted to status.
+In case of other errors, a value other than the above two values is assigned to status.
 
-同様に，XMP/Fortranにおいて，同期が成功した場合は，stat=の右辺の変数に「STAT_STOPPED_IMAGE」が代入され，
-いずれかのイメージがすでに終了していた場合は，「STAT_STOPPED_IMAGE」が代入されます．
-それ以外のエラーの場合は，上記2つ以外の値が代入されます．
+
+Similarly, if synchronization is successful in XMP/Fortran, "STAT_STOPPED_IMAGE" is assigned to the variable on the right side of stat=, and if any image has already ended, "STAT_STOPPED_IMAGE" is assigned.
+In case of other errors, a value other than the above two values is assigned.
+
 
 .. hint::
-   XMP/Fortranにおいて，stat＝やerrmsg=を省略した方が同期の速度は早いでしょう．
-   XMP/Cにおいても，xmp_sync_all(NULL); のようにNULLを用いることにより，statusの代入を省略することができます．
+   In XMP/Fortran, if you omit stat= and errmsg=, synchronization speed will be faster.
+   In XMP/C, assignment of status can be omitted by using NULL like xmp_sync_all (NULL);
+
 
 
 

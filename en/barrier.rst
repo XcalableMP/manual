@@ -1,31 +1,31 @@
 =================================
-barrier指示文
+barrier directive
 =================================
 
-バリア同期を発生させます．
+Execute barrier synchronization.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp barrier
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
     !$xmp barrier
 
-on節を使って，バリアの範囲を設定することもできます．
-下記の例では，ノード集合pの最初の2ノードだけでバリア同期が発生します．
+You can set the barrier range by using the on clause.
+In the below example, barrier synchronization occurs only in the first two nodes of p.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
    #pragma xmp barrier on p[0:2]
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 

@@ -1,11 +1,11 @@
 =================================
-wait_async指示文
+wait_async directive
 =================================
 
-通信指示文（reflect，gmove，reduction，bcast，reduce_shadow）には，「async」節をつけることで，非同期に通信を行うことができます．
-その非同期通信の完了を保証するのにwait_async指示文は用いられます．
+Communication directives (reflect, gmove, reduction, bcast, reduce_shadow) can execute asynchronous communication by attaching the "async" clause.
+The wait_async directive is used to guarantee the completion of that asynchronous communication.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -13,7 +13,7 @@ wait_async指示文
         :
     #pragma xmp wait_async (1)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -21,16 +21,15 @@ wait_async指示文
       	    :
     !$xmp wait_async (1)
 
-bcast指示文はasync節があるので，bcast指示文の直後では通信は終わっていないかもしれません．
-その通信の完了は，async節と同じ値が指定されているwait_async指示文で保証されます．
-そのため，bcast指示文とwait_async指示文の間では，bcast指示文で指定してある変数numに関する操作を行うことはできません．
+Since the bcast directive has an async clause, communication may not be completed immediately after the bcast directive.
+Completion of that communication is guaranteed with the wait_async directive whose the same value as the async clause is specified.
+Therefore, between the bcast directive and the wait_async directive, you can not operate on the num valiable specified in the bcast directive.
 
 .. hint::
-    bcast指示文の後に，bcast指示文で指定した変数と依存関係のない計算を行うことにより，
-    いわゆる通信と計算のオーバラップを行うことができるため，全体の計算時間の削減が見込めます．
+    By performing calculations without a dependency relationship with the variable specified by the bcast directive after the bcast directive, overlap of communication and calculation can be performed, so the total calculation time can be expected to be reduced.
 
 .. note::
-   async節に指定できる値は，XMP/Cではint型であり，XMP/Fortranではinteger型です．
+   Values that can be specified for async clause are int type in XMP/C, and integer type in XMP/Fortran.
 
 
 

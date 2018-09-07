@@ -1,9 +1,9 @@
 =================================
-reduce_shadow指示文
+reduce_shadow directive
 =================================
-reduce_shadow指示文は，袖の値を同期元の要素の値に加算します．
+The reduce_shadow directive adds the value of the sleeve to the value of the source element.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
@@ -21,7 +21,7 @@ reduce_shadow指示文は，袖の値を同期元の要素の値に加算しま�
      #pragma xmp reflect (a)
      #pragma xmp reduce_shadow (a)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -40,26 +40,26 @@ reduce_shadow指示文は，袖の値を同期元の要素の値に加算しま�
     !$xmp reflect (a)
     !$xmp reduce_shadow (a)
 
-shadow指示文は，各ノードが持つ分散配列aに対して袖を1要素追加します．
-次に，reflect指示文は，隣接ノード間で袖の更新を行います．
-最後に，reduce_shadow指示文は，袖の値を同期元の要素の値に加算します．
+The shadow directive adds one sleeve to the distributed array a of each node.
+Next, the reflect directive will update sleeves between neighboring nodes.
+Finally, the reduce_shadow directive adds the value of the sleeve to the value of the source element.
 
-XMP/Cでは，p[0]のa[3]は8の値を持ち，p[1]のa[4]は10の値を持ちます．
-同様に，XMP/Fortranでは，p(1)のa(4)は8の値を持ち，p(2)のa(5)は10の値を持ちます．
+In XMP/C, a[3] of p[0] has a value of 8, and a[4] of p[1] has a value of 10.
+Similarly, in XMP/Fortran, a(4) of p(1) has a value of 8, and a(5) of p(2) has a value of 10.
 
 .. image:: ../img/reduce_shadow/reduce_shadow.png
 
 
-周期的な領域の更新を行うために，periodic修飾子をwidth節に追加することもできます．
+You can add the periodic modifier to the width clause to execute periodic region updates.
 
-* XMP/Cプログラム
+* XMP/C program
 
 .. code-block:: C
 
      #pragma xmp reflect (a) width(/periodic/1)
      #pragma xmp reduce_shadow (a) width(/periodic/1)
 
-* XMP/Fortranプログラム
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -68,5 +68,5 @@ XMP/Cでは，p[0]のa[3]は8の値を持ち，p[1]のa[4]は10の値を持ち�
 
 .. image:: ../img/reduce_shadow/reduce_shadow_periodic.png
 
-最初の例に追加して，XMP/Cでは，p[0]のa[0]は2の値を持ち，p[1]のa[7]は16の値を持ちます．
-同様に，XMP/Fortranでは，p(1)のa(1)は2の値を持ち，p(2)のa(8)は16の値を持ちます．
+In addition to the first example, in XMP/C, a[0] of p[0] has a value of 2, and a[7] of p[1] has a value of 16.
+Similarly, in XMP/Fortran, a(1) in p(1) has a value of 2, and a(8) in p(2) has a value of 16.
