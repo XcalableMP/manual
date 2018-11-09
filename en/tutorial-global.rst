@@ -1,23 +1,24 @@
 ===================================
-チュートリアル（Global-view）
+Tutorial (Global-view)
 ===================================
 
 .. contents::
    :local:
    :depth: 2
 
-はじめに
+Introduction
 -----------
-グローバルビューのプログラミングでは，逐次プログラムに指示文を挿入することで並列化を行います．
-グローバルビューでは，下記の動作を指示文を使って記述します．
+In the global-view model of XcalableMP (XMP), the user adds directives into the serial code to specify parallelism. 
+The following actions can be described by XMP directives.
 
-* データマッピング（データを分割し，各ノードに割り当てる）
-* ワークマッピング（処理を分割し，各ノードに割り当てる）
-* ノード間通信（ノード間でデータの通信を行う）
+* Data Mapping (divides data and distributes it among nodes)
+* Work Mapping (divides workload and distributes it among nodes)
+* Inter-node Communication (exchange data between nodes)
 
-本章では，下記のシンプルな逐次プログラムを並列化していくことで，XMPの機能を説明します．
+This tutorial introduces the basics of XMP.
+A simple sequential code will be parallelized by adding XMP directives.
 
-* Cプログラム
+* C Program
 
 .. code-block:: C
 
@@ -34,7 +35,7 @@
       return 0;
     }
 
-* Fortranプログラム
+* Fortran Program
 
 .. code-block:: Fortran
 
@@ -47,7 +48,7 @@
       enddo
     end program main
 
-このプログラムをgccやgfortranなどの逐次プログラム用のコンパイラで翻訳し，実行すると下記のように1〜10の数字が出力されます．
+Compilers such as gcc/gfortran translate the sequential code into a binary, which generates the following output.
 
 .. code-block:: bash
 
@@ -62,14 +63,14 @@
     9
     10
 
-では，このプログラムを並列化していきます．
+XMP provides several directives to parallelize the sequential code.
 
-データマッピング
+Data Mapping
 -------------------------------------------------------
-データマッピングを行うには，notes指示文，template指示文，distribute指示文，align指示文を用います．
-指示文の先頭は，XMP/Cは「#pragma xmp」，XMP/Fortranは「!$xmp」です．
+The user use the nodes, template, distribute, and align directive to specify data mappong among nodes.
+Directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
 
-* XMP/Cプログラム（未完成）
+* XMP/C Program (incomplete)
 
 .. code-block:: C
 
@@ -90,7 +91,7 @@
       return 0;
     }
 
-* XMP/Fortranプログラム（未完成）
+* XMP/Fortran Program (incomplete)
 
 .. code-block:: Fortran
 
@@ -107,48 +108,45 @@
       enddo
     end program main
 
-上の例では，要素数10の配列aを各ノードに5要素ずつ分散配置しています．
+In the above example, the user specify data mapping of array a (10 elements) among 2 nodes (5 elements per node).
 
-nodes指示文はサイズ2のノード集合pを，template指示文はサイズ10のテンプレートtを宣言しています．
-XMPでは，角括弧を用いると0からインデックスが始まり，丸括弧を用いると1からインデックスが始まります．
-XMP/Cでは，p[0]とp[1]のノードとt[0]からt[9]のテンプレートが宣言されています．
-同様に，XMP/Fortranでは，p(1)とp(2)のノードとt(1)からt(10)のテンプレートが宣言されています．
+The nodes directive declares node p of size 2.
+The template declares template t of size 10.
+In XMP, array indices start from 0 in [], and start from 1 in ().
+Node p has element p[0] and p[1] and template t has elements from t[0] to t[9] in the XMP/C style.
+In XMP/Fortran, node p has element p(1) and p(2) and template t has elements from t(1) to t(10).
 
 .. note::
-    歴史的な経緯により，XMP/Cでも丸括弧を利用できますが，
-    各ベース言語に従い，XMP/Cでは角括弧，XMP/Fortranでは丸括弧を用いることをお勧めします．
-    なお，XMP/Fortranでは角括弧は利用できません．
+    For some historical reasion, the user can use both [] and () in XMP/C.
+	[] is not available in XMP/Fortran.
+    However, we recommand to use the same syntax to the base language．
 
-distribute指示文は，ノード上にテンプレートを分散させます．
-XMP/Cの場合は，p[0]にt[0]からt[4]を対応付け，p[1]にt[5]からt[9]を対応付けます．
-同様に，XMP/Fortranの場合は，
-p(1)にt(1)からt(5)を対応付け，p(2)にt(6)からt(10)を対応付けます．
+The distribute directive distributes template elements among nodes.
+In XMP/C, elements from t[0] to t[4] are assigned to p[0] and the remaining elements are assigned to p[1].
+In XMP/Fortran, elements from t(1) to t(5) are assigned to p(1) and the remaining elements are assigned to p(2).
 
-align指示文は，指定した配列に対して，テンプレートに設定されたデータマッピングを行います．
-align指示文は，配列の宣言より後に挿入します．
-XMP/Cの場合は，p[0]にa[0]からa[4]を対応付け，p[1]にa[5]からa[9]を対応付けます．
-同様に，XMP/Fortranの場合は，p(1)にa(1)からa(5)を対応付け，p(2)にa(6)からa(10)を対応付けます．
+The align directive assigns target array elements based on the specified template.
+Each align directive has to be declared before the target array definition.
 
-これまでの指示文の動作を図示すると，下記のようになります．
+In XMP/C, elements from a[0] to a[4] are assgiend to p[0] and the remaining elements are assigned to p[1].
+In XMP/Fortran, elements from a(1) to a(5) are assigned to p(1) and the remaining elements are assigned to p(2).
+
+The following figure illustrates the behavior of XMP directives for data mapping.
 
 .. image:: ../img/tutorial-global/global.png
 
-align指示文でデータマッピングされた配列を「分散配列」と呼びます．
-データマッピングされていない配列（通常の配列）は，全ノードにそのまま存在するので，「重複配列」と呼びます．
+The target array specified in the align directive is called "distributed array"
+Other arrays are called "replicated array" when they are not specified in data mapping directives.
 
-ここまでで，データマッピングは完了です．
-次に，データマッピングで用いたテンプレートを用いて，ワークマッピングを行っていきます．
-
-ワークマッピング
+Work Mapping
 ------------------
 
-loop指示文
+loop Directive
 ^^^^^^^^^^^
 
-ループ文に対してワークマッピングを行うためにloop指示文を用います．
-loop指示文は対象のループ文の直前に挿入します．
+The user uses the loop directive to specify work mapping of the following loop statement.
 
-* XMP/Cプログラム
+* XMP/C Program
 
 .. code-block:: C
 
@@ -170,7 +168,7 @@ loop指示文は対象のループ文の直前に挿入します．
       return 0;
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran Program
 
 .. code-block:: Fortran
 
@@ -188,11 +186,11 @@ loop指示文は対象のループ文の直前に挿入します．
       enddo
     end program main
 
-上の例では，XMP/Cの場合は，p[0]にイテレーション0から4を対応付け，p[1]に5から9を対応付けます．
-同様に，XMP/Fortranの場合は， p(1)にイテレーション1から5を対応付け，p(2)に6から10を対応付けます．
+In the above example, iterations from 0 to 4 are mapped onto p[0] and iterations 5 to 9 are mapped onto p[1] (in XMP/C).
+In XMP/Fortran, iterations from 1 to 5 are mapped onto p(1) and iterations 6 to 10 are mapped onto p(2).
 
-このプログラムをXMPコンパイラを用いて翻訳し，2ノードで実行すると，2つのノードからそれぞれ担当した5要素が出力されます．
-例えば以下のような結果となります．
+The following output shows the execution result of the sample program with 2 nodes.
+Each node prints out the list of assigned array values.
 
 .. code-block:: bash
 
@@ -207,7 +205,7 @@ loop指示文は対象のループ文の直前に挿入します．
    9
    10
 
-2つのノードは，どちらが先に実行されるかわからないため，下記のように出力の順番が逆になることや，出力が混じることもあります．
+In the parallel execution, the order of each node's output can be changed or merged.
 
 .. code-block:: bash
 
@@ -222,12 +220,13 @@ loop指示文は対象のループ文の直前に挿入します．
    4
    5
 
-task指示文
+task Directive
 ^^^^^^^^^^^
-特定のノード集合だけが実行する範囲を設定するtask指示文を紹介します．
-XMP/Cの場合はtask指示文の適用範囲は波括弧で記述し，XMP/Fortranの場合は適用範囲の終了をend task指示文で記述します．
+The task directive limits the range of execution nodes and changes the execution context.
+The task speficies the parallel execution of the following compound statement.
+In XMP/Fortran, the end task directive is required to specify the end of the region.
 
-* XMP/Cプログラム
+* XMP/C Program
 
 .. code-block:: C
 
@@ -243,7 +242,7 @@ XMP/Cの場合はtask指示文の適用範囲は波括弧で記述し，XMP/Fort
       return 0;
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran Program
 
 .. code-block:: Fortran
 
@@ -255,56 +254,60 @@ XMP/Cの場合はtask指示文の適用範囲は波括弧で記述し，XMP/Fort
     !$xmp end task
     end program main
 
-この例では，XMP/Cの場合はp[0]，XMP/Fortranの場合はp(1)のそれぞれ1ノードだけが"Hello"と出力します．
+In the above example, p[0] prints out "Hello" on the screen (in XMP/C).
+In XMP/Fortran, p(1) prints out the result．
 
-次に，複数のノードを指定する方法を説明します．
-XMPでは「triplet」という下記の記法を用いることで，複数のノードを指定できます．
+The user can use a integer triplet to specify multiple nodes.
 
-* XMP/Cプログラム
+* XMP/C Program
 
 .. code-block:: C
 
     [start:length:stride]
 
-* XMP/Fortranプログラム
+* XMP/Fortran Program
 
 .. code-block:: Fortran
 
     (start:end:stride)
 
-この記法はFortranでは一般に利用されているものなので，以下ではXMP/Cにおけるtripletについて説明します．
+XMP/Fortran follows the syntax of the array section in Fortran.
 
-ノード集合pが定義されている場合，p[0:5]はp[0]からp[4]の5ノードを意味します．
-コロン前の数字は開始番号，コロン後の数字は要素数を意味します．
-開始番号および要素数は省略できます．
-開始番号を省略した場合，開始番号には0が用いられます．
-要素数を省略した場合，要素数には開始番号から計算できる残りの要素数が用いられます．
-また，p[0:5:2]のようにコロンが2つ用いられた場合は，2つ目のコロンの後の数字はステップ数を指します．
-p[0:5:2]はp[0]から2ステップごとに5要素という意味になります．
+XMP/C has a different form. Triplets in XMP/C is written as [start:size:step].
 
-20ノードで構成されるノード集合pに対するtripletの例を下記に示します．
+Start means the start index of the node group.
+When start is omitted, the range start with the first element.
+Size means the size of the specified node group.
+When size is omitted, the node group has elements starting from start to the defined size (with specified step).
+Step can be specified to declare a discontinuous node group.
+When step is omitted, 1 will be used.
+
+For example, p[0:5] specifies 5 nodes starting from p[0] (from p[0] to p[4]).
+p[0:5:2] has p[0], p[2], p[4], p[6], p[8].
+
+The following shows some examples of triplet. The size of node p is 20 (from p[0] to p[19]).
 
 +-----------+------------------------------------------------+
-| 表記      | 意味                                           |
+| Triplet   | Meaning                                        |
 +===========+================================================+
-| p[5:10]   | p[5]からp[14]までの10ノード                    |
+| p[5:10]   | 10 nodes starting from p[5]                    |
 +-----------+------------------------------------------------+
-| p[:10]    | p[0]からp[9]までの10ノード                     |
+| p[:10]    | 10 nodes starting from p[0]                    |
 +-----------+------------------------------------------------+
-| p[10:]    | p[10]からp[19]までの10ノード                   |
+| p[10:]    | node elemente from p[10] to p[19]              |
 +-----------+------------------------------------------------+
-| p[:]      | すべてのノード（p[0]からp[19]までの20ノード）  |
+| p[:]      | every node elements (from p[0] to p[19])       |
 +-----------+------------------------------------------------+
-| p[0:5:2]  | p[0]，p[2]，p[4]，p[6]，p[8]の5ノード          |
+| p[0:5:2]  | p[0], p[2], p[4], p[6], p[8]                   |
 +-----------+------------------------------------------------+
 
 .. note:: 
+    In XMP/Fortran, triplet can be written as (start:end:step). End specifies the last elements in the node group.
 
-    Fortranの場合，1つ目のコロン後の数字は「終了番号」を指します．
 
-この記法を用いて，例えば4ノードで構成されるノード集合から最初の2ノードだけで実行したい場合は，下記のようにtask指示文のon節にノード集合を指定します．
+The following program uses the task directive to specify the first two nodes in the original node group.
 
-* XMP/Cプログラム
+* XMP/C Program
 
 .. code-block:: C
 
@@ -320,7 +323,7 @@ p[0:5:2]はp[0]から2ステップごとに5要素という意味になります
       return 0;
     }
 
-* XMP/Fortranプログラム
+* XMP/Fortran Program
 
 .. code-block:: Fortran
 
@@ -333,11 +336,11 @@ p[0:5:2]はp[0]から2ステップごとに5要素という意味になります
     end program main
 
 
-ノード間通信
+Inter-node Communication
 -----------------
-最終的な答えを1つのノードに集約して出力することを行います．
+XMP provides some directives specifying typical inter-node communication patterns.
 
-* XMP/Cプログラム
+* XMP/C Program
 
 .. code-block:: C
 
@@ -367,7 +370,7 @@ p[0:5:2]はp[0]から2ステップごとに5要素という意味になります
       return 0;
     }
     
-* XMP/Fortranプログラム
+* XMP/Fortran Program
 
 .. code-block:: Fortran
 
@@ -393,22 +396,25 @@ p[0:5:2]はp[0]から2ステップごとに5要素という意味になります
     !$xmp end task
     end program main
 
-配列aと同じ型と形状を持つ重複配列bを宣言します．
-上のプログラムでは，gmove指示文を用いて配列aの全要素を配列bに集め，
-task指示文を用いて1ノードだけが配列bの出力を行っています．
+Array b is a replicated array which has the same shape to distributed array a.
+The program uses the gmove directive to collect all elements from array a to local array b.
+The task directive is used to print out the elements in array b by a single node.
 
-gmove指示文は，分散配列に対して通信を行うための指示文です．
-gmove指示文は，その後に続く配列代入文とセットで用います．
-配列代入文ではtripletを用いることで，複数の要素を表現できます．
-この例では，分散配列aの全要素から重複配列bの全要素への通信を表現していて，下図ような通信パターンとなります．
+The gmove directive specified a collective communication between distribute/replicated arrays.
+The compiler generates collective communication required for the following assignment statement.
+Triplet form can be used in the assignment statement to specify multiple elements.
+
+In the program, all distributed data elements are collected from the owner nodes to the local array.
+The following figure illustrates the inter-node communication generated by the compiler.
 
 .. image:: ../img/tutorial-global/gmove_allreduce.png
 
-配列bと同じインデックスを持つ配列aの要素についてはノード内の通信が行われ，
-配列bと異なるインデックスを持つ配列aの要素についてはノード間の通信が行われます．
+If the target element is allocated locally, data can be moved within the memory, while
+inter-node communication is required if the target element is allocated in a remote node.
 
-出力結果は下記のようになります．XMP/Cではp[0]，XMP/Fortranではp(1)のそれぞれ1ノードだけが，出力を行っています．
-この出力は，1ノードだけが実行しているので，順番通りに値が出力されます．
+The following outout shows the result of the program.
+p[0] (in XMP/C) or p(1) (in XMP/Fortran) prints out the result.
+The output sequence is always the same because it is handled by a single node.
 
 .. code-block:: bash
 
@@ -423,14 +429,6 @@ gmove指示文は，その後に続く配列代入文とセットで用います
     9
     10
 
-以上で，XMPによる並列化は完了です，
-
 .. note::
-
-    XMPではノード間の通信はすべて明示的に記述する必要があります．
-    XMPコンパイラは，XMPの記述から適切な通信を生成しますが，
-    記述がない箇所では通信を生成することはありません（この点がXMPの先祖であるHPFとの大きな違いです）．
-    このような仕様にした理由は，利用者が予想しない箇所で通信が起こった場合，
-    プログラムの性能チューニングが難しくなるためです．
-    通信は利用者が記述した場所だけで発生し，記述のない場所は全実行ノードが同じ実行を行う冗長実行となります．
-
+    All communication in XMP should be specified explicitly since the language does not assume automatic inter-node communication (which is a big difference its ancestor, HPF).
+    This design choice makes the performance model clear to user and easier to optimize the performance.
