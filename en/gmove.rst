@@ -53,7 +53,7 @@ Copying a part of array "a" to array "b". For array assignment statements in a g
 In XMP/C, p[0] sends between b[0] and b[3] to p[2] and [3], and p[1] sends b[4] to p[3].
 Similarly, in XMP/Fortran, p(1) sends between b(1) and b(4) to p(3) and p(4), and p(2) sends b(5) to p(4).
 
-In the previous example, it is assignment statements between distributed arrays with the same shape, but of couree it can be assign with the different shape.
+In this example, it is assignment statements between distributed arrays with the same shape, but of couree it can be assign with the different shape.
 
 * XMP/C program
 
@@ -134,7 +134,7 @@ By using this method, the shape of distributed array can be changed during calcu
 
 .. image:: ../img/gmove/gmove_change.png
 
-In the previous example, copying all elements of array b which is block distributed to array a which is gblock distributed.
+In this example, copying all elements of array b which is block distributed to array a which is gblock distributed.
 In array a and b, communication occurs only for elements whose responsible nodes do not match (the arrow means communication between nodes in figures).
 
 Communication of scalar
@@ -171,7 +171,7 @@ In an assignment statement, if one element is specified on the right side and pl
 
 .. image:: ../img/gmove/gmove_one_element.png
 
-In the previous example, in XMP/C, an element array b[0] of node p[0] will be broadcasted to specified index of node p[2] and p[3].
+In this example, in XMP/C, an element array b[0] of node p[0] will be broadcasted to specified index of node p[2] and p[3].
 Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcasted to specified index of node p(3) and p(4).
 
 Communication of duplicated array and scalar values
@@ -210,7 +210,7 @@ Not only the distributed array but also the duplicate array and ordinary scalar 
    !$xmp gmove
       a(10:14) = c
 
-In the previous example, duplicated array and scalar variable are local copied to distributed array.
+In this example, duplicated array and scalar variable are local copied to distributed array.
 For this reason, communication does not occur.
 
 Communication between distributed arrays with different division dimensions
@@ -250,7 +250,7 @@ Communication between distributed arrays with different division dimensions
 
 .. image:: ../img/gmove/gmove_different.png
 
-In the previous example, in XMP/C, b[0][0:2] of p[0], b[0][2:2] of p[1], b[0][4:2] of p[2] and b[0][6:2] of p[3] are copied to a[0][:] of p[0].
+In this example, in XMP/C, b[0][0:2] of p[0], b[0][2:2] of p[1], b[0][4:2] of p[2] and b[0][6:2] of p[3] are copied to a[0][:] of p[0].
 Similarly, in XMP/Fortran, b(1:2,1) of p(1), b(3:4,1) of p(2), b(5:6,1) of p(3) and b(7:8,1) of p(4) are copied to a(:,1) of p(1).
 
 
@@ -290,7 +290,7 @@ It operates as in mode by setting in clause to gmove directive
      a(1:2) = b(3:4)
    !$xmp end task
 
-In previous example, the task directive divides the node set of 4 nodes into two nodes, the first half and the second half.
+In this example, the task directive divides the node set of 4 nodes into two nodes, the first half and the second half.
 In gmove directive which is in mode, it executes Get communication from array of second half node to array of first half node.
 
 .. image:: ../img/gmove/gmove_in.png
@@ -331,7 +331,7 @@ It operates as out mode by setting out clause to gmove directive
      b(3:4) = a(1:2)
    !$xmp end task
 
-In the previous example, it just reversed the assignment statement of the in mode.
+In this example, it just reversed the assignment statement of the in mode.
 In gmove directive which is out mode, it executes Put communication from array of first half node to array of second half node.
 
 .. image:: ../img/gmove/gmove_out.png
