@@ -243,3 +243,34 @@ shadow指示文とreflect指示文は，多次元分割の配列についても�
 .. note::
 
    orthogonal節は，2次元以上が分割された配列でしか意味はありません．
+
+また，任意の次元のみに袖領域を追加することもできます．
+
+* XMP/Cプログラム
+
+.. code-block:: C
+  #pragma xmp nodes p[3]
+  #pragma xmp template t[9]
+  #pragma xmp distribute t[block] onto p
+  double a[9][9];
+  #pragma xmp align a[i][*] with t[i]
+  #pragma xmp shadow a[1][0]
+    :
+  #pragma xmp reflect (a)
+
+* XMP/Fortranプログラム
+
+.. code-block:: Fortran
+  !$xmp nodes p[3]
+  !$xmp template t[9]
+  !$xmp distribute t[block] onto p
+  real :: a(9,9)
+  !$xmp align a(*,i) with t(i)
+  !$xmp shadow a(0,1)
+    :
+  !$xmp reflect (a)
+
+.. image:: ../img/shadow_reflect/1of2.png
+
+shadow指示文で指定する配列で分散していない次元には0と記述します．
+
