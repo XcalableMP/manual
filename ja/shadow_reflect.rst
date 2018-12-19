@@ -249,6 +249,7 @@ shadow指示文とreflect指示文は，多次元分割の配列についても�
 * XMP/Cプログラム
 
 .. code-block:: C
+
   #pragma xmp nodes p[3]
   #pragma xmp template t[9]
   #pragma xmp distribute t[block] onto p
@@ -261,6 +262,7 @@ shadow指示文とreflect指示文は，多次元分割の配列についても�
 * XMP/Fortranプログラム
 
 .. code-block:: Fortran
+
   !$xmp nodes p[3]
   !$xmp template t[9]
   !$xmp distribute t[block] onto p
