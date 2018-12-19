@@ -292,3 +292,37 @@ directive.
 
    The orthogonal clause is effective only for arrays more than one
    dimension of which is distributed.
+
+Besides, you can also add shadow areas to only specidifed dimension.
+
+* XMP/C program
+
+.. code-block:: C
+
+  #pragma xmp nodes p[3]
+  #pragma xmp template t[9]
+  #pragma xmp distribute t[block] onto p
+  double a[9][9];
+  #pragma xmp align a[i][*] with t[i]
+  #pragma xmp shadow a[1][0]
+    :
+  #pragma xmp reflect (a)
+
+* XMP/Fortran program
+
+.. code-block:: Fortran
+
+  !$xmp nodes p[3]
+  !$xmp template t[9]
+  !$xmp distribute t[block] onto p
+  real :: a(9,9)
+  !$xmp align a(*,i) with t(i)
+  !$xmp shadow a(0,1)
+    :
+  !$xmp reflect (a)
+
+.. image:: ../img/shadow_reflect/1of2.png
+
+In the array specified in the shadow directive,
+0 is set as the shadow width in dimensions which are not distributed.
+
