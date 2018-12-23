@@ -69,5 +69,5 @@ the array.
 
 .. note::
    The template appearing in the on clause must have the same shape of
-   arrays in the following statement. The rhs value must be identical
-   among all nodes. The array construct is collective.
+   arrays in the following statement. The right-hand-side value must be identical
+   among all nodes because the array construct is collective.
