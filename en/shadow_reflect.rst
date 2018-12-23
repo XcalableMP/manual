@@ -10,7 +10,7 @@ may reside on another node.
 Because it costs largely to copy a[i+1] from the neighboring node to
 update each a[i], a technique of copying collectively elements on the
 neighboring node to the area added to the distributed array on each
-node is usually adopted. In XMP, such additional region is referred as "shadow."
+node is usually adopted. In XMP, such additional region is called "shadow."
 
 .. contents::
    :local:
@@ -19,7 +19,7 @@ node is usually adopted. In XMP, such additional region is referred as "shadow."
 Declare shadow
 --------------
 
-Widths on lower/upper bounds are the same
+Widths of lower/upper bounds are the same
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Shadow areas can be declared with the shadow directive.
@@ -55,7 +55,7 @@ and white ones are shadow.
 .. note::
    Distributed arrays in a cyclic manner cannot have shadow.
 
-Widths on upper/lower bounds are different
+Widths of lower/upper bounds are different
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 For some programs, it is natural that the widths of the shadow area on
 the lower and upper bounds are different.
@@ -87,7 +87,7 @@ array a has a shadow area of width one only on the upper bound.
 
 .. image:: ../img/shadow_reflect/shadow_uneven.png
 
-The values on the left- and right-hand sides of colon designate the widths on
+The values on the left- and right-hand sides of a colon designate the widths on
 the lower and upper bounds, respectively.
 
 Update shadow
@@ -138,9 +138,9 @@ p(1) sends an element a(4) to the shadow area on the lower
 bound on p(2), and p(3) sends a(9) to the shadow
 area on the upper bound on p(2).
 
-Specifying width
+Specify width
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The default behavior of a reflect directive is to update whole of
+The default behavior of a reflect directive is to update the whole of
 the shadow area declared by a shadow directive. However, there are
 some cases where a specific part of the shadow area is to be updated
 to reduce the communication size in a point of the code.
@@ -148,7 +148,7 @@ to reduce the communication size in a point of the code.
 To update only a specific part of the shadow area, add the width
 clause to the reflect directive.
 
-The values on the left- and right-hand sides of colon in the width clause
+The values on the left- and right-hand sides of a colon in the width clause
 designate the widths on the lower and upper bounds to be updated,
 respectively. In the example below, only the shadow area on the upper
 bound is updated.
@@ -228,11 +228,10 @@ area on the lower bound on p(1).
    lower bounds are equal, as shown by width(/periodic/1:1) in the
    above example, you can abbreviate it as width(/periodic/1).
 
-Multidimensional shadow
+Multi-dimensional shadow
 -----------------------
 
-The shadow directive and reflect construct can be applied to arrays that is
-distributed in multiple dimensions.
+The shadow directive and reflect construct can be applied to distributed arrays multiple dimensions.
 The following programs are the examples for two-dimensional distribution.
 
 * XMP/C program
@@ -290,7 +289,7 @@ can be avoided by adding an orthogonal clause to a reflect construct.
    The orthogonal clause is effective only for arrays more than one
    dimension of which is distributed.
 
-Besides, you can also add shadow areas to only specidifed dimension.
+Besides, you can also add shadow areas to only specified dimension.
 
 * XMP/C program
 
