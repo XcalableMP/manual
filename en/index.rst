@@ -1,7 +1,7 @@
 XcalableMP Handbook
 ==================================
 
-This cite introduces a parallel language XcalableMP.
+This website introduces a parallel language XcalableMP.
 
 The explanation is based on the latest specification,
 but some features from the upcoming one are also included.
