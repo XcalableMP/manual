@@ -91,14 +91,20 @@ XMP also supports to assign it with the different shape.
 
 .. image:: ../img/gmove/gmove_cyclic.png
 
-Array a is distributed according to cyclic, array b is distributed according to block.
+While array a is distributed in a cyclic manner, array b is distributed in a block manner.
 
-In XMP/C, p[0] sends b[0] and b[4] to p[2] and p[3]. p[1] sends b[1] to p[2]. Each element of p[2] and p[3] will be local copied.
-Similarly, in XMP/Fortran, p(1) sends b(1) and b(5) to p(3) and p(4). p(2) sends b(2) to p(3). Each element of p(3) and p(4) will be local copied.
+In XMP/C,
+p[0] sends b[0] and b[4] to p[2] and p[3].
+p[1] sends b[1] to p[2].
+Each element of p[2] and p[3] will be copied localy.
+Similarly, in XMP/Fortran,
+p(1) sends b(1) and b(5) to p(3) and p(4). p(2) sends b(2) to p(3).
+Each element of p(3) and p(4) will be copied localy.
 
 .. note::
    
-   If the number of elements specified on the right side is other than 1, it will not work properly if the number of elements differs between the right side and the left side.
+   If the number of elements specified on the right hand side is other than 1,
+   it will not work properly if the number of elements differs between the right hand side and the left hand side.
 
 By using this method, the shape of distributed array can be changed during calculation.
 
@@ -136,12 +142,16 @@ By using this method, the shape of distributed array can be changed during calcu
 
 .. image:: ../img/gmove/gmove_change.png
 
-In this example, copying all elements of array b which is block distributed to array a which is gblock distributed.
-In array a and b, communication occurs only for elements whose responsible nodes do not match (the arrow means communication between nodes in figures).
+In this example,
+copying all elements of array b which is distributed in a block manner to array a which is distributed in a gblock manner.
+In arrays a and b,
+communication occurs only for elements whose responsible nodes do not match (the arrow means communication between nodes in figures).
 
 Communication of scalar
 ^^^^^^^^^^^^^^^
-In an assignment statement, if one element is specified on the right side and plural elements are specified on the left side, the operation will be broadcast communication.
+In an assignment statement,
+if one element is specified on the right hand side and plural elements are specified on the left hand side,
+the operation will be broadcast communication.
 
 * XMP/C program
 
@@ -178,9 +188,9 @@ Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcaste
 
 Communication of duplicated array and scalar values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Not only the distributed array but also the duplicate array and ordinary scalar variable can be described on the right side.
+Not only distributed arrays but also duplicated arrays and scalar variables can be described on the right hand side.
 
-* XMP/C program (a port of it)
+* XMP/C program
 
 .. code-block:: C
 
@@ -212,11 +222,11 @@ Not only the distributed array but also the duplicate array and ordinary scalar 
    !$xmp gmove
       a(10:14) = c
 
-In this example, duplicated array and scalar variable are local copied to distributed array.
+In this example, duplicated array and scalar variable are copied to distributed array localy.
 For this reason, communication does not occur.
 
-Communication between distributed arrays with different division dimensions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Communication between distributed arrays with different dimensions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * XMP/C program
 
@@ -252,9 +262,11 @@ Communication between distributed arrays with different division dimensions
 
 .. image:: ../img/gmove/gmove_different.png
 
-In this example, in XMP/C, b[0][0:2] of p[0], b[0][2:2] of p[1], b[0][4:2] of p[2] and b[0][6:2] of p[3] are copied to a[0][:] of p[0].
-Similarly, in XMP/Fortran, b(1:2,1) of p(1), b(3:4,1) of p(2), b(5:6,1) of p(3) and b(7:8,1) of p(4) are copied to a(:,1) of p(1).
-
+In this example,
+in XMP/C, b[0][0:2] of p[0], b[0][2:2] of p[1], b[0][4:2] of p[2] and b[0][6:2] of p[3] are copied to a[0][:] of p[0].
+Similarly,
+in XMP/Fortran,
+b(1:2,1) of p(1), b(3:4,1) of p(2), b(5:6,1) of p(3) and b(7:8,1) of p(4) are copied to a(:,1) of p(1).
 
 in mode
 ---------
@@ -293,7 +305,7 @@ It operates as in mode by setting in clause to gmove directive
    !$xmp end task
 
 In this example, the task directive divides the node set of 4 nodes into two nodes, the first half and the second half.
-In gmove directive which is in mode, it executes Get communication from array of second half node to array of first half node.
+In gmove directive which is in mode, it executes get communication from array of second half node to array of first half node.
 
 .. image:: ../img/gmove/gmove_in.png
 
@@ -334,6 +346,6 @@ It operates as out mode by setting out clause to gmove directive
    !$xmp end task
 
 In this example, it just reversed the assignment statement of the in mode.
-In gmove directive which is out mode, it executes Put communication from array of first half node to array of second half node.
+In gmove directive which is out mode, it executes put communication from array of first half node to array of second half node.
 
 .. image:: ../img/gmove/gmove_out.png
