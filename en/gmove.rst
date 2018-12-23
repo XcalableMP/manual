@@ -54,7 +54,8 @@ Array assignment statements in a gmove construct uses triplet.
 In XMP/C, p[0] sends b[0] - b[3] to p[2] - p[3], and p[1] sends b[4] to p[3].
 Similarly, in XMP/Fortran, p(1) sends b(1) - b(4) to p(3) - p(4), and p(2) sends b(5) to p(4).
 
-In this example, it is assignment statements between distributed arrays with the same shape, but of couree it can be assign with the different shape.
+In this example, it is assignment statements between distributed arrays with the same shape.
+XMP also supports to assign it with the different shape.
 
 * XMP/C program
 
