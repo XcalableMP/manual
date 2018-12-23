@@ -26,7 +26,7 @@ block Distribution
 
 Target data is divided into contiguous blocks and distributed among nodes.
 When the size of the template is N and the number of nodes is K, the chunk size of each block will be ceil(N/K).
-For example, block distribution is useful for stencil computation which refers to boundary elements of distributed chunks.
+For example, block distribution is useful for stencil computation which refers to neighborhood elements.
 
 .. note:: 
 
@@ -130,7 +130,7 @@ block-cyclic Distribution
 
 Target data is divided into a contiguous block of size w and distributed among nodes in a round-robin manner.
 Block-cyclic distribution is suitable for computation which has irregular load balance
-and references to boundary elements of distributed chunks.
+and references to neighborhood elements.
 
 * XMP/C program
 
