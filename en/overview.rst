@@ -30,7 +30,7 @@ version and hardware)
    For more detail, please refer:
    Ken Kennedy, Charles Koelbel and Hans Zima: The Rise and Fall of High Performance Fortran: An Historical Object Lesson, Proc. 3rd ACM SIGPLAN History of Programming Languages Conf. (HOPL-III), pp. 7-1-7-22 (2007).
 
-In such circumstance, to development a new parallel programming model
+In such circumstance, to develop a new parallel programming model
 that enables easy parallelization of existing serial programs and design
 a new language based on it, "the XMP Specification Working Group" was
 established in 2008.
@@ -59,14 +59,14 @@ XMP supports both C and Fortran as base languages while HPF is an extension
 of only Fortran. It is advantages of XMP that it is easy to migrate with
 low cost of learning because it is based on existing languages.
 
-In this site, XMP for C and XMP for Fortran are referred as XMP/C and
+In this site, XMP for C and XMP for Fortran are called as XMP/C and
 XMP/Fortran, respectively. XMP for C++ is also under development.
 
 Memory model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 XMP is a parallel programming language for distributed-memory systems.
 A distributed-memory system is a system where distributed memory and
-CPUs are connected with each other via network, as shown in the figure
+CPUs are connected with each other via a network, as shown in the figure
 below. However, actual hardware can be equipped with shared memory. In
 such a case, each core on a chip can be regarded as a CPU in the
 figure.

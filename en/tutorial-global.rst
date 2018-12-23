@@ -11,9 +11,9 @@ Introduction
 In the global-view model of XcalableMP (XMP), the user adds directives into the serial code to specify parallelism. 
 The following actions can be described by XMP directives.
 
-* Data Mapping (divides data and distributes it among nodes)
-* Work Mapping (divides workload and distributes it among nodes)
-* Inter-node Communication (exchange data between nodes)
+* Data mapping (divides data and distributes it among nodes)
+* Work mapping (divides workload and distributes it among nodes)
+* Inter-node communication (exchange data between nodes)
 
 This tutorial introduces the basics of XMP.
 A simple sequential code will be parallelized by adding XMP directives.
@@ -65,9 +65,9 @@ Compilers such as gcc/gfortran translate the sequential code into a binary, whic
 
 XMP provides several directives to parallelize the sequential code.
 
-Data Mapping
+Data mapping
 -------------------------------------------------------
-The user use the nodes, template, distribute, and align directives to specify data mappong among nodes.
+The user uses the nodes, template, distribute, and align directives to specify data mapping among nodes.
 XMP directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
 
 * XMP/C program (incomplete)
@@ -108,7 +108,7 @@ XMP directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
       enddo
     end program main
 
-In the above example, the user specifies data mapping of array a (10 elements) among 2 nodes (5 elements per node).
+In the above example, the user specifies data mapping of an array a (10 elements) among 2 nodes (5 elements per node).
 
 The nodes directive declares node set p of size 2.
 The template directive declares template t of size 10.
@@ -117,9 +117,9 @@ The node set p has element p[0] and p[1] and template t has elements from t[0] t
 In XMP/Fortran, node set p has element p(1) and p(2) and template t has elements from t(1) to t(10).
 
 .. note::
-    For some historical reasion, the user can use both [] and () in XMP/C.
+    For some historical reasions, the user can use both [] and () in XMP/C.
     [] is not available in XMP/Fortran.
-    However, we recommand to use the same syntax to the base language.
+    However, we recommend to use the same syntax to the base language.
 
 The distribute directive distributes template elements among nodes.
 In XMP/C, elements from t[0] to t[4] are assigned to p[0] and the remaining elements are assigned to p[1].
@@ -127,7 +127,7 @@ In XMP/Fortran, elements from t(1) to t(5) are assigned to p(1) and the remainin
 
 The align directive assigns target array elements based on the specified template.
 Each align directive has to be declared before the target array definition.
-In XMP/C, elements from a[0] to a[4] are assgiend to p[0] and the remaining elements are assigned to p[1].
+In XMP/C, elements from a[0] to a[4] are assigned to p[0] and the remaining elements are assigned to p[1].
 In XMP/Fortran, elements from a(1) to a(5) are assigned to p(1) and the remaining elements are assigned to p(2).
 
 The following figure illustrates the behavior of XMP directives for data mapping.
@@ -140,10 +140,10 @@ Other arrays are called "replicated array" when they are not specified in data m
 Data mapping is now complete.
 Next, you will perform work mapping using the template used for data mapping.
 
-Work Mapping
+Work mapping
 ------------------
 
-loop Directive
+loop directive
 ^^^^^^^^^^^^^^
 
 The user uses the loop directive to specify work mapping of the following loop statement.
@@ -223,10 +223,10 @@ Note that the order of each node's output can be changed or merged in the parall
    4
    5
 
-task Directive
+task directive
 ^^^^^^^^^^^^^^
 The task directive limits the range of execution nodes and changes the execution context.
-In XMP/C, the task directive speficies the parallel execution of the following compound statement.
+In XMP/C, the task directive specifies the parallel execution of the following compound statement.
 In XMP/Fortran, the end task directive is required to specify the end of the region.
 
 * XMP/C program
@@ -260,7 +260,7 @@ In XMP/Fortran, the end task directive is required to specify the end of the reg
 In the above example, in XMP/C, p[0] prints out "Hello" on the screen.
 In XMP/Fortran, p(1) prints out the result.
 
-The user can use a integer triplet to specify multiple nodes.
+The user can use an integer triplet to specify multiple nodes.
 
 * XMP/C program
 
@@ -338,7 +338,7 @@ The following program uses the task directive to specify the first two nodes in 
     end program main
 
 
-Inter-node Communication
+Inter-node communication
 ------------------------
 XMP provides some directives specifying typical inter-node communication patterns.
 
