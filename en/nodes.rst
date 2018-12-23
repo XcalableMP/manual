@@ -135,8 +135,8 @@ The user can declare an 1-dimensional node set from a multi-dimensional node set
    !$xmp nodes col(2)=p(:,*)
 
 In line 1, a 2-dimensional node set p which has 4x2 nodes is declared.
-In line 2, a partial node set row from a single row elements of p is declared.
-In line 3, a partial node set col from a single column elements of p is declared.
+In line 2, a partial node set row from a single row node set of p is declared.
+In line 3, a partial node set col from a single column node set of p is declared.
 
 The colon symbols used in the sample program are triplets which indicate that all elements in the dimension are used to declare the target partial node set.
 The asterisk symbols indicate that the current executing node will be used to declare the target partial node set.
@@ -151,4 +151,4 @@ In XMP/Fortran, both p(1,1) and p(2,1) will be row(1).
 Likewise, p(1,1), p(1,2), p(1,3) and p(1,4) will be col(1) in each context.
 
 .. note::
-   The syntactic meaning of asterisk symbols in the node set references are different when declaring a node set  and regular expressions in on claueses.
+   The syntactic meaning of asterisk symbols in the node set references are different when declaring a node set  and regular expressions in on clauses.
