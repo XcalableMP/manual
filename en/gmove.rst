@@ -225,7 +225,7 @@ Not only distributed arrays but also duplicated arrays and scalar variables can 
 In this example, duplicated array and scalar variable are copied to distributed array locally.
 For this reason, communication does not occur.
 
-Between distributed arrays with different dimensions
+Distributed arrays with different dimensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * XMP/C program
