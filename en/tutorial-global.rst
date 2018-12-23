@@ -8,7 +8,7 @@ Tutorial (Global-view)
    :depth: 2
 
 Introduction
------------
+------------
 In the global-view model of XcalableMP (XMP), the user adds directives into the serial code to specify parallelism. 
 The following actions can be described by XMP directives.
 

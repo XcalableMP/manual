@@ -10,7 +10,7 @@ A node set can have a multi-dimensional shape.
    :depth: 2
 
 1-dimensional Node Set
------------------
+----------------------
 
 * XMP/C program
 
@@ -29,7 +29,7 @@ In XMP/C, the node set consists of p[0], p[1], p[2], and p[3].
 In XMP/Fortran, the node set consists of p(1), p(2), p(3), and p(4).
 
 Multi-dimensional Node Set
------------------
+--------------------------
 
 * XMP/C program
 

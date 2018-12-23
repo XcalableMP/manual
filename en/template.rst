@@ -11,7 +11,7 @@ They can have multi-dimensional shapes.
    :depth: 2
 
 1-dimensional Template
----------------------
+----------------------
 * XMP/C program
 
 .. code-block:: C
@@ -45,7 +45,7 @@ The template directive declares 1-dimensional template t starting from t(-5) to 
    In XMP/C, templates should start from 0 since array indices start from 0 in the C language.
 
 Multi-dimensional Template
----------------------
+--------------------------
 * XMP/C program
 
 .. code-block:: C

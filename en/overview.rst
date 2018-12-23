@@ -54,7 +54,7 @@ was not available in HPF. This feature might enable users to implement
 parallel algorithms easily.
 
 Extension for C and Fortran
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 XMP supports both C and Fortran as base languages while HPF is an extension
 of only Fortran. It is advantages of XMP that it is easy to migrate with
 low cost of learning because it is based on existing languages.
@@ -81,7 +81,7 @@ accesses to local data residing within the node is specified in the
 same way as in normal languages.
 
 Execution model
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 The execution model of XMP follows the Single Program Multiple Data
 (SPMD) model, like MPI.
 According to this model, each node executes the same code

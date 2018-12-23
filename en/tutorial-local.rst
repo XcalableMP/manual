@@ -48,9 +48,9 @@ Coarray can be accessed from other images using assignment statements.
 Of course, coarray can be also accessed from your image like ordinary array.
 
 One-sided Communication
----------
+-----------------------
 Put Communication
-^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 When the Coarray reference appears in the left hand side in a assignment statement, it causes put communication.
 
@@ -96,7 +96,7 @@ The following figure illustrates the one-sided communication done by Corray.
    On the other hand, Coarrays in the local-view model invoke one-sided communication.
 
 Get Communication
-^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 When a Coarray appears in the right hand side in the assignment statement, it causes get communication.
 
 * XMP/C program
@@ -130,7 +130,7 @@ The following figure illustrates Coarray get communication.
    Put communication achieves better performance than get since there is no such extra step.
 
 Synchronization
----------
+---------------
 Here, we introduce "sync all" which is most frequently used among Coarray synchronization functions.
 
 * XMP/C program
@@ -287,7 +287,7 @@ After the communication, array a has the following values.
   9
 
 One-sided Communication for a Discontiguous Region
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the second get communication, in XMP/C, image 0 gets b[0:5:2] from image 1 and stores them to b[0:5:2].
 In XMP/Fortran, image 1 gets b(1:10:2) from image 2 and stores them to b(1:10:2).
 
@@ -307,7 +307,7 @@ After the communication, array b has the following values.
   9
 
 One-sided Communication for Multi-dimensional Arrays
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the put communication, in XMP/C, image 0 puts c[0:5][0:5] to on c[0:5][0:5] image 1.
 In XMP/Fortran, image 1 puts c(1:5,1:5) to c(1:5,1:5) on image 2.
 The communication has the block-strided communication pattern.

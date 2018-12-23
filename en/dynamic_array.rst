@@ -1,6 +1,6 @@
-=================================
+========================================
 Dynamic allocation of distributed arrays
-=================================
+========================================
 
 This section explains how distributed arrays are allocated at
 runtime. The basic procedure is common in XMP/C and XMP/Fortran with a
@@ -11,7 +11,7 @@ few specific difference.
    :depth: 2
 
 One-dimensional arrays
--------------------
+----------------------
 * XMP/C program
 
 .. code-block:: C
@@ -48,7 +48,7 @@ Second, align it. Finally, allocate memory for it with the allocate
 statement.
 
 Multi-dimensional arrays
------------------
+------------------------
 The procedure is the same as that for one-dimensional array.
 
 * XMP/C program
