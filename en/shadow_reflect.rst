@@ -10,8 +10,11 @@ may reside on another node.
 Because it costs largely to copy a[i+1] from the neighboring node to
 update each a[i], a technique of copying collectively elements on the
 neighboring node to the area added to the distributed array on each
-node is usually adopted. In XMP, such additional region is referred as
-"shadow."
+node is usually adopted. In XMP, such additional region is referred as "shadow."
+
+.. contents::
+   :local:
+   :depth: 2
 
 Declare shadow
 --------------
