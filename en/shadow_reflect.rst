@@ -20,8 +20,7 @@ Shadow areas of the same size on the lower and upper bound.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Shadow areas can be declared with the shadow directive.
-In the example below, an array a has shadow areas of size one on both
-the lower and upper bound.
+In the example below, an array a has shadow areas of size one on both the lower and upper bounds.
 
 * XMP/C program
 
@@ -51,7 +50,7 @@ In the figure above, colored elements are those that each node owns
 and white ones are shadow.
 
 .. note::
-   Arrays distributed in cyclic cannot have shadow.
+   Distributed arrays in a cyclic manner cannot have shadow.
 
 When the widths on the Upper and Lower Bounds Are Different
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -60,7 +59,7 @@ For some programs, it is natural that the widths of the shadow area on
 the lower and upper bounds are different.
 There is also a case where the shadow area exists only on either of
 the bounds. In the example below, it is declared that a distributed
-array ``a`` has a shadow area of width one only on the upper bound.
+array a has a shadow area of width one only on the upper bound.
 
 * XMP/C program
 
