@@ -231,7 +231,7 @@ Then, add the reduction clause to the loop directive.
     end program main
 
 A operator and target variables for reduction are specified in a
-reduction clause. In the above examples, a + operator is specified for
+reduction clause. In the above examples, a "+" operator is specified for
 the reduction computation to produce a total sum among nodes.
 
 .. image:: ../img/loop/reduction2.png
