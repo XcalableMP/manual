@@ -3,7 +3,6 @@ Cooperation with Python
 =================================
 
 We will show you how to call XMP program from Python program.
-Currently, it supports only XMP/C.
 
 .. note::
    The method of calling a Python program from the XMP program is the same as calling a Python program from each base language.
@@ -41,10 +40,10 @@ The number of parallel in the XMP program is the same as the number of parallel 
       :
    }
 
-In the first line of the Python program, import XMP of Python package.
-On line 4, specify the shared library created by the XMP program with the function you want to call.
-In line 6, call the XMP program in that shared library.
-The first argument of xmp.call() is the MPI communicator, which is used to generate the node set in the XMP program.
+In line 1 of the Python program, XMP package is imported.
+In line 4, the shared library is specified which is created by the XMP program with the function you want to call.
+In line 6, the XMP program is called.
+The first argument of xmp.call() is an MPI communicator, which is used to generate the node set in the XMP program.
 The second argument is the function name of the XMP program.
 The third argument is an argument to be passed to the function of the XMP program.
 If the argument of the XMP program function is unnecessary, the third argument of xmp.call() can be omitted.
@@ -75,7 +74,8 @@ Call the parallel XMP program from the sequential Python program.
       :
    }
 
-The first argument of xmp.spawn() is the number of parallel of the XMP program and the second argument is the function name.
+The first argument of xmp.spawn() is the number of nodes of the XMP program.
+The second argument is the function name.
 The third argument is an argument to be passed to the function of the XMP program.
 If the argument of the XMP program function is unnecessary, the third argument of xmp.spawn() can be omitted.
 
@@ -87,5 +87,4 @@ xmp.spawn() waits until the specified XMP program is completed, but if you do no
    // other work
    job.wait()
 
-xmp.wait() guarantees completion of XMP program.
-
+xmp.wait() guarantees completion of the XMP program.
