@@ -1,5 +1,5 @@
 =================================
-barrier directive
+barrier construct
 =================================
 
 Execute barrier synchronization.

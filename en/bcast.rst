@@ -1,5 +1,5 @@
 =================================
-bcast directive
+bcast construct
 =================================
 
 This directive broadcasts variables which are held by the node, specified in the from clause, to the node set specified in the on clause.

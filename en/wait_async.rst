@@ -1,5 +1,5 @@
 =================================
-wait_async directive
+wait_async construct
 =================================
 
 Communication directives (reflect, gmove, reduction, bcast, reduce_shadow) can execute asynchronous communication by attaching the "async" clause.

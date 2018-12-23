@@ -1,8 +1,8 @@
 =================================
-nodes Construct
+nodes directive
 =================================
 
-The nodes construct declares the name of a node set and its shape.
+The nodes directive declares the name of a node set and its shape.
 A node set can have a multi-dimensional shape.
 
 .. contents::
@@ -24,7 +24,7 @@ A node set can have a multi-dimensional shape.
 
     !$xmp nodes p(4)
 
-The nodes construct declares 1-dimensional node set p which has 4 nodes. 
+The nodes directive declares 1-dimensional node set p which has 4 nodes. 
 In XMP/C, the node set consists of p[0], p[1], p[2], and p[3].
 In XMP/Fortran, the node set consists of p(1), p(2), p(3), and p(4).
 
@@ -43,7 +43,7 @@ Multi-dimensional Node Set
 
     !$xmp nodes p(3,2)
 
-The nodes construct declares 2-dimensional node set p which has 6 nodes.
+The nodes directive declares 2-dimensional node set p which has 6 nodes.
 In XMP/C, the node set consists of p[0][0], p[0][1], p[0][2], p[1][0], p[1][1], and p[1][2].
 In XMP/Fortran, the node set consists of p(1,1), p(2,1), p(3,1), p(1,2), p(2,2), and p(3,2).
 
@@ -64,7 +64,7 @@ Dynamic Node Set
 
     !$xmp nodes p(*)
 
-An asterisk symbol can be used in the nodes construct to declare a dynamic node set.
+An asterisk symbol can be used in the nodes directive to declare a dynamic node set.
 The program declares 1-dimensional dynamic node set p by using an asterisk symbol.
 The size of a dynamic node set is determined at runtime (at the beginning of the execution).
 For example, when the user runs the sample program with 3 nodes, the node set p will have 3 nodes.

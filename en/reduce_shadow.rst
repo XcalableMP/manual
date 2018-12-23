@@ -1,5 +1,5 @@
 =================================
-reduce_shadow directive
+reduce_shadow construct
 =================================
 The reduce_shadow directive adds the value of the sleeve to the value of the source element.
 

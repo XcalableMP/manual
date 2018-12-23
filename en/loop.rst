@@ -1,5 +1,5 @@
 =================================
-loop Construct
+loop construct
 =================================
 
 The loop directive is used to parallelize a loop. Distributed arrays

@@ -1,8 +1,8 @@
 =================================
-distribute Construct
+distribute directive
 =================================
 
-The distribute construct specifies a distribution of the target template.
+The distribute directive specifies a distribution of the target template.
 The user can specify block, cyclic, block-cyclic, gblock (irregular data distribution) distribution, which can be chosen by the target application.
 
 .. contents::
@@ -212,7 +212,7 @@ The user can distribute multi-dimensional templates with a (single/multi-dimensi
    !$xmp template t(10,10)
    !$xmp distribute t(block,block) onto p
 
-The distribute construct declares data distribution of a 2-dimensional template by using a 2-dimensional node set.
+The distribute directive declares data distribution of a 2-dimensional template by using a 2-dimensional node set.
 Each dimension of the template is divided by block distribution on node set p.
 
 .. image:: ../img/distribute/multi.png
@@ -237,7 +237,7 @@ The user can specify different distribution pattern to each dimension.
 
 .. image:: ../img/distribute/multi2.png
 
-When an asterisk symbol is given in the distribute construct instead of distribution type,
+When an asterisk symbol is given in the distribute directive instead of distribution type,
 the target dimension will remain undistributed.
 In the following example, the first dimension will be distributed (block distribution) and the second dimension will remain undistributed.
 

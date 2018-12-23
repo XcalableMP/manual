@@ -1,5 +1,5 @@
 =================================
-gmove directive
+gmove construct
 =================================
 
 You can describe a communication for distributed arrays in the form of assignment statements by using gmove directive.

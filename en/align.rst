@@ -1,9 +1,9 @@
 =================================
-align Construct
+align directive
 =================================
 
-The align construct performs data mapping and distributes data among nodes by using a distributed template.
-The align construct should be given after the target array definition.
+The align directive performs data mapping and distributes data among nodes by using a distributed template.
+The align directive should be given after the target array definition.
 
 .. contents::
    :local:
@@ -32,12 +32,12 @@ Normal Alignment
     integer :: a(8)
     !$xmp align a(i) with t(i)
 
-The align construct aligns the owner node of a[i] with t(i), a distributed template.
+The align directive aligns the owner node of a[i] with t(i), a distributed template.
 As a result, array a is distributed among the node set p.
 
 .. image:: ../img/align/1dim.png
 
-The align construct also can be used for multi-dimensional arrays.
+The align directive also can be used for multi-dimensional arrays.
 
 * XMP/C program
 
@@ -87,7 +87,7 @@ The user can align a 2-dimensional array with a 1-dimensional template.
     integer :: a(8,8)
     !$xmp align a(*,i) with t(i)
 
-When an asterisk symbol is given in the array reference in the align construct,
+When an asterisk symbol is given in the array reference in the align directive,
 the specified dimension is not distributed among the node set.
 In the sample program, the first dimension of the array a is distribute among node set p
 while the second dimension is duplicated.
@@ -121,7 +121,7 @@ The use also can align an 1-dimensional array with a multi-dimensional template.
     integer :: a(8)
     !$xmp align a(i) with t(*,i)
 
-When an asterisk symbol is given in the template reference in the align construct,
+When an asterisk symbol is given in the template reference in the align directive,
 the owner nodes of the specified dimension will have duplicated images of the target array.
 
 .. image:: ../img/align/replicate.png

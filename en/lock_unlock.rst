@@ -1,4 +1,4 @@
 =================================
-lock/unlock directive
+lock/unlock construct
 =================================
 Work in progress.

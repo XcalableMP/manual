@@ -1,5 +1,5 @@
 =================================
-reduction directive
+reduction construct
 =================================
 
 Execute aggregate operation.

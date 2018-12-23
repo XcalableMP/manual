@@ -1,5 +1,5 @@
 =================================
-post/wait directive
+post/wait construct
 =================================
 Work in progress.
 
