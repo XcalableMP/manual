@@ -1,7 +1,7 @@
 =================================
 reduce_shadow construct
 =================================
-The reduce_shadow directive adds the value of the sleeve to the value of the source element.
+The reduce_shadow directive adds the value of the shadow to the value of the source element.
 
 * XMP/C program
 
@@ -40,9 +40,9 @@ The reduce_shadow directive adds the value of the sleeve to the value of the sou
     !$xmp reflect (a)
     !$xmp reduce_shadow (a)
 
-The shadow directive adds one sleeve to the distributed array a of each node.
-Next, the reflect directive will update sleeves between neighboring nodes.
-Finally, the reduce_shadow directive adds the value of the sleeve to the value of the source element.
+The shadow directive adds one shadow to the distributed array a of each node.
+Next, the reflect directive will update shadow between neighboring nodes.
+Finally, the reduce_shadow directive adds the value of the shadow to the value of the source element.
 
 In XMP/C, a[3] of p[0] has a value of 8, and a[4] of p[1] has a value of 10.
 Similarly, in XMP/Fortran, a(4) of p(1) has a value of 8, and a(5) of p(2) has a value of 10.
