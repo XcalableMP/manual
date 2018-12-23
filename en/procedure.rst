@@ -3,7 +3,7 @@ Procedure interface
 =================================
 
 Procedure calls in XMP are basically the same as the base language.
-Procedures call between different languages and external library are also possible if the base language supports them.
+Procedure calls between different languages and external library are also possible if the base language supports them.
 
 In the below example, sub1() calls sub2() with a distributed array as an argument.
 
