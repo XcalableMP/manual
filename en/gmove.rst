@@ -18,7 +18,7 @@ Collective mode
 
 Communications among distributed arrays
 ^^^^^^^^^^^^^^^^^^^
-Copying a part of array "a" to array "b". For array assignment statements in a gmove, use triplet.
+Copying a part of array a to array b. For array assignment statements in a gmove, use triplet.
 
 * XMP/C program
 
@@ -89,7 +89,7 @@ In this example, it is assignment statements between distributed arrays with the
 
 .. image:: ../img/gmove/gmove_cyclic.png
 
-Array "a" is distributed according to cyclic, array "b" is distributed according to block.
+Array a is distributed according to cyclic, array b is distributed according to block.
 
 In XMP/C, p[0] sends b[0] and b[4] to p[2] and p[3]. p[1] sends b[1] to p[2]. Each element of p[2] and p[3] will be local copied.
 Similarly, in XMP/Fortran, p(1) sends b(1) and b(5) to p(3) and p(4). p(2) sends b(2) to p(3). Each element of p(3) and p(4) will be local copied.
