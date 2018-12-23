@@ -48,7 +48,7 @@ The second argument is the function name of the XMP program.
 The third argument is an argument to be passed to the function of the XMP program.
 If the argument of the XMP program function is unnecessary, the third argument of xmp.call() can be omitted.
 
-Calling from the sequential Python program
+Calling from sequential Python program
 ------------------------------------------
 Call the parallel XMP program from the sequential Python program.
 
