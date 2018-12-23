@@ -41,7 +41,7 @@ The reduce_shadow directive adds the value of the shadow to the value of the sou
     !$xmp reduce_shadow (a)
 
 The shadow directive adds one shadow to the distributed array a of each node.
-Next, the reflect directive will update shadow between neighboring nodes.
+Next, the reflect directive will update shadow between neighborhood nodes.
 Finally, the reduce_shadow directive adds the value of the shadow to the value of the source element.
 
 In XMP/C, a[3] of p[0] has a value of 8, and a[4] of p[1] has a value of 10.

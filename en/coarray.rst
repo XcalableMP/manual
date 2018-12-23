@@ -3,13 +3,13 @@ coarray notation
 =================================
 
 An overview of Coarray has described in :doc:`tutorial-local`.
-This page explains details of the synchronization statement that has not been explained yet.
+This page explains details of the synchronization statements that have not been explained yet.
 
 .. contents::
    :local:
    :depth: 2
 
-Kind of synchronization statements
+Synchronization statements
 -------------
 sync all
 ^^^^^^^^^^^^^^^^^^
@@ -26,7 +26,7 @@ sync all
    sync all
 
 Barrier synchronization is performed among all images after completing all one side communications.
-For details, see: doc: `tutorial-local`.
+For details, see :doc:`tutorial-local`.
 
 sync images
 ^^^^^^^^^^^^^^^^^^
