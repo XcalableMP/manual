@@ -89,7 +89,7 @@ When the user runs the sample program with 12 nodes, the node set p will have a 
    The user can use only one asterisk symbol in the last dimension of the node set.
 
 .. hint::
-   The dynamic node set may interfere with compiler optimizations. Static node sets achieves better performance in general.
+   The dynamic node set may interfere with compiler optimizations. Static node sets may achieve better performance in general.
 
 Partial node set
 ------------------
@@ -112,9 +112,9 @@ Partial node sets can be used to optimize inter-node communication by reducing t
    !$xmp nodes q(8)=p(1:8)
    !$xmp nodes r(2,4)=p(9:16)
 
-Line 1 declares node set p which has 16 nodes.
-Line 2 declares partial node set q from the first half of p.
-Line 3 declares 2-dimensional partial node set r from the latter half of p.
+In line 1, a node set p which has 16 nodes is declared.
+In line 2, a partial node set q from the first half of p is declared.
+In line 3, a 2-dimensional partial node set r from the latter half of p is declared.
 
 The user can declare an 1-dimensional node set from a multi-dimensional node set.
 
@@ -134,9 +134,9 @@ The user can declare an 1-dimensional node set from a multi-dimensional node set
    !$xmp nodes row(4)=p(*,:)
    !$xmp nodes col(2)=p(:,*)
 
-Line 1 declares 2-dimensional node set p which has 4x2 nodes.
-Line 2 declares partial node set row from a single row elements of p.
-Line 3 declares partial node set col from a single column elements of p.
+In line 1, a 2-dimensional node set p which has 4x2 nodes is declared.
+In line 2, a partial node set row from a single row elements of p is declared.
+In line 3, a partial node set col from a single column elements of p is declared.
 
 The colon symbols used in the sample program are triplets which indicate that all elements in the dimension are used to declare the target partial node set.
 The asterisk symbols indicate that the current executing node will be used to declare the target partial node set.
