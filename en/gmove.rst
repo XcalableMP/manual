@@ -17,7 +17,7 @@ Collective mode
 ------------------
 
 Communications among distributed arrays
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Copying a part of array a to array b.
 Array assignment statements in a gmove construct uses triplet.
 

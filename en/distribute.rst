@@ -151,7 +151,7 @@ and references to neighborhood elements.
 .. image:: ../img/distribute/block-cyclic.png
 
 gblock Distribution
------------
+-------------------
 
 * XMP/C program
 
@@ -193,7 +193,7 @@ The user can specify an asterisk symbol instead of a mapping array in gblock.
 In that case, data distribution will be determined at runtime by using :doc:`template_fix`.
 
 Distribution of Multi-dimensional templates
---------------------------
+-------------------------------------------
 The user can distribute multi-dimensional templates with a (single-/multi-dimensional) node set.
 
 * XMP/C program

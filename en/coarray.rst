@@ -75,7 +75,7 @@ Wait for completion of all one side communications.
 This function does not include barrier synchronization unlike sync all and sync images, so it is executed only locally.
 
 About arguments
---------------
+----------------
 
 * XMP/C program
 
