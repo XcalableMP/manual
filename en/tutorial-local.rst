@@ -23,7 +23,7 @@ Coarray in XMP/C has its own original syntax since the C language does not suppo
 The basic unit of execution in the local-view is called "image" while it is called "node" in the global-view model.
 The two words has the same meaning in XMP.
 
-Coarray Declaration
+Coarray declaration
 -------------------
 * XMP/C program
 
@@ -47,9 +47,9 @@ The asterisk symbol is used in the both language.
 Coarray can be accessed from other images using assignment statements.
 Of course, coarray can be also accessed from your image like ordinary array.
 
-One-sided Communication
+One-sided communication
 -----------------------
-Put Communication
+Put communication
 ^^^^^^^^^^^^^^^^^
 
 When the Coarray reference appears in the left hand side in a assignment statement, it causes put communication.
@@ -95,7 +95,7 @@ The following figure illustrates the one-sided communication done by Corray.
    The directives in the global-view model invoke point-to-point communication.
    On the other hand, Coarrays in the local-view model invoke one-sided communication.
 
-Get Communication
+Get communication
 ^^^^^^^^^^^^^^^^^
 When a Coarray appears in the right hand side in the assignment statement, it causes get communication.
 
@@ -266,7 +266,7 @@ The following shows the initial values of each array.
    * b : from 10 to 19
    * c : from 100 to 199
 
-One-sided Communication for a Contiguous Region
+One-sided communication for a contiguous region
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the first get communication, in XMP/C, image 0 gets a[5:3] from image 1 and stores them to a[0:3].
 In XMP/Fortran, image 1 gets a[6:8] from image 2 and stores them to a(1:3)
@@ -286,7 +286,7 @@ After the communication, array a has the following values.
   8
   9
 
-One-sided Communication for a Discontiguous Region
+One-sided communication for a discontiguous region
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the second get communication, in XMP/C, image 0 gets b[0:5:2] from image 1 and stores them to b[0:5:2].
 In XMP/Fortran, image 1 gets b(1:10:2) from image 2 and stores them to b(1:10:2).
@@ -306,7 +306,7 @@ After the communication, array b has the following values.
   18
   9
 
-One-sided Communication for Multi-dimensional Arrays
+One-sided communication for multi-dimensional arrays
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the put communication, in XMP/C, image 0 puts c[0:5][0:5] to on c[0:5][0:5] image 1.
 In XMP/Fortran, image 1 puts c(1:5,1:5) to c(1:5,1:5) on image 2.
