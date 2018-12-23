@@ -95,7 +95,7 @@ General Case
 ^^^^^^^^^^^^
 
 To copy data to shadow areas from neighboring nodes, use the
-``reflect`` directive. In the example below, an array ``a`` having
+reflect directive. In the example below, an array a having
 shadow areas of width one on each the upper and lower bounds is
 *reflected*.
 
@@ -122,33 +122,32 @@ shadow areas of width one on each the upper and lower bounds is
 
 .. image:: ../img/shadow_reflect/reflect.png
 
-With this ``reflect`` directive, in XMP/C, node
-``p[1]`` sends an element ``a[4]`` to the shadow area on the upper
-bound on node ``p[0]`` and ``a[7]`` to the shadow
-area on the lower bound on ``p[2]``; 
-``p[0]`` sends an element ``a[3]`` to the shadow area on the lower
-bound on ``p[1]``, and ``p[2]`` sends ``a[8]`` to the shadow
-area on the upper bound on ``p[1]``.
+With this reflect directive, in XMP/C, node
+p[1] sends an element a[4] to the shadow area on the upper
+bound on node p[0] and a[7] to the shadow
+area on the lower bound on p[2]; 
+p[0] sends an element a[3] to the shadow area on the lower
+bound on p[1], and p[2] sends a[8] to the shadow area on the upper bound on p[1].
 
 Similarly, in XMP/Fortran, node
-``p(2)`` sends an element ``a(5)`` to the shadow area on the upper
-bound on node ``p(1)`` and ``a(8)`` to the shadow
-area on the lower bound on ``p(3)``;
-``p(1)`` sends an element ``a(4)`` to the shadow area on the lower
-bound on ``p(2)``, and ``p(3)`` sends ``a(9)`` to the shadow
-area on the upper bound on ``p(2)``.
+p(2) sends an element a(5) to the shadow area on the upper
+bound on node p(1) and a(8) to the shadow
+area on the lower bound on p(3);
+p(1) sends an element a(4) to the shadow area on the lower
+bound on p(2), and p(3) sends a(9) to the shadow
+area on the upper bound on p(2).
 
 Specifying the Update Width
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The default behavior of a ``reflect`` directive is to update whole of
-the shadow area declared by a ``shadow`` directive. However, there are
+The default behavior of a reflect directive is to update whole of
+the shadow area declared by a shadow directive. However, there are
 some cases where a specific part of the shadow area is to be updated
 to reduce the communication size in a point of the code.
 
-To update only a specific part of the shadow area, add the ``width``
-clause to the ``reflect`` directive.
+To update only a specific part of the shadow area, add the width
+clause to the reflect directive.
 
-The values on the left and right side of colon in the ``width`` clause
+The values on the left and right side of colon in the width clause
 designate the widths on the lower and upper bounds to be updated,
 respectively. In the example below, only the shadow area on the upper
 bound is updated.
@@ -170,17 +169,17 @@ bound is updated.
 .. note::
 
    If the widths of the shadow areas to be updated on the upper and
-   lower bounds are equal, that is, for example, ``width(1:1)``, you
-   can abbreviate it as ``width(1)``.
+   lower bounds are equal, that is, for example, width(1:1), you
+   can abbreviate it as width(1).
 
 .. note::
 
    It is not possible to update the shadow area on a particular node.
 
-If no shadow area is specified on the lower bound, the ``reflect``
+If no shadow area is specified on the lower bound, the reflect
 directive does not update it with or without a width clause.
-The below figure illustrates the behavior of a ``reflect`` directive
-for a distributed array ``a`` having a shadow area of width one only
+The below figure illustrates the behavior of a reflect directive
+for a distributed array a having a shadow area of width one only
 on the upper bound.
 
 .. image:: ../img/shadow_reflect/reflect_uneven.png
@@ -188,13 +187,13 @@ on the upper bound.
 Update Periodic Shadow
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The ``reflect`` directive does not update either the shadow area on
+The reflect directive does not update either the shadow area on
 the lower bound on the leading node or that on the upper bound on the
 last node. However, the values in such areas are needed for stencil
 computation if the computation needs a periodic boundary condition.
 
-To update such areas, add a ``periodic`` qualifier into a ``width``
-clause. Let's look at the following example where an array ``a``
+To update such areas, add a periodic qualifier into a width
+clause. Let's look at the following example where an array a
 having shadow areas of width one on both the lower and upper bounds
 appears.
 
@@ -212,21 +211,21 @@ appears.
 
 .. image:: ../img/shadow_reflect/reflect_periodic.png
 
-The ``periodic`` qualifier has the following effects, in addition to
-that of a normal ``reflect` directive: in XMP/C, node
-``p[0]`` sends an element ``a[0]`` to the shadow area on the upper
-bound on node ``p[3]``, and ``p[3]`` sends ``a[15]`` to the shadow
-area on the lower bound on ``p[0]``;
+The periodic qualifier has the following effects, in addition to
+that of a normal reflect directive: in XMP/C, node
+p[0] sends an element a[0] to the shadow area on the upper
+bound on node p[3], and p[3] sends a[15] to the shadow
+area on the lower bound on p[0];
 in XMP/Fortran, node
-``p(1)`` sends an element ``a(1)`` to the shadow area on the upper
-bound on node ``p(4)``, and ``p(4)`` sends ``a(16)`` to the shadow
-area on the lower bound on ``p(1)``.
+p(1) sends an element a(1) to the shadow area on the upper
+bound on node p(4), and p(4) sends a(16) to the shadow
+area on the lower bound on p(1).
 
 .. note::
 
    If the widths of the shadow areas to be updated on the upper and
-   lower bounds are equal, as shown by ``width(/periodic/1:1)`` in the
-   above example, you can abbreviate it as ``width(/periodic/1)``.
+   lower bounds are equal, as shown by width(/periodic/1:1) in the
+   above example, you can abbreviate it as width(/periodic/1).
 
 Multidimensional Shadow
 -----------------------
@@ -270,7 +269,7 @@ in the figure.
 For some applications, data from *ordinal* directions are not
 necessary.
 In such a case, the data communication from/to the ordinal directions
-can be avoided by adding a ``orthogonal`` clause to a reflect
+can be avoided by adding a orthogonal clause to a reflect
 directive.
 
 * XMP/C program
