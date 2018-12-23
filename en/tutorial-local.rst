@@ -42,9 +42,10 @@ In XMP/Fortran, the user declares a Coarray by adding [] after the array declara
 The asterisk symbol is used in the both language.
 
 .. note::
-    Based on Fortran 2008, The Coarray dimension should have the same size of the entire execution node group.
+    Based on Fortran 2008, the Coarray should have the same size of the entire execution node group.
 
-Coarray can be accessed remotly (one-sided communication) by using Coarray dimension.
+Coarray can be accessed from other images using assignment statements.
+Of course, coarray can be also accessed from your image like ordinary array.
 
 One-sided Communication
 ---------
@@ -75,11 +76,10 @@ When the Coarray reference appears in the left hand side in a assignment stateme
 
 The integer number in the Coarray dimension specifies the targer image.
 Each image index starts with 0 in XMP/C and starts with 1 in XMP/Fortran.
-
-xmpc_this_image() in XMP/C and this_image() XMP/Fortran returns the current image index.
+xmpc_this_image() in XMP/C and this_image() XMP/Fortran return the current image index.
 
 .. note::
-   Image index start with 1 while it uses [] (similar to C style for array dimension) to specify Coarray dimension
+   In XMP/Fortran, image index starts with 1 while it uses [] (similar to C style for array dimension) to specify Coarray dimension
    based on the standard Fortran 2008.
 
 .. note::
@@ -92,8 +92,8 @@ The following figure illustrates the one-sided communication done by Corray.
 .. image:: ../img/tutorial-local/put.png
 
 .. note::
-   The directives in the global-view model invokes point-to-point communication.
-   On the other hand, Coarrays in the local-view model invokes one-sided communication.
+   The directives in the global-view model invoke point-to-point communication.
+   On the other hand, Coarrays in the local-view model invoke one-sided communication.
 
 Get Communication
 ^^^^^^^^^
@@ -119,8 +119,8 @@ When a Coarray appears in the right hand side in the assignment statement, it ca
      b(3:5) = a(1:3)[2]
    end if
 
-In the above program, XMP/C gets a[0:3] from image 1 and store them on b[3:3] (on image 0).
-XMP/Fortran gets a(1:3) from image 2 and store them on b(3:5) (on image 1).
+In the above program, XMP/C gets a[0:3] from image 1 and store them on b[3:3] of image 0.
+XMP/Fortran gets a(1:3) from image 2 and store them on b(3:5) of image 1.
 The following figure illustrates Coarray get communication.
 
 .. image:: ../img/tutorial-local/get.png
@@ -131,7 +131,7 @@ The following figure illustrates Coarray get communication.
 
 Synchronization
 ---------
-Here, we introduce sync all which is most frequently used among Coarray synchronization functions.
+Here, we introduce "sync all" which is most frequently used among Coarray synchronization functions.
 
 * XMP/C Program
 
@@ -145,12 +145,12 @@ Here, we introduce sync all which is most frequently used among Coarray synchron
 
     sync all
 
-sync all waits all existing one-sided communication issued and invoke barrier synchronization among the entire images.
+The "sync all" waits all issued one-sided communication and invokes barrier synchronization among the entire images.
 
 .. image:: ../img/tutorial-local/sync_all.png
 
 In the above example, the left image puts data to the right image and both nodes invoke sync all. 
-When both nodes finishes sync all, the the execution continues after the synchronization point.
+When both nodes finish sync all, the the execution continues after the synchronization point.
 
 Tutorial
 ----------
@@ -268,7 +268,7 @@ The following shows the initial values of each array.
 
 One-sided Communication for a Contiguous Region
 ^^^^^^^^^^^^^^^^^^^^^
-In the second get communication, image 0 gets a[5:3] from image 1 and stores them to a[0:3] (in XMP/C).
+In the first get communication, in XMP/C, image 0 gets a[5:3] from image 1 and stores them to a[0:3].
 In XMP/Fortran, image 1 gets a[6:8] from image 2 and stores them to a(1:3)
 
 After the communication, array a has the following values.
@@ -288,7 +288,7 @@ After the communication, array a has the following values.
 
 One-sided Communication for a Discontiguous Region
 ^^^^^^^^^^^^^^^^^^^^^
-In the first get communication, image 0 gets b[0:5:2] from image 1 and stores them to b[0:5:2] (in XMP/C).
+In the second get communication, in XMP/C, image 0 gets b[0:5:2] from image 1 and stores them to b[0:5:2].
 In XMP/Fortran, image 1 gets b(1:10:2) from image 2 and stores them to b(1:10:2).
 
 After the communication, array b has the following values.
@@ -308,7 +308,7 @@ After the communication, array b has the following values.
 
 One-sided Communication for Multi-dimensional Arrays
 ^^^^^^^^^^^^^^^^^^^^^
-In the put communication, image 0 puts c[0:5][0:5] to on c[0:5][0:5] image 1 (in XMP/C).
+In the put communication, in XMP/C, image 0 puts c[0:5][0:5] to on c[0:5][0:5] image 1.
 In XMP/Fortran, image 1 puts c(1:5,1:5) to c(1:5,1:5) on image 2.
 The communication has the block-strided communication pattern.
 
