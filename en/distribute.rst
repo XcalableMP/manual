@@ -165,9 +165,9 @@ gblock distribution
 
    !$xmp distribute t(gblock(W)) onto p
 
-Array W is a mapping array which is used for an irregular data distribution. 
+Array W is a mapping array which is used for irregular data distribution. 
 W[k]/W(k) elements will be allocated on node p(k).
-The user can specify special type of data distribution explicitly by using mapping arrays (e.g. distribution of triangular matrix).
+The user can specify a special type of data distribution explicitly by using mapping arrays (e.g. distribution of triangular matrix).
 
 * XMP/C program
 
@@ -217,7 +217,7 @@ Each dimension of the template is divided by block distribution on a node set p.
 
 .. image:: ../img/distribute/multi.png
 
-The user can specify different distribution pattern to each dimension.
+The user can specify a different distribution pattern to each dimension.
 
 * XMP/C program
 

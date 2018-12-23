@@ -9,7 +9,7 @@ The align directive should be given after the target array definition.
    :local:
    :depth: 2
 
-Normal Alignment
+Normal alignment
 ----------------
 
 * XMP/C program
@@ -61,7 +61,7 @@ The align directive also can be used for multi-dimensional arrays.
 
 .. image:: ../img/align/multi-dim.png
 
-Special Alignment
+Special alignment
 -----------------
 Collapse
 ^^^^^^^^
