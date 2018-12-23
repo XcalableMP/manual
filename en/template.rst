@@ -10,7 +10,7 @@ They can have multi-dimensional shapes.
    :local:
    :depth: 2
 
-1-dimensional Template
+1-dimensional template
 ----------------------
 * XMP/C program
 
@@ -29,7 +29,7 @@ In XMP/C, each element has an unique index from t[0] to t[9].
 Likewise, in XMP/Fortran, the index starts from t(1) to t(10).
 
 .. hint::
-   In general, the user declare temaplates which has the same size with the target data array where data/work mapping is done.
+   In general, the user declare templates which has the same size with the target data array where data/work mapping is done.
 
 In XMP/Fortran, the start index of the template can be given by an arbitrary number to match the starting array index in the base language.
 
@@ -44,7 +44,7 @@ The template directive declares 1-dimensional template t starting from t(-5) to 
 .. note::
    In XMP/C, templates should start from 0 since array indices start from 0 in the C language.
 
-Multi-dimensional Template
+Multi-dimensional template
 --------------------------
 * XMP/C program
 
@@ -62,7 +62,7 @@ The template directive declares 2-dimensional template t which has 10x20 element
 In XMP/C, the template has elements starting from t[0][0] to t[9][19].
 Likewise, the template has elements starting from t(1,1) to t(20,10) in XMP/Fortran.
 
-Dynamic Template
+Dynamic template
 -------------------
 * XMP/C program
 
