@@ -2,7 +2,7 @@
 reduction construct
 =================================
 
-Execute aggregate operation.
+Execute reduction operation.
 It has the same meaning as the reduction clause of :doc:`loop`, but the reduction directive can be described anywhere.
 
 * XMP/C program
@@ -25,8 +25,9 @@ It has the same meaning as the reduction clause of :doc:`loop`, but the reductio
 
 .. image:: ../img/reduction/reduction.png
 
-You can set the range by using the on clause.
-In the below example, only the values of the last two nodes in four nodes are target to aggregation operation.
+You can set the range of the node set by using the on clause.
+In the below example,
+only the values of the last two nodes in four nodes are target to reduction operation.
 
 * XMP/C program
 
@@ -87,6 +88,6 @@ The specifiable operators are as follows.
    But, since the reduction directive does not need a loop statement, there are no such operators.
 
 .. note::
-   Similar to the reduction clause, the reduction directive may have slightly different results from sequential execution and parallel execution, because of depending on the calculation order when the aggregate variable is a floating-point type.
+   Similar to the reduction clause, the reduction directive may have slightly different results from sequential execution and parallel execution, because of depending on the calculation order when the reduction variable is a floating-point type.
 
 
