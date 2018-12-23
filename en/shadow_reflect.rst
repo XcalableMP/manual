@@ -96,8 +96,7 @@ General Case
 
 To copy data to shadow areas from neighboring nodes, use the
 reflect directive. In the example below, an array a having
-shadow areas of width one on each the upper and lower bounds is
-*reflected*.
+shadow areas of width one on each the upper and lower bounds is reflected.
 
 * XMP/C program
 
@@ -266,8 +265,7 @@ The central node receives the shadow data from the surrounding eight nodes.
 The shadow areas of the other nodes are also updated, which is omitted
 in the figure.
 
-For some applications, data from *ordinal* directions are not
-necessary.
+For some applications, data from ordinal directions are not necessary.
 In such a case, the data communication from/to the ordinal directions
 can be avoided by adding a orthogonal clause to a reflect
 directive.
