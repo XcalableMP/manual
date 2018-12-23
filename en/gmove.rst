@@ -103,8 +103,8 @@ Each element of p(3) and p(4) will be copied localy.
 
 .. note::
    
-   If the number of elements specified on the right hand side is other than 1,
-   it will not work properly if the number of elements differs between the right hand side and the left hand side.
+   If the number of elements specified on the right-hand side is other than 1,
+   it will not work properly if the number of elements differs between the right-hand side and the left-hand side.
 
 By using this method, the shape of distributed array can be changed during calculation.
 
@@ -150,7 +150,7 @@ communication occurs only for elements whose responsible nodes do not match (the
 Communication of scalar
 ^^^^^^^^^^^^^^^^^^^^^^^
 In an assignment statement,
-if one element is specified on the right hand side and plural elements are specified on the left hand side,
+if one element is specified on the right-hand side and plural elements are specified on the left-hand side,
 the operation will be broadcast communication.
 
 * XMP/C program
@@ -188,7 +188,7 @@ Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcaste
 
 Communication of duplicated array and scalar values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Not only distributed arrays but also duplicated arrays and scalar variables can be described on the right hand side.
+Not only distributed arrays but also duplicated arrays and scalar variables can be described on the right-hand side.
 
 * XMP/C program
 
