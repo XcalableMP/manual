@@ -194,7 +194,7 @@ In that case, data distribution will be determined at runtime by using :doc:`tem
 
 Distribution of Multi-dimensional templates
 --------------------------
-The user can distribute multi-dimensional templates with a (single/multi-dimensional) node set.
+The user can distribute multi-dimensional templates with a (single-/multi-dimensional) node set.
 
 * XMP/C program
 
@@ -213,7 +213,7 @@ The user can distribute multi-dimensional templates with a (single/multi-dimensi
    !$xmp distribute t(block,block) onto p
 
 The distribute directive declares data distribution of a 2-dimensional template by using a 2-dimensional node set.
-Each dimension of the template is divided by block distribution on node set p.
+Each dimension of the template is divided by block distribution on a node set p.
 
 .. image:: ../img/distribute/multi.png
 
@@ -239,7 +239,8 @@ The user can specify different distribution pattern to each dimension.
 
 When an asterisk symbol is given in the distribute directive instead of distribution type,
 the target dimension will remain undistributed.
-In the following example, the first dimension will be distributed (block distribution) and the second dimension will remain undistributed.
+In the following example,
+the first dimension will be distributed in a block manner and the second dimension will remain undistributed.
 
 * XMP/C program
 
