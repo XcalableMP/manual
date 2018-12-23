@@ -16,7 +16,7 @@ While in mode uses get communication, out mode uses put communication.
 Collective mode
 ------------------
 
-Communications among distributed arrays
+Distributed arrays
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Copying a part of array a to array b.
 Array assignment statements in a gmove construct uses triplet.
@@ -96,17 +96,17 @@ While array a is distributed in a cyclic manner, array b is distributed in a blo
 In XMP/C,
 p[0] sends b[0] and b[4] to p[2] and p[3].
 p[1] sends b[1] to p[2].
-Each element of p[2] and p[3] will be copied localy.
+Each element of p[2] and p[3] will be copied locally.
 Similarly, in XMP/Fortran,
 p(1) sends b(1) and b(5) to p(3) and p(4). p(2) sends b(2) to p(3).
-Each element of p(3) and p(4) will be copied localy.
+Each element of p(3) and p(4) will be copied locally.
 
 .. note::
    
    If the number of elements specified on the right-hand side is other than 1,
    it will not work properly if the number of elements differs between the right-hand side and the left-hand side.
 
-By using this method, the shape of distributed array can be changed during calculation.
+By using this method, the shape of a distributed array can be changed during calculation.
 
 .. code-block:: C
 
@@ -147,7 +147,7 @@ copying all elements of array b which is distributed in a block manner to array 
 In arrays a and b,
 communication occurs only for elements whose responsible nodes do not match (the arrow means communication between nodes in figures).
 
-Communication of scalar
+Scalar
 ^^^^^^^^^^^^^^^^^^^^^^^
 In an assignment statement,
 if one element is specified on the right-hand side and plural elements are specified on the left-hand side,
@@ -183,10 +183,10 @@ the operation will be broadcast communication.
 
 .. image:: ../img/gmove/gmove_one_element.png
 
-In this example, in XMP/C, an element array b[0] of node p[0] will be broadcasted to specified index of node p[2] and p[3].
-Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcasted to specified index of node p(3) and p(4).
+In this example, in XMP/C, an element array b[0] of node p[0] will be broadcasted to the specified index of node p[2] and p[3].
+Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcasted to the specified index of node p(3) and p(4).
 
-Communication of duplicated array and scalar values
+Duplicated array and scalar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Not only distributed arrays but also duplicated arrays and scalar variables can be described on the right-hand side.
 
@@ -222,10 +222,10 @@ Not only distributed arrays but also duplicated arrays and scalar variables can 
    !$xmp gmove
       a(10:14) = c
 
-In this example, duplicated array and scalar variable are copied to distributed array localy.
+In this example, duplicated array and scalar variable are copied to distributed array locally.
 For this reason, communication does not occur.
 
-Communication between distributed arrays with different dimensions
+Between distributed arrays with different dimensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * XMP/C program
