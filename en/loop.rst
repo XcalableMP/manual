@@ -85,10 +85,8 @@ Is it possible to parallelize the below loops whose bounds are shrunk?
 
 In this case, the conditions 1 and 2 are satisfied and therefore it is
 possible to parallelize them.
-In XMP/C, p[0] processes the indices from one to four and p[1] from
-five to eight.
-In XMP/Fortran, p(1) processes the indices from two to five and p(2) from
-six to nine.
+In XMP/C, p[0] processes the indices from one to four and p[1] from five to eight.
+In XMP/Fortran, p(1) processes the indices from two to five and p(2) from six to nine.
 
 .. image:: ../img/loop/loop2.png
 	   

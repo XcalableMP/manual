@@ -67,9 +67,9 @@ Dynamic Node Set
 An asterisk symbol can be used in the nodes construct to declare a dynamic node set.
 The program declares 1-dimensional dynamic node set p by using an asterisk symbol.
 The size of a dynamic node set is determined at runtime (at the beginning of the execution).
-For example, when the user runs the sample program with 3 XMP processes, the node set p will have 3 nodes.
+For example, when the user runs the sample program with 3 nodes, the node set p will have 3 nodes.
 
-The user also declare multi-dimensional dynamic nodes with an asterisk symbol.
+The user also can declare multi-dimensional dynamic nodes with an asterisk symbol.
 
 * XMP/C program
 
@@ -83,13 +83,13 @@ The user also declare multi-dimensional dynamic nodes with an asterisk symbol.
 
     !$xmp nodes p(3,*)
 
-When the user runs the sample program with 12 XMP processes, the node set p will have a shape of [4][3] in C, and (3, 4) in Fortran.
+When the user runs the sample program with 12 nodes, the node set p will have a shape of [4][3] in C, and (3,4) in Fortran.
 
 .. note::
    The user can use only one asterisk symbol in the last dimension of the node set.
 
 .. hint::
-   The dynamic node set may interfere with compiler optimizations and reduce the execution time. Static node sets achieves better performance in general.
+   The dynamic node set may interfere with compiler optimizations. Static node sets achieves better performance in general.
 
 Partial Node Set
 ------------------
@@ -113,8 +113,8 @@ Partial node sets can be used to optimize inter-node communication by reducing t
    !$xmp nodes r(2,4)=p(9:16)
 
 Line 1 declares node set p which has 16 nodes.
-Line 2 declares partial node set q from the first half of p ([0:8]).
-Line 3 declares 2-dimensional partial node set r from the latter half of p ([8:8]).
+Line 2 declares partial node set q from the first half of p.
+Line 3 declares 2-dimensional partial node set r from the latter half of p.
 
 The user can declare an 1-dimensional node set from a multi-dimensional node set.
 
