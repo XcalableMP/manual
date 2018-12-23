@@ -2,12 +2,12 @@
 Cooperation with Python
 =================================
 
-We will show you how to call XMP program from Python program.
+This page explains how to call an XMP program from Python program.
 
 .. note::
    The method of calling a Python program from the XMP program is the same as calling a Python program from each base language.
 
-We provide two ways to call XMP program as follows.
+We provide two ways to call an XMP program as follows.
 
 .. contents::
    :local:
