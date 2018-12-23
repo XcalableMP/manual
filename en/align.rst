@@ -89,7 +89,7 @@ The user can align a 2-dimensional array with a 1-dimensional template.
 
 When an asterisk symbol is given in the array reference in the align directive,
 the specified dimension is not distributed among the node set.
-In the sample program, the first dimension of the array a is distribute among node set p
+In the sample program, the first dimension of the array a is distributed among node set p
 while the second dimension is duplicated.
 
 .. image:: ../img/align/collapse.png
