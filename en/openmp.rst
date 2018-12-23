@@ -5,7 +5,7 @@ Cooperation with OpenMP
 You can write OpenMP directives in XMP programs.
 In other words, you can do the hybrid programming with the XMP parallelized on the distributed memory system, and the OpenMP parallelized on the shared memory system.
 
-However, there is a precondition that "a single thread must invoke XMP directive, Coarray notation excluding loop directive, function provided by XMP, etc."
+However, there is a precondition that "a single thread must invoke XMP directive, Coarray notation excluding loop directive, a function provided by XMP, etc."
 You can write the XMP loop directive as long as it is just before or after OpenMP/C parallel for directive or OpenMP/Fortran parallel do directive.
 
 * XMP/C program
@@ -43,5 +43,5 @@ You can write the XMP loop directive as long as it is just before or after OpenM
    enddo
 
 The order of the XMP directive and the OpenMP directive does not matter in this case.
-In the above example, the XMP directive first divides the loop statement into each node, and then the OpenMP directive divides the loop statement into the (multiple) CPU core in each node.
+In the above example, the XMP directive first divides the loop statement into each node, and then the OpenMP directive divides the loop statement into the multiple CPU cores in each node.
 

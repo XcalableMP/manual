@@ -6,9 +6,9 @@ Cooperation with MPI
    :local:
    :depth: 2
 
-Calling MPI program
---------------------------
-You can call the MPI program from the XMP program by using following functions.
+Calling MPI program from XMP program
+------------------------------------
+You can call the MPI program from the XMP program by using the following functions.
 
 * Initialization of MPI environment
 
@@ -85,12 +85,12 @@ You can call the MPI program from the XMP program by using following functions.
      call xmp_finalize_mpi()
    end program
 
-xmp_init_mpi() initializes the MPI environment with the XMP program, and xmp_finalize_mpi() performs the completion processing of the MPI environment with the XMP program.
-You can call any MPI functions and xmp_get_mpi_comm() between the above two functions.
-xmp_get_mpi_comm() can acquire the MPI communicator of the node set (p[1:2] in the above XMP/C and p(2:3) in the XMP/Fortran) currently being executed.
+The xmp_init_mpi() initializes the MPI environment with the XMP program, and the xmp_finalize_mpi() performs the completion processing of the MPI environment with the XMP program.
+You can call any MPI functions and the xmp_get_mpi_comm() between the above two functions.
+The xmp_get_mpi_comm() can acquire the MPI communicator of the node set (p[1:2] in the above XMP/C and p(2:3) in the XMP/Fortran) currently being executed.
 
-Calling from MPI program
-----------------------------
+Calling XMP program from MPI program
+-------------------------------------
 You can call the XMP program from the MPI program by using following functions.
 
 * Initialization of XMP environment
@@ -169,6 +169,6 @@ You can call the XMP program from the MPI program by using following functions.
    end subroutine hoge
 
 
-xmp_init() initializes the XMP environment with the MPI program, and xmp_finalize() completes the XMP environment with the MPI program.
+The xmp_init() initializes the XMP environment with the MPI program, and the xmp_finalize() completes the XMP environment with the MPI program.
 You can call any XMP functions can be called between the above two functions.
-Note that, xmp_init() must be executed after MPI_Init() and xmp_finalize() must be executed before MPI_Finalize().
+Note that, the xmp_init() must be executed after MPI_Init() and the xmp_finalize() must be executed before MPI_Finalize().

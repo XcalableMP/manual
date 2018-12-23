@@ -3,7 +3,7 @@ coarray notation
 =================================
 
 An overview of Coarray has described in :doc:`tutorial-local`.
-This page explains details of the synchronization statements that have not been explained yet.
+This page explains the details of the synchronization statements that have not been explained yet.
 
 .. contents::
    :local:
@@ -74,7 +74,7 @@ sync memory
 Wait for completion of all one side communications.
 This function does not include barrier synchronization unlike sync all and sync images, so it is executed only locally.
 
-About arguments
+Arguments
 ----------------
 
 * XMP/C program
@@ -94,11 +94,11 @@ About arguments
    sync memory [stat=..] [errmsg=..]
 
 In XMP/C, if synchronization is successful, "XMP_STAT_SUCCESS" which is the constant defined in xmp.h is assigned to status.
-If any of the images have already ended, "XMP_STAT_STOPPED_IMAGE" is substituted to status.
+If any images have already ended, "XMP_STAT_STOPPED_IMAGE" is substituted to status.
 In case of other errors, a value other than the above two values is assigned to status.
 
 
-Similarly, if synchronization is successful in XMP/Fortran, "STAT_STOPPED_IMAGE" is assigned to the variable on the right-hand side of stat=, and if any image has already ended, "STAT_STOPPED_IMAGE" is assigned.
+Similarly, if synchronization is successful in XMP/Fortran, "STAT_STOPPED_IMAGE" is assigned to the variable on the right-hand side of stat=, and if any images have already ended, "STAT_STOPPED_IMAGE" is assigned.
 In case of other errors, a value other than the above two values is assigned.
 
 
