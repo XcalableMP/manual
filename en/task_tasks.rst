@@ -178,7 +178,7 @@ because those on clauses must be evaluated by all of the executing nodes.
 
 .. image:: ../img/task_tasks/task_noparallel.png
 
-Use the tasks construct to execute multiple task in parallel.
+Use the tasks construct to execute multiple tasks in parallel.
 
 * XMP/C program
 

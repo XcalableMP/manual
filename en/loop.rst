@@ -16,7 +16,7 @@ in such a loop must fulfill the following two conditions:
    :local:
    :depth: 2
 
-Accessing Distributed Arrays
+Accessing distributed array
 -------------------------------------
 The programs below are examples of a right loop directive and a loop statement.
 The condition 1. is satisfied because i is the only one index of the
@@ -117,7 +117,7 @@ In XMP/Fortran, p(1) tries to access a(6) but does not own it.
 
 .. image:: ../img/loop/loop3.png
 
-Reduction Computations
+Reduction computation
 -----------------------
 
 The serial programs below are examples of the reduction computation.
@@ -284,7 +284,7 @@ the following associative ones.
    the difference of the order of the executions can make a little bit
    difference between serial and parallel executions
 
-Parallelizing nested loops
+Parallelizing nested loop
 ------------------------------
 Parallelization of nested loops can be specified in a similar manner
 for a single loop.
