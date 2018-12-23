@@ -30,7 +30,7 @@ You can call the MPI program from the XMP program by using following functions.
 | XMP/Fortran | integer      | xmp_get_mpi_comm()          |
 +-------------+--------------+-----------------------------+
 
-* Finalization process of MPI environment
+* Finalization of MPI environment
 
 +-------------+--------------+-----------------------------+
 | Language    | Retrun Value | Function                    |
@@ -87,11 +87,11 @@ You can call the MPI program from the XMP program by using following functions.
 
 xmp_init_mpi() initializes the MPI environment with the XMP program, and xmp_finalize_mpi() performs the completion processing of the MPI environment with the XMP program.
 You can call any MPI functions and xmp_get_mpi_comm() between the above two functions.
-xmp_get_mpi_comm() can acquire the MPI communicator of the node set (p[1: 2] in the above XMP/C and p(2: 3) in the XMP/Fortran) currently being executed.
+xmp_get_mpi_comm() can acquire the MPI communicator of the node set (p[1:2] in the above XMP/C and p(2:3) in the XMP/Fortran) currently being executed.
 
 Calling from MPI program
 ----------------------------
-By using following functions, you can call XMP program from MPI program.
+You can call the XMP program from the MPI program by using following functions.
 
 * Initialization of XMP environment
 
@@ -103,7 +103,7 @@ By using following functions, you can call XMP program from MPI program.
 | XMP/Fortran | (None)       | xmp_init(Integer)  |
 +-------------+--------------+--------------------+
 
-* Finalization process of XMP environment
+* Finalization of XMP environment
 
 +-------------+--------------+-------------------------+
 | Language    | Retrun Value | Function                |

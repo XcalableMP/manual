@@ -10,7 +10,7 @@ The user can specify block, cyclic, block-cyclic, gblock (irregular data distrib
    :depth: 2
 
 block Distribution
-----------
+------------------
 
 * XMP/C program
 
@@ -78,7 +78,7 @@ In that case, the remaining elements will be allocated on the last node.
 And then remaining 8 elements will be allocated on the last node p[2].
 
 cyclic Distribution
-----------
+-------------------
 
 * XMP/C program
 
@@ -114,7 +114,7 @@ Cyclic distribution is suitable for computation with irregular load balance of d
 .. image:: ../img/distribute/cyclic.png
 
 block-cyclic Distribution
--------------------
+-------------------------
 
 * XMP/C program
 

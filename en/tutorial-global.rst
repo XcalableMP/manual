@@ -1,4 +1,3 @@
-
 ===================================
 Tutorial (Global-view)
 ===================================
@@ -145,7 +144,7 @@ Work Mapping
 ------------------
 
 loop Directive
-^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 The user uses the loop directive to specify work mapping of the following loop statement.
 The loop directive is inserted before the target loop statement.
@@ -225,7 +224,7 @@ Note that the order of each node's output can be changed or merged in the parall
    5
 
 task Directive
-^^^^^^^^^^^
+^^^^^^^^^^^^^^
 The task directive limits the range of execution nodes and changes the execution context.
 In XMP/C, the task directive speficies the parallel execution of the following compound statement.
 In XMP/Fortran, the end task directive is required to specify the end of the region.
@@ -340,7 +339,7 @@ The following program uses the task directive to specify the first two nodes in 
 
 
 Inter-node Communication
------------------
+------------------------
 XMP provides some directives specifying typical inter-node communication patterns.
 
 * XMP/C program

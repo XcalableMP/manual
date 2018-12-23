@@ -7,7 +7,7 @@ Tutorial (Local-view)
    :depth: 2
 
 Introduction
------------
+------------
 The user uses Coarray in the local-view model to desctibe one-sided communication.
 In XMP, put/get communication and some synchronization functions are supported.
 
@@ -24,7 +24,7 @@ The basic unit of execution in the local-view is called "image" while it is call
 The two words has the same meaning in XMP.
 
 Coarray Declaration
----------------
+-------------------
 * XMP/C program
 
 .. code-block:: C
@@ -267,7 +267,7 @@ The following shows the initial values of each array.
    * c : from 100 to 199
 
 One-sided Communication for a Contiguous Region
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the first get communication, in XMP/C, image 0 gets a[5:3] from image 1 and stores them to a[0:3].
 In XMP/Fortran, image 1 gets a[6:8] from image 2 and stores them to a(1:3)
 

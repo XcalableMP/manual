@@ -10,7 +10,7 @@ The align directive should be given after the target array definition.
    :depth: 2
 
 Normal Alignment
---------------
+----------------
 
 * XMP/C program
 
@@ -62,9 +62,9 @@ The align directive also can be used for multi-dimensional arrays.
 .. image:: ../img/align/multi-dim.png
 
 Special Alignment
--------------
+-----------------
 Collapse
-^^^^^^
+^^^^^^^^
 The user can align a 2-dimensional array with a 1-dimensional template.
 
 * XMP/C program
@@ -98,7 +98,7 @@ In XMP/C, a[0:2][:] will be allocated on p[0].
 Likewise, a(:,1:2) will be allocated on p(1) in XMP/Fortran.
 
 Replicate
-^^^^^^
+^^^^^^^^^^
 The use also can align an 1-dimensional array with a multi-dimensional template.
 
 * XMP/C program

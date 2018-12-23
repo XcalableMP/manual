@@ -10,7 +10,7 @@ This page explains details of the synchronization statements that have not been 
    :depth: 2
 
 Synchronization statements
--------------
+--------------------------
 sync all
 ^^^^^^^^^^^^^^^^^^
 * XMP/C program
