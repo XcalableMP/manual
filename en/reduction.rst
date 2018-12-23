@@ -3,7 +3,7 @@ reduction construct
 =================================
 
 Execute aggregate operation.
-It has the same meaning as the reduction clause of :doc: 'loop', but the reduction directive can be described anywhere.
+It has the same meaning as the reduction clause of :doc:`loop`, but the reduction directive can be described anywhere.
 
 * XMP/C program
 
