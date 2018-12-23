@@ -33,7 +33,7 @@ Normal Alignment
     !$xmp align a(i) with t(i)
 
 The align construct aligns the owner node of a[i] with t(i), a distributed template.
-As a result, array a is distributed among the node group p.
+As a result, array a is distributed among the node set p.
 
 .. image:: ../img/align/1dim.png
 
@@ -88,8 +88,8 @@ The user can align a 2-dimensional array with a 1-dimensional template.
     !$xmp align a(*,i) with t(i)
 
 When an asterisk symbol is given in the array reference in the align construct,
-the specified dimension is not distributed among the node group.
-In the sample program, the first dimension of the array a is distribute among node group p
+the specified dimension is not distributed among the node set.
+In the sample program, the first dimension of the array a is distribute among node set p
 while the second dimension is duplicated.
 
 .. image:: ../img/align/collapse.png

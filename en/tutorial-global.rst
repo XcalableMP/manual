@@ -278,11 +278,11 @@ The user can use a integer triplet to specify multiple nodes.
 XMP/Fortran follows the syntax of the array section in Fortran.
 
 XMP/C has a different form. Triplets in XMP/C is written as [start:size:step].
-Start means the start index of the node group.
+Start means the start index of the node set.
 When start is omitted, the range start with the first element.
-Size means the size of the specified node group.
-When size is omitted, the node group has elements starting from start to the defined size (with specified step).
-Step can be specified to declare a discontinuous node group.
+Size means the size of the specified node set.
+When size is omitted, the node set has elements starting from start to the defined size (with specified step).
+Step can be specified to declare a discontinuous node set.
 When step is omitted, 1 will be used.
 
 For example, p[0:5] specifies 5 nodes starting from p[0] (from p[0] to p[4]).
@@ -305,10 +305,10 @@ The following shows some examples of triplet. The size of node set p is 20 (from
 +-----------+------------------------------------------------+
 
 .. note:: 
-    In XMP/Fortran, triplet can be written as (start:end:step). End specifies the last elements in the node group.
+    In XMP/Fortran, triplet can be written as (start:end:step). End specifies the last elements in the node set.
 
 
-The following program uses the task directive to specify the first two nodes in the original node group.
+The following program uses the task directive to specify the first two nodes in the original node set.
 
 * XMP/C Program
 

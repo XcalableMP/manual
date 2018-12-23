@@ -194,7 +194,7 @@ In that case, data distribution will be determined at runtime by using :doc:`tem
 
 Distribution of Multi-dimensional templates
 --------------------------
-The user can distribute multi-dimensional templates with a (single/multi-dimensional) node group.
+The user can distribute multi-dimensional templates with a (single/multi-dimensional) node set.
 
 * XMP/C program
 
@@ -212,8 +212,8 @@ The user can distribute multi-dimensional templates with a (single/multi-dimensi
    !$xmp template t(10,10)
    !$xmp distribute t(block,block) onto p
 
-The distribute construct declares data distribution of a 2-dimensional template by using a 2-dimensional node group.
-Each dimension of the template is divided by block distribution on node group p.
+The distribute construct declares data distribution of a 2-dimensional template by using a 2-dimensional node set.
+Each dimension of the template is divided by block distribution on node set p.
 
 .. image:: ../img/distribute/multi.png
 
