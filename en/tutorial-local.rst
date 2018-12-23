@@ -25,13 +25,13 @@ The two words has the same meaning in XMP.
 
 Coarray Declaration
 ---------------
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
     int a[10]:[*];
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -54,7 +54,7 @@ Put Communication
 
 When the Coarray reference appears in the left hand side in a assignment statement, it causes put communication.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -63,7 +63,7 @@ When the Coarray reference appears in the left hand side in a assignment stateme
     if (xmpc_this_image() == 0)
       a[0:3]:[1] = b[3:3];
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -99,7 +99,7 @@ Get Communication
 ^^^^^^^^^
 When a Coarray appears in the right hand side in the assignment statement, it causes get communication.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -108,7 +108,7 @@ When a Coarray appears in the right hand side in the assignment statement, it ca
     if (xmpc_this_image() == 0)
       b[3:3] = a[0:3]:[1];
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -133,13 +133,13 @@ Synchronization
 ---------
 Here, we introduce "sync all" which is most frequently used among Coarray synchronization functions.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
     void xmp_sync_all(int *status)
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -156,7 +156,7 @@ Tutorial
 ----------
 Run the following sample using 2 images.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -203,7 +203,7 @@ Run the following sample using 2 images.
      return 0;
    }
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 

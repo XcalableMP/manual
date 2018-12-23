@@ -19,7 +19,7 @@ The following actions can be described by XMP directives.
 This tutorial introduces the basics of XMP.
 A simple sequential code will be parallelized by adding XMP directives.
 
-* C Program
+* C program
 
 .. code-block:: C
 
@@ -36,7 +36,7 @@ A simple sequential code will be parallelized by adding XMP directives.
       return 0;
     }
 
-* Fortran Program
+* Fortran program
 
 .. code-block:: Fortran
 
@@ -71,7 +71,7 @@ Data Mapping
 The user use the nodes, template, distribute, and align directives to specify data mappong among nodes.
 XMP directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
 
-* XMP/C Program (incomplete)
+* XMP/C program (incomplete)
 
 .. code-block:: C
 
@@ -92,7 +92,7 @@ XMP directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
       return 0;
     }
 
-* XMP/Fortran Program (incomplete)
+* XMP/Fortran program (incomplete)
 
 .. code-block:: Fortran
 
@@ -150,7 +150,7 @@ loop Directive
 The user uses the loop directive to specify work mapping of the following loop statement.
 The loop directive is inserted before the target loop statement.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -172,7 +172,7 @@ The loop directive is inserted before the target loop statement.
       return 0;
     }
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -230,7 +230,7 @@ The task directive limits the range of execution nodes and changes the execution
 In XMP/C, the task directive speficies the parallel execution of the following compound statement.
 In XMP/Fortran, the end task directive is required to specify the end of the region.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -246,7 +246,7 @@ In XMP/Fortran, the end task directive is required to specify the end of the reg
       return 0;
     }
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -263,13 +263,13 @@ In XMP/Fortran, p(1) prints out the result.
 
 The user can use a integer triplet to specify multiple nodes.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
     [start:length:stride]
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -310,7 +310,7 @@ The following shows some examples of triplet. The size of node set p is 20 (from
 
 The following program uses the task directive to specify the first two nodes in the original node set.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -326,7 +326,7 @@ The following program uses the task directive to specify the first two nodes in 
       return 0;
     }
 
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -343,7 +343,7 @@ Inter-node Communication
 -----------------
 XMP provides some directives specifying typical inter-node communication patterns.
 
-* XMP/C Program
+* XMP/C program
 
 .. code-block:: C
 
@@ -373,7 +373,7 @@ XMP provides some directives specifying typical inter-node communication pattern
       return 0;
     }
     
-* XMP/Fortran Program
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
