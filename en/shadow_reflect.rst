@@ -85,7 +85,7 @@ array a has a shadow area of width one only on the upper bound.
 
 .. image:: ../img/shadow_reflect/shadow_uneven.png
 
-The values on the left and right side of colon designate the widths on
+The values on the left and right sides of colon designate the widths on
 the lower and upper bounds, respectively.
 
 Update shadow
@@ -229,7 +229,7 @@ area on the lower bound on p(1).
 Multidimensional Shadow
 -----------------------
 
-The shadow and reflect directives can be applied to arrays that is
+The shadow directive and reflect construct can be applied to arrays that is
 distributed in multiple dimensions.
 The following programs are the examples for two-dimensional distribution.
 
@@ -267,8 +267,7 @@ in the figure.
 
 For some applications, data from ordinal directions are not necessary.
 In such a case, the data communication from/to the ordinal directions
-can be avoided by adding a orthogonal clause to a reflect
-directive.
+can be avoided by adding a orthogonal clause to a reflect construct.
 
 * XMP/C program
 
