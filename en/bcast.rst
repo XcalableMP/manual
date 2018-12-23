@@ -28,7 +28,7 @@ In the below example, the first node of the node set p is the starting point.
 
 .. image:: ../img/bcast/bcast.png
 
-In the below example, starting from the last node of node set p by the from clause.
+In the below example, starting from the last node of the node set p by the from clause.
 
 * XMP/C program
 
@@ -50,7 +50,7 @@ In the below example, starting from the last node of node set p by the from clau
 
 .. image:: ../img/bcast/bcast_from.png
 
-In the below example, only the values of the last three nodes in 4 nodes are target for communication by the on clause.
+In the below example, only the values of the last three nodes in 4 nodes are targets for communication by the on clause.
 
 * XMP/C program
 

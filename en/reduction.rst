@@ -27,7 +27,7 @@ It has the same meaning as the reduction clause of :doc:`loop`, but the reductio
 
 You can set the range of the node set by using the on clause.
 In the below example,
-only the values of the last two nodes in four nodes are target to reduction operation.
+only the values of the last two nodes in four nodes are targets to reduction operation.
 
 * XMP/C program
 

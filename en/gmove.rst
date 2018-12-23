@@ -16,7 +16,7 @@ While in mode uses get communication, out mode uses put communication.
 Collective mode
 ------------------
 
-Distributed arrays
+Distributed array
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Copying a part of array a to array b.
 Array assignment statements in a gmove construct uses triplet.
@@ -225,7 +225,7 @@ Not only distributed arrays but also duplicated arrays and scalar variables can 
 In this example, duplicated array and scalar variable are copied to distributed array locally.
 For this reason, communication does not occur.
 
-Distributed arrays with different dimensions
+Distributed array with different dimension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * XMP/C program
