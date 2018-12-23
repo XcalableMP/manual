@@ -166,7 +166,7 @@ gblock Distribution
    !$xmp distribute t(gblock(W)) onto p
 
 Array W is a mapping array which is used for irregular data distribution. 
-W[k]/W(k) elements will be allocated on node p(k)．
+W[k]/W(k) elements will be allocated on node p(k).
 The user can specify special type of data distribution explicitly by using mapping arrays (e.g. distribution of triangular matrix).
 
 * XMP/C program

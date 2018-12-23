@@ -94,7 +94,7 @@ while the second dimension is duplicated.
 
 .. image:: ../img/align/collapse.png
 
-In XMP/C, a[0:2][:] will be allocated on p[0]．
+In XMP/C, a[0:2][:] will be allocated on p[0].
 Likewise, a(:,1:2) will be allocated on p(1) in XMP/Fortran.
 
 Replicate
@@ -126,5 +126,5 @@ the owner nodes of the specified dimension will have duplicated images of the ta
 
 .. image:: ../img/align/replicate.png
 
-In XMP/C, a[0:4] will be duplicated and allocated on p[0][0] and p[0][1]．
-Likewise, a(1:4) will be allocated on p(1,1) and p(2,1) in XMP/Fortran．
+In XMP/C, a[0:4] will be duplicated and allocated on p[0][0] and p[0][1].
+Likewise, a(1:4) will be allocated on p(1,1) and p(2,1) in XMP/Fortran.

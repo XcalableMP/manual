@@ -37,8 +37,8 @@ Coarray Declaration
 
    integer a(10)[*]
 
-In XMP/C, the user declares a Coarray by adding :[] (Coarray dimension) after the array declaration．
-In XMP/Fortran, the user declares a Coarray by adding [] after the array declaration．
+In XMP/C, the user declares a Coarray by adding :[] (Coarray dimension) after the array declaration.
+In XMP/Fortran, the user declares a Coarray by adding [] after the array declaration.
 The asterisk symbol is used in the both language.
 
 .. note::

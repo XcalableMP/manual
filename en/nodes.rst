@@ -2,7 +2,8 @@
 nodes Construct
 =================================
 
-The nodes construct declares the name of a node group and its shape．A node group can have a multi-dimensional shape.
+The nodes construct declares the name of a node group and its shape.
+A node group can have a multi-dimensional shape.
 
 .. contents::
    :local:
@@ -24,8 +25,8 @@ The nodes construct declares the name of a node group and its shape．A node gro
     !$xmp nodes p(4)
 
 The nodes construct declares 1-dimensional node group p which has 4 nodes. 
-In XMP/C, the node group consists of p[0]，p[1]，p[2]，and p[3]．
-In XMP/Fortran, the node group consists of p(1)，p(2)，p(3)，and p(4)．
+In XMP/C, the node group consists of p[0], p[1], p[2], and p[3].
+In XMP/Fortran, the node group consists of p(1), p(2), p(3), and p(4).
 
 Multi-dimensional Node Group
 -----------------
@@ -43,8 +44,8 @@ Multi-dimensional Node Group
     !$xmp nodes p(3,2)
 
 The nodes construct declares 2-dimensional node group p which has 6 nodes.
-In XMP/C, the node group consists of p[0][0]，p[0][1]，p[0][2]，p[1][0]，p[1][1]，and p[1][2]．
-In XMP/Fortran, the node group consists of p(1,1)，p(2,1)，p(3,1)，p(1,2)，p(2,2)，and p(3,2)．
+In XMP/C, the node group consists of p[0][0], p[0][1], p[0][2], p[1][0], p[1][1], and p[1][2].
+In XMP/Fortran, the node group consists of p(1,1), p(2,1), p(3,1), p(1,2), p(2,2), and p(3,2).
 
 .. note::
    The ordering of the elements in a node group depends on the base language, C and Fortran.
@@ -68,7 +69,7 @@ The program declares 1-dimensional dynamic node group p by using an asterisk sym
 The size of a dynamic node group is determined at runtime (at the beginning of the execution).
 For example, when the user runs the sample program with 3 XMP processes, the node group p will have 3 nodes.
 
-The user also declare multi-dimensional dynamic nodes with an asterisk symbol．
+The user also declare multi-dimensional dynamic nodes with an asterisk symbol.
 
 * XMP/C program
 

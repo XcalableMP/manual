@@ -59,7 +59,7 @@ Multi-dimensional Template
     !$xmp template t(20,10)
 
 The template construct declares 2-dimensional template t which has 10x20 elements.
-In XMP/C, the template has elements starting from t[0][0] to t[9][19]．
+In XMP/C, the template has elements starting from t[0][0] to t[9][19].
 Likewise, the template has elements starting from t(1,1) to t(20,10) in XMP/Fortran.
 
 Dynamic Template
@@ -78,4 +78,4 @@ Dynamic Template
 
 A colon symbol is used instead of a number to declare 1-dimensional dynamic template t.
 The colon symbol indicates that the size of the template is undefined.
-The size of the template is determined at runtime by :doc:`template_fix`．
+The size of the template is determined at runtime by :doc:`template_fix`.

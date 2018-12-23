@@ -120,7 +120,7 @@ In XMP/Fortran, node set p has element p(1) and p(2) and template t has elements
 .. note::
     For some historical reasion, the user can use both [] and () in XMP/C.
     [] is not available in XMP/Fortran.
-    However, we recommand to use the same syntax to the base language．
+    However, we recommand to use the same syntax to the base language.
 
 The distribute directive distributes template elements among nodes.
 In XMP/C, elements from t[0] to t[4] are assigned to p[0] and the remaining elements are assigned to p[1].
@@ -259,7 +259,7 @@ In XMP/Fortran, the end task directive is required to specify the end of the reg
     end program main
 
 In the above example, in XMP/C, p[0] prints out "Hello" on the screen.
-In XMP/Fortran, p(1) prints out the result．
+In XMP/Fortran, p(1) prints out the result.
 
 The user can use a integer triplet to specify multiple nodes.
 
