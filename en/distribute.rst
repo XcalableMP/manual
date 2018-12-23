@@ -9,7 +9,7 @@ The user can specify block, cyclic, block-cyclic, gblock (irregular data distrib
    :local:
    :depth: 2
 
-block Distribution
+block distribution
 ------------------
 
 * XMP/C program
@@ -77,7 +77,7 @@ In that case, the remaining elements will be allocated on the last node.
 7 elements will be allocated on the p[0] and p[1], as specified in the directive.
 And then remaining 8 elements will be allocated on the last node p[2].
 
-cyclic Distribution
+cyclic distribution
 -------------------
 
 * XMP/C program
@@ -93,7 +93,7 @@ cyclic Distribution
    !$xmp distribute t(cyclic) onto p
 
 Target data is divided into a chunk of a single element and distributed among nodes in a round-robin manner.
-Cyclic distribution is suitable for computation with irregular load balance of data and computation.
+Cyclic distribution is suitable for computation with an irregular load balance of data and computation.
 
 * XMP/C program
 
@@ -113,7 +113,7 @@ Cyclic distribution is suitable for computation with irregular load balance of d
 
 .. image:: ../img/distribute/cyclic.png
 
-block-cyclic Distribution
+block-cyclic distribution
 -------------------------
 
 * XMP/C program
@@ -129,7 +129,7 @@ block-cyclic Distribution
    !$xmp distribute t(cyclic(w)) onto p
 
 Target data is divided into a contiguous block of size w and distributed among nodes in a round-robin manner.
-Block-cyclic distribution is suitable for computation which has irregular load balance
+Block-cyclic distribution is suitable for computation which has an irregular load balance
 and references to neighborhood elements.
 
 * XMP/C program
@@ -150,7 +150,7 @@ and references to neighborhood elements.
 
 .. image:: ../img/distribute/block-cyclic.png
 
-gblock Distribution
+gblock distribution
 -------------------
 
 * XMP/C program
@@ -165,7 +165,7 @@ gblock Distribution
 
    !$xmp distribute t(gblock(W)) onto p
 
-Array W is a mapping array which is used for irregular data distribution. 
+Array W is a mapping array which is used for an irregular data distribution. 
 W[k]/W(k) elements will be allocated on node p(k).
 The user can specify special type of data distribution explicitly by using mapping arrays (e.g. distribution of triangular matrix).
 
@@ -192,7 +192,7 @@ The user can specify special type of data distribution explicitly by using mappi
 The user can specify an asterisk symbol instead of a mapping array in gblock.
 In that case, data distribution will be determined at runtime by using :doc:`template_fix`.
 
-Distribution of Multi-dimensional templates
+Distribution of multi-dimensional templates
 -------------------------------------------
 The user can distribute multi-dimensional templates with a (single-/multi-dimensional) node set.
 
