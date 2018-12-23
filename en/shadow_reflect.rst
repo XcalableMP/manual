@@ -19,8 +19,8 @@ node is usually adopted. In XMP, such additional region is referred as "shadow."
 Declare shadow
 --------------
 
-Shadow areas of the same size on the lower and upper bound.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Widths on lower/upper bounds are the same
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Shadow areas can be declared with the shadow directive.
 In the example below, an array a has shadow areas of size one on both the lower and upper bounds.
@@ -55,9 +55,8 @@ and white ones are shadow.
 .. note::
    Distributed arrays in a cyclic manner cannot have shadow.
 
-When the widths on the Upper and Lower Bounds Are Different
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+Widths on upper/lower bounds are different
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 For some programs, it is natural that the widths of the shadow area on
 the lower and upper bounds are different.
 There is also a case where the shadow area exists only on either of
@@ -94,7 +93,7 @@ the lower and upper bounds, respectively.
 Update shadow
 -------------
 
-General Case
+General
 ^^^^^^^^^^^^
 
 To copy data to shadow areas from neighboring nodes, use the
@@ -139,7 +138,7 @@ p(1) sends an element a(4) to the shadow area on the lower
 bound on p(2), and p(3) sends a(9) to the shadow
 area on the upper bound on p(2).
 
-Specifying the Update Width
+Specifying width
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The default behavior of a reflect directive is to update whole of
 the shadow area declared by a shadow directive. However, there are
@@ -186,7 +185,7 @@ on the upper bound.
 
 .. image:: ../img/shadow_reflect/reflect_uneven.png
 
-Update Periodic Shadow
+Update periodic shadow
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The reflect directive does not update either the shadow area on
@@ -229,7 +228,7 @@ area on the lower bound on p(1).
    lower bounds are equal, as shown by width(/periodic/1:1) in the
    above example, you can abbreviate it as width(/periodic/1).
 
-Multidimensional Shadow
+Multidimensional shadow
 -----------------------
 
 The shadow directive and reflect construct can be applied to arrays that is
