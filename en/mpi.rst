@@ -91,7 +91,7 @@ The xmp_get_mpi_comm() can acquire the MPI communicator of the node set (p[1:2] 
 
 Calling XMP program from MPI program
 -------------------------------------
-You can call the XMP program from the MPI program by using following functions.
+You can call the XMP program from the MPI program by using the following functions.
 
 * Initialization of XMP environment
 
@@ -171,4 +171,4 @@ You can call the XMP program from the MPI program by using following functions.
 
 The xmp_init() initializes the XMP environment with the MPI program, and the xmp_finalize() completes the XMP environment with the MPI program.
 You can call any XMP functions can be called between the above two functions.
-Note that, the xmp_init() must be executed after MPI_Init() and the xmp_finalize() must be executed before MPI_Finalize().
+Note that, the xmp_init() must be executed after the MPI_Init() and the xmp_finalize() must be executed before the MPI_Finalize().
