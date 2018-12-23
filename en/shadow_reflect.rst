@@ -267,7 +267,7 @@ in the figure.
 
 For some applications, data from ordinal directions are not necessary.
 In such a case, the data communication from/to the ordinal directions
-can be avoided by adding a orthogonal clause to a reflect construct.
+can be avoided by adding an orthogonal clause to a reflect construct.
 
 * XMP/C program
 

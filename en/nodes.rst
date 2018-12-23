@@ -9,7 +9,7 @@ A node set can have a multi-dimensional shape.
    :local:
    :depth: 2
 
-1-dimensional Node Set
+1-dimensional node set
 ----------------------
 
 * XMP/C program
@@ -28,7 +28,7 @@ The nodes directive declares 1-dimensional node set p which has 4 nodes.
 In XMP/C, the node set consists of p[0], p[1], p[2], and p[3].
 In XMP/Fortran, the node set consists of p(1), p(2), p(3), and p(4).
 
-Multi-dimensional Node Set
+Multi-dimensional node set
 --------------------------
 
 * XMP/C program
@@ -50,7 +50,7 @@ In XMP/Fortran, the node set consists of p(1,1), p(2,1), p(3,1), p(1,2), p(2,2),
 .. note::
    The ordering of the elements in a node set depends on the base language, C and Fortran.
 
-Dynamic Node Set
+Dynamic node set
 ------------------
 * XMP/C program
 
@@ -91,7 +91,7 @@ When the user runs the sample program with 12 nodes, the node set p will have a 
 .. hint::
    The dynamic node set may interfere with compiler optimizations. Static node sets achieves better performance in general.
 
-Partial Node Set
+Partial node set
 ------------------
 The user can declare a partial node set from the existing node set.
 Partial node sets can be used to optimize inter-node communication by reducing the number of nodes participating in the communication.

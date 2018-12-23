@@ -27,7 +27,7 @@ One-dimensional arrays
 First, declare a pointer of the type of the target distributed array.
 Second, align it as if it were an array.
 Finally, allocate memory for it with the xmp_malloc() function.
-xmp_desc_of() is a intrinsic/builtin function that returns the
+xmp_desc_of() is an intrinsic/builtin function that returns the
 descriptor of the XMP object specified by the argument.
 
 * XMP/Fortran program
