@@ -91,7 +91,7 @@ In XMP/Fortran, p(1) processes the indices from two to five and p(2) from six to
 .. image:: ../img/loop/loop2.png
 	   
 Next, is it possible to parallelize the below loops in which the index
-of the distributed array is different ?
+of the distributed array is different?
 
 * XMP/C program
 
@@ -230,7 +230,7 @@ Then, add the reduction clause to the loop directive.
 
     end program main
 
-A operator and target variables for reduction are specified in a
+An operator and target variables for reduction are specified in a
 reduction clause. In the above examples, a "+" operator is specified for
 the reduction computation to produce a total sum among nodes.
 
@@ -280,14 +280,13 @@ the following associative ones.
     lastmin
 
 .. note::
-   If the reduction variable is type of floating point, 
+   If the reduction variable is a type of floating point, 
    the difference of the order of the executions can make a little bit
    difference between serial and parallel executions
 
 Parallelizing nested loop
 ------------------------------
-Parallelization of nested loops can be specified in a similar manner
-for a single loop.
+Parallelization of nested loops can be specified similarly for a single loop.
 
 * XMP/C program
 
