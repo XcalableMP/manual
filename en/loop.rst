@@ -66,7 +66,7 @@ distributed array.
 
 Is it possible to parallelize the below loops whose bounds are shrunk?
 
-* XMP/C program (excerpt)
+* XMP/C program
 
 .. code-block:: C
 
@@ -74,7 +74,7 @@ Is it possible to parallelize the below loops whose bounds are shrunk?
       for(int i=1;i<9;i++)
         a[i] = i;
 
-* XMP/Fortran program (excerpt)
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -91,9 +91,9 @@ In XMP/Fortran, p(1) processes the indices from two to five and p(2) from six to
 .. image:: ../img/loop/loop2.png
 	   
 Next, is it possible to parallelize the below loops in which the index
-of the distributed array is different?.
+of the distributed array is different ?
 
-* XMP/C program (excerpt)
+* XMP/C program
 
 .. code-block:: C
 
@@ -101,7 +101,7 @@ of the distributed array is different?.
       for(int i=1;i<9;i++)
         a[i+1] = i;
 
-* XMP/Fortran program (excerpt)
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
@@ -161,7 +161,7 @@ If the above loops are parallelized only with the loop directive, the
 value of the variable sum varies from node to node because it is
 calculated on each node.
 
-* XMP/C program (excerpt)
+* XMP/C program
 
 .. code-block:: C
 
@@ -171,7 +171,7 @@ calculated on each node.
         sum += a[i];
       }
 
-* XMP/Fortran program (excerpt)
+* XMP/Fortran program
 
 .. code-block:: Fortran
 
