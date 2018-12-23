@@ -12,15 +12,15 @@ The user uses Coarray in the local-view model to desctibe one-sided communicatio
 In XMP, put/get communication and some synchronization functions are supported.
 
 If the target system supports Remote Direct Memory Access（RDMA） in the hardware,
-one-sided communication in the local view model can achieve better performance compared to the global view model.
+one-sided communication in the local-view model can achieve better performance compared to the global-view model.
 However, it requires more effort to describe parallel program since all communication should be specified in detail.
 
-XMP/Fortran support Coarray in the standard Fortran 2008.
+XMP/Fortran supports Coarray in the standard Fortran 2008.
 Coarray in XMP/C has its own original syntax since the C language does not support Coarray.
 
 .. note:: XMP/Fortran has upward compatibility with Fortran 2008.
 
-The basic unit of execution in the local view is called "image" while it is called "node" in the global view model.
+The basic unit of execution in the local-view is called "image" while it is called "node" in the global-view model.
 The two words has the same meaning in XMP.
 
 Coarray Declaration
@@ -92,8 +92,8 @@ The following figure illustrates the one-sided communication done by Corray.
 .. image:: ../img/tutorial-local/put.png
 
 .. note::
-   The directives in the global view model invokes point-to-point communication.
-   On the other hand, Coarrays in the local view model invokes one-sided communication.
+   The directives in the global-view model invokes point-to-point communication.
+   On the other hand, Coarrays in the local-view model invokes one-sided communication.
 
 Get Communication
 ^^^^^^^^^
