@@ -3,7 +3,7 @@ wait_async construct
 =================================
 
 Communication directives (reflect, gmove, reduction, bcast, reduce_shadow) can execute asynchronous communication by attaching the "async" clause.
-The wait_async directive is used to guarantee the completion of that asynchronous communication.
+The wait_async directive is used to guarantee the completion of their asynchronous communication.
 
 * XMP/C program
 
@@ -26,7 +26,7 @@ Completion of that communication is guaranteed with the wait_async directive who
 Therefore, between the bcast directive and the wait_async directive, you can not operate on the num valiable specified in the bcast directive.
 
 .. hint::
-    By performing calculations without a dependency relationship with the variable specified by the bcast directive after the bcast directive, overlap of communication and calculation can be performed, so the total calculation time can be expected to be reduced.
+    By performing calculations without a dependency relationship with the variable specified by the bcast directive after the bcast directive, overlap of communication and calculation can be performed, so the total calculation time may be small.
 
 .. note::
    Values that can be specified for async clause are int type in XMP/C, and integer type in XMP/Fortran.

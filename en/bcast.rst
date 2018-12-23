@@ -2,7 +2,7 @@
 bcast construct
 =================================
 
-This directive broadcasts variables which are held by the node, specified in the from clause, to the node set specified in the on clause.
+The bcast directive broadcasts variables which are held by the node, specified in the from clause, to the node set specified in the on clause.
 If there is no from clause, the first node of the target node set is the starting point.
 If there is no on clause, the current set of nodes will be covered.
 
