@@ -148,7 +148,7 @@ In arrays a and b,
 communication occurs only for elements whose responsible nodes do not match (the arrow means communication between nodes in figures).
 
 Communication of scalar
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 In an assignment statement,
 if one element is specified on the right hand side and plural elements are specified on the left hand side,
 the operation will be broadcast communication.
@@ -187,7 +187,7 @@ In this example, in XMP/C, an element array b[0] of node p[0] will be broadcaste
 Similarly, in XMP/Fortran, an element array b(1) of node p(1) will be broadcasted to specified index of node p(3) and p(4).
 
 Communication of duplicated array and scalar values
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Not only distributed arrays but also duplicated arrays and scalar variables can be described on the right hand side.
 
 * XMP/C program

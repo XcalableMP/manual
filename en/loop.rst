@@ -118,7 +118,7 @@ In XMP/Fortran, p(1) tries to access a(6) but does not own it.
 .. image:: ../img/loop/loop3.png
 
 Reduction Computations
----------
+-----------------------
 
 The serial programs below are examples of the reduction computation.
 
