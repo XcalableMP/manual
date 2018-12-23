@@ -270,7 +270,7 @@ b(1:2,1) of p(1), b(3:4,1) of p(2), b(5:6,1) of p(3) and b(7:8,1) of p(4) are co
 
 in mode
 ---------
-It operates as in mode by setting in clause to gmove directive
+It operates as in mode by setting in clause to gmove directive.
 
 * XMP/C program
 
@@ -304,8 +304,8 @@ It operates as in mode by setting in clause to gmove directive
      a(1:2) = b(3:4)
    !$xmp end task
 
-In this example, the task directive divides the node set of 4 nodes into two nodes, the first half and the second half.
-In gmove directive which is in mode, it executes get communication from array of second half node to array of first half node.
+In this example, the task directive divides the node set of 4 nodes into two nodes, the first-half and the second-half.
+In gmove directive which is in mode, it executes get communication from array of second-half node to array of first-half node.
 
 .. image:: ../img/gmove/gmove_in.png
 
@@ -346,6 +346,6 @@ It operates as out mode by setting out clause to gmove directive
    !$xmp end task
 
 In this example, it just reversed the assignment statement of the in mode.
-In gmove directive which is out mode, it executes put communication from array of first half node to array of second half node.
+In gmove directive which is out mode, it executes put communication from array of first-half node to array of second-half node.
 
 .. image:: ../img/gmove/gmove_out.png
