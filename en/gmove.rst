@@ -5,7 +5,7 @@ gmove construct
 You can describe a communication for distributed arrays in the form of assignment statements by using gmove directive.
 
 There are three modes in gmove; "collective mode", "in mode," and "out mode."
-Whilte collective mode executes two-sided communication among the executing nodes,
+While collective mode executes two-sided communication among the executing nodes,
 in/out modes execute one-sided communication among tasks with a task directive.
 While in mode uses get communication, out mode uses put communication.
 
