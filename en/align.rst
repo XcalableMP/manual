@@ -122,7 +122,7 @@ The use also can align an 1-dimensional array with a multi-dimensional template.
     !$xmp align a(i) with t(*,i)
 
 When an asterisk symbol is given in the template reference in the align directive,
-the owner nodes of the specified dimension will have duplicated images of the target array.
+the owner nodes of the specified dimension will have duplicated elements of the target array.
 
 .. image:: ../img/align/replicate.png
 
