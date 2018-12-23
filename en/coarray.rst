@@ -98,7 +98,7 @@ If any of the images have already ended, "XMP_STAT_STOPPED_IMAGE" is substituted
 In case of other errors, a value other than the above two values is assigned to status.
 
 
-Similarly, if synchronization is successful in XMP/Fortran, "STAT_STOPPED_IMAGE" is assigned to the variable on the right side of stat=, and if any image has already ended, "STAT_STOPPED_IMAGE" is assigned.
+Similarly, if synchronization is successful in XMP/Fortran, "STAT_STOPPED_IMAGE" is assigned to the variable on the right hand side of stat=, and if any image has already ended, "STAT_STOPPED_IMAGE" is assigned.
 In case of other errors, a value other than the above two values is assigned.
 
 

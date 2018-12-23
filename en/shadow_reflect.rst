@@ -85,7 +85,7 @@ array a has a shadow area of width one only on the upper bound.
 
 .. image:: ../img/shadow_reflect/shadow_uneven.png
 
-The values on the left and right sides of colon designate the widths on
+The values on the left and right hand sides of colon designate the widths on
 the lower and upper bounds, respectively.
 
 Update shadow
@@ -146,7 +146,7 @@ to reduce the communication size in a point of the code.
 To update only a specific part of the shadow area, add the width
 clause to the reflect directive.
 
-The values on the left and right side of colon in the width clause
+The values on the left and right hand sides of colon in the width clause
 designate the widths on the lower and upper bounds to be updated,
 respectively. In the example below, only the shadow area on the upper
 bound is updated.
