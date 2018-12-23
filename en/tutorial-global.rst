@@ -128,7 +128,6 @@ In XMP/Fortran, elements from t(1) to t(5) are assigned to p(1) and the remainin
 
 The align directive assigns target array elements based on the specified template.
 Each align directive has to be declared before the target array definition.
-
 In XMP/C, elements from a[0] to a[4] are assgiend to p[0] and the remaining elements are assigned to p[1].
 In XMP/Fortran, elements from a(1) to a(5) are assigned to p(1) and the remaining elements are assigned to p(2).
 
@@ -139,6 +138,9 @@ The following figure illustrates the behavior of XMP directives for data mapping
 The target array specified in the align directive is called "distributed array"
 Other arrays are called "replicated array" when they are not specified in data mapping directives.
 
+Data mapping is now complete.
+Next, you will perform work mapping using the template used for data mapping.
+
 Work Mapping
 ------------------
 
@@ -146,6 +148,7 @@ loop Directive
 ^^^^^^^^^^^
 
 The user uses the loop directive to specify work mapping of the following loop statement.
+The loop directive is inserted before the target loop statement.
 
 * XMP/C Program
 
@@ -187,7 +190,7 @@ The user uses the loop directive to specify work mapping of the following loop s
       enddo
     end program main
 
-In the above example, iterations from 0 to 4 are mapped onto p[0] and iterations 5 to 9 are mapped onto p[1] (in XMP/C).
+In the above example, in XMP/C, iterations from 0 to 4 are mapped onto p[0] and iterations 5 to 9 are mapped onto p[1].
 In XMP/Fortran, iterations from 1 to 5 are mapped onto p(1) and iterations 6 to 10 are mapped onto p(2).
 
 The following output shows the execution result of the sample program with 2 nodes.
@@ -206,7 +209,7 @@ Each node prints out the list of assigned array values.
    9
    10
 
-In the parallel execution, the order of each node's output can be changed or merged.
+Note that the order of each node's output can be changed or merged in the parallel execution.
 
 .. code-block:: bash
 
@@ -224,7 +227,7 @@ In the parallel execution, the order of each node's output can be changed or mer
 task Directive
 ^^^^^^^^^^^
 The task directive limits the range of execution nodes and changes the execution context.
-The task speficies the parallel execution of the following compound statement.
+In XMP/C, the task directive speficies the parallel execution of the following compound statement.
 In XMP/Fortran, the end task directive is required to specify the end of the region.
 
 * XMP/C Program
@@ -255,7 +258,7 @@ In XMP/Fortran, the end task directive is required to specify the end of the reg
     !$xmp end task
     end program main
 
-In the above example, p[0] prints out "Hello" on the screen (in XMP/C).
+In the above example, in XMP/C, p[0] prints out "Hello" on the screen.
 In XMP/Fortran, p(1) prints out the result．
 
 The user can use a integer triplet to specify multiple nodes.
@@ -275,7 +278,6 @@ The user can use a integer triplet to specify multiple nodes.
 XMP/Fortran follows the syntax of the array section in Fortran.
 
 XMP/C has a different form. Triplets in XMP/C is written as [start:size:step].
-
 Start means the start index of the node group.
 When start is omitted, the range start with the first element.
 Size means the size of the specified node group.
@@ -286,7 +288,7 @@ When step is omitted, 1 will be used.
 For example, p[0:5] specifies 5 nodes starting from p[0] (from p[0] to p[4]).
 p[0:5:2] has p[0], p[2], p[4], p[6], p[8].
 
-The following shows some examples of triplet. The size of node p is 20 (from p[0] to p[19]).
+The following shows some examples of triplet. The size of node set p is 20 (from p[0] to p[19]).
 
 +-----------+------------------------------------------------+
 | Triplet   | Meaning                                        |
