@@ -99,7 +99,7 @@ Likewise, a(:,1:2) will be allocated on p(1) in XMP/Fortran.
 
 Replicate
 ^^^^^^^^^^
-The use also can align an 1-dimensional array with a multi-dimensional template.
+The user also can align a 1-dimensional array with a multi-dimensional template.
 
 * XMP/C program
 

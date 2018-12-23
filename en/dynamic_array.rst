@@ -1,5 +1,5 @@
 ========================================
-Dynamic allocation of distributed arrays
+Dynamic allocation of distributed array
 ========================================
 
 This section explains how distributed arrays are allocated at
@@ -10,7 +10,7 @@ few specific difference.
    :local:
    :depth: 2
 
-One-dimensional arrays
+One-dimensional array
 ----------------------
 * XMP/C program
 
@@ -47,9 +47,9 @@ distributed array.
 Second, align it. Finally, allocate memory for it with the allocate
 statement.
 
-Multi-dimensional arrays
+Multi-dimensional array
 ------------------------
-The procedure is the same as that for one-dimensional array.
+The procedure is the same as that for a one-dimensional array.
 
 * XMP/C program
 

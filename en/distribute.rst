@@ -192,9 +192,9 @@ The user can specify a special type of data distribution explicitly by using map
 The user can specify an asterisk symbol instead of a mapping array in gblock.
 In that case, data distribution will be determined at runtime by using :doc:`template_fix`.
 
-Distribution of multi-dimensional templates
+Distribution of multi-dimensional template
 -------------------------------------------
-The user can distribute multi-dimensional templates with a (single-/multi-dimensional) node set.
+The user can distribute a multi-dimensional template with a (single-/multi-dimensional) node set.
 
 * XMP/C program
 
