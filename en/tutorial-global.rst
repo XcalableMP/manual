@@ -1,3 +1,4 @@
+
 ===================================
 Tutorial (Global-view)
 ===================================
@@ -67,8 +68,8 @@ XMP provides several directives to parallelize the sequential code.
 
 Data Mapping
 -------------------------------------------------------
-The user use the nodes, template, distribute, and align directive to specify data mappong among nodes.
-Directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
+The user use the nodes, template, distribute, and align directives to specify data mappong among nodes.
+XMP directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
 
 * XMP/C Program (incomplete)
 
@@ -108,17 +109,17 @@ Directives start with "#pragma xmp" in XMP/C, and "!$xmp" in XMP/Fortran.
       enddo
     end program main
 
-In the above example, the user specify data mapping of array a (10 elements) among 2 nodes (5 elements per node).
+In the above example, the user specifies data mapping of array a (10 elements) among 2 nodes (5 elements per node).
 
-The nodes directive declares node p of size 2.
-The template declares template t of size 10.
+The nodes directive declares node set p of size 2.
+The template directive declares template t of size 10.
 In XMP, array indices start from 0 in [], and start from 1 in ().
-Node p has element p[0] and p[1] and template t has elements from t[0] to t[9] in the XMP/C style.
-In XMP/Fortran, node p has element p(1) and p(2) and template t has elements from t(1) to t(10).
+The node set p has element p[0] and p[1] and template t has elements from t[0] to t[9] in the XMP/C style.
+In XMP/Fortran, node set p has element p(1) and p(2) and template t has elements from t(1) to t(10).
 
 .. note::
     For some historical reasion, the user can use both [] and () in XMP/C.
-	[] is not available in XMP/Fortran.
+    [] is not available in XMP/Fortran.
     However, we recommand to use the same syntax to the base language．
 
 The distribute directive distributes template elements among nodes.
