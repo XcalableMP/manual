@@ -30,7 +30,7 @@ version and hardware)
    For more detail, please refer:
    Ken Kennedy, Charles Koelbel and Hans Zima: The Rise and Fall of High Performance Fortran: An Historical Object Lesson, Proc. 3rd ACM SIGPLAN History of Programming Languages Conf. (HOPL-III), pp. 7-1-7-22 (2007).
 
-In such circumstance, to development a mew parallel programming model
+In such circumstance, to development a new parallel programming model
 that enables easy parallelization of existing serial programs and design
 a new language based on it, "the XMP Specification Working Group" was
 established in 2008.
@@ -55,8 +55,8 @@ parallel algorithms easily.
 
 Extension for C and Fortran
 ^^^^^^^^^^^^^^^^^^^^^^
-XMP supports C and Fortran as base languages while HPF is an extension
-of Fortran. It is advantages of XMP that it is easy to migrate with
+XMP supports both C and Fortran as base languages while HPF is an extension
+of only Fortran. It is advantages of XMP that it is easy to migrate with
 low cost of learning because it is based on existing languages.
 
 In this site, XMP for C and XMP for Fortran are referred as XMP/C and
@@ -73,7 +73,7 @@ figure.
 
 .. image:: ../img/overview/architecture.png
 
-In XMP, A combination of memory and a CPU is referred as a *node*,
+In XMP, a combination of memory and a single CPU is referred as a *node*,
 which is an execution unit of XMP programs.
 Accesses to remote data residing on another node is specified with
 special constructs such as dedicated directives and *coarrays* while
@@ -115,18 +115,17 @@ Users can use both of the two models in an XMP application.
 Interoperability
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Most of existing parallel applications are written with MPI. It is not
-realistic to port them over to XMP because each of them could consist
-of millions of lines.
+realistic to port them over to XMP because each of them consists of millions of lines.
 
 Because XMP is interoperable with MPI, users can develop an XMP
-application by modifying a part of an existing one instead of rewriting
-it totally. When developing a parallel application from scratch, it is
-possible to use XMP to write a complicated part of, for example,
+application by modifying a part of an existing one instead of rewriting it totally.
+Besides, when developing a parallel application from scratch,
+it is possible to use XMP to write a complicated part of, for example,
 domain decomposition while they use MPI, which could be faster than XMP,
 to write a hot-spot part that need to be tuned carefully. In addition,
 XMP is interoperable with OpenMP and Python.
 
-It might be difficult to develop a parallel application with
+It might be difficult to develop an application with
 just one programming language or framework since it generally has its
 own strong and weak points. Thus, an XMP program is interoperable with
 those in other languages to provide both high productivity and

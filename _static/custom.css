@@ -143,6 +143,7 @@ div.note {
 p {
   margin-bottom: 14px;
   margin-top   : 14px;
+  text-align   : justify;
 }
 
 .rst-content .section > img, .rst-content .section > a > img {
