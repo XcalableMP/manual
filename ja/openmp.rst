@@ -43,5 +43,5 @@ XMPのloop指示文は，OpenMP/Cのparallel for指示文もしくはOpenMP/Fort
      a(i) = i
    enddo
 
-XMP指示文とOpenMP指示文の順序はどちらが先でも構いません．
+XMP指示文とOpenMP指示文の順序はどちらが先でも同じ意味になります．
 上の例では，まずXMP指示文がループ文を各ノードに分割し，その後にOpenMP指示文が各ノードが持つ複数のCPUコアにループ文を分割します．

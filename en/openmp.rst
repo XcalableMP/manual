@@ -42,6 +42,6 @@ You can write the XMP loop directive as long as it is just before or after OpenM
      a(i) = i
    enddo
 
-The order of the XMP directive and the OpenMP directive does not matter in this case.
+The order of the XMP and OpenMP directives is the same meaning whichever comes first.
 In the above example, the XMP directive first divides the loop statement into each node, and then the OpenMP directive divides the loop statement into the multiple CPU cores in each node.
 
