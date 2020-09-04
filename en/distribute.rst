@@ -30,7 +30,7 @@ For example, block distribution is useful for stencil computation which refers t
 
 .. note:: 
 
-   Function ceil(x) returns the minimum integer value which is greater than x.
+   Function ceil(x) returns the minimum integer value greater than or equal to x
 
 * XMP/C program
 
